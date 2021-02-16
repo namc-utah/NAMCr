@@ -7,14 +7,10 @@ Maintainer: National Aquatic Monitoring Center <usubuglab@gmail.com>
 Description: Updates and manages taxa entries and references within the NAMC database.
     Taxa data is pulled and synced from multiple reference databases including ITIS, EOL and NCBI
 Imports:
-    taxize,
     jsonlite,
-    config,
     ghql,
     R6,
     yaml,
-    odbc,
-    DBI,
     httr,
     httpuv
 License: MIT
