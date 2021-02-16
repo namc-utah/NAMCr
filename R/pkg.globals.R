@@ -1,0 +1,1 @@
+pkg.globals = new.env( parent = emptyenv() )

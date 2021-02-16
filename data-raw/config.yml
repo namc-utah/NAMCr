@@ -1,0 +1,40 @@
+---
+# List of common parameters shared by object configurations
+
+user:
+  display_messages: TRUE
+  is.deployed: FALSE
+  is.mode_test: FALSE
+  manage_credentials: TRUE
+  return_type: 'R'
+  credential_store: 'vault'
+  path.credential_store: '~/R/.secrets/'
+  path.credential_store_key: '~/R/.secrets/'
+database:
+  postgresql_driver_url: 'https://odbc.postgresql.org/'
+  sqlserver_driver_url: 'https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server'
+api:
+  is_initialized: FALSE
+  URL: 'https://54w15tgigd.execute-api.us-west-2.amazonaws.com/production/api'
+  pagination_limit: 100
+  top_level_key: 'data'
+  top_level_key_error: 'errors'
+  tpl_pagination_first: 'limit:|val|'
+  tpl_pagination_offset: ' nextToken:|val|'
+auth:
+  oAuth2_appname: 'NAMCr'
+  IAM_protocol: 'https://'
+  IAM_redirect_URL: 'http://localhost:1410/'
+  IAM_authorize_path: 'authorize'
+  IAM_access_path: 'token'
+  IAM_userpool_path: 'userInfo'
+  IAM_base_path: 'oauth2'
+  IAM_base_URL: ''
+  IAM_clientId: ''
+  IAM_scope:
+    - 'openid'
+    - 'email'
+  auto_token_refresh: TRUE
+  cache_dir: './'
+
+...
