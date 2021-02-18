@@ -3,6 +3,10 @@
 #' @return a `namc_api` class (R6 class)
 #' @export
 #' @examples
+#'
+#' api_config = list(...) # namc_api public or private variables
+#' api = namc_api$new(argList = api_config)
+#'
 namc_api = R6::R6Class(
     "namc_api",
     inherit = base_class,
@@ -16,13 +20,28 @@ namc_api = R6::R6Class(
 
     public = list(
 
+        #' @field is_configured shows the configured state of the namc_api object
         is_configured = FALSE,
+
+        #' @field URL is the API URL endpoint
         URL = NULL,
+
+        #' @field top_level_key is the top level key returned in the graphql JSON return for data
         top_level_key = NULL,
+
+        #' @field top_level_key_error is the top level key returned in the graphql JSON return for errors
         top_level_key_error = NULL,
+
+        #' @field schema is a list of endpoints and fields for the API
         schema = NULL,
+
+        #' @field pagination_limit is the max number of records returned without pagination
         pagination_limit = NULL,
+
+        #' @field tpl_pagination_first is the numeric first record to return
         tpl_pagination_first = NULL,
+
+        #' @field tpl_pagination_offset is the numeric offset of the return
         tpl_pagination_offset = NULL,
 
 
@@ -34,6 +53,11 @@ namc_api = R6::R6Class(
         #' @return namc_api An R6 class.
         #'
         #' @examples
+        #'
+        #' api_config = list(...) # namc_api public or private variables
+        #' api = namc_api$new(argList = api_config)
+        #' api$configure()
+        #'
         configure = function(){
 
             auth = self$build_schema()$get_auth_info()
@@ -50,9 +74,16 @@ namc_api = R6::R6Class(
         #'
         #' Configures a graphql client with proper authentication and connection settings
         #'
+        #' @param authenticate boolean A logical TRUE/FALSE representing the required authentication state.
+        #'
         #' @return ghql::GraphqlClient A preconfigured graphql R6 class.
         #'
         #' @examples
+        #'
+        #' api_config = list(...) # namc_api public or private variables
+        #' api = namc_api$new(argList = api_config)
+        #' api$get_connection(authenticate = TRUE)
+        #'
         get_connection = function(authenticate = TRUE){
             return(
                 ghql::GraphqlClient$new(
@@ -72,6 +103,56 @@ namc_api = R6::R6Class(
 
 
 
+        #' Introspect the API schema type
+        #'
+        #' Retrieves the raw schema return from introspecting the API schema type
+        #'
+        #' @return namc_api An R6 class.
+        #'
+        #' @examples
+        #'
+        #' api_config = list(...) # namc_api public or private variables
+        #' api = namc_api$new(argList = api_config)
+        #' api$get_api_types()
+        #'
+        get_api_types = function(){
+
+            # Retrieve schema via introspection
+            return(
+                ( self$query(
+                    '{
+                        __schema {
+                          types {
+                            name
+                            kind
+                            fields {
+                              name
+                              args {
+                                name
+                                type {
+                                  name
+                                  kind
+                                }
+                              }
+                              type {
+                                name
+                                kind
+                                ofType {
+                                  name
+                                }
+                              }
+                            }
+                          }
+                        }
+                    }',
+                    authenticate = FALSE
+                ) )[['__schema']]$types
+            )
+
+        },
+
+
+
         #' Builds a graphql schema
         #'
         #' Builds a graphql schema structure via introspection of the API.
@@ -82,60 +163,51 @@ namc_api = R6::R6Class(
         #' @return namc_api An R6 class.
         #'
         #' @examples
+        #'
+        #' api_config = list(...) # namc_api public or private variables
+        #' api = namc_api$new(argList = api_config)
+        #' api$build_schema()
+        #' schema = api$schema
+        #'
         build_schema = function(){
 
-            # Grab authentication data
-            qry = self$query(
-                '{
-                    __schema {
-                      types {
-                        name
-                        kind
-                        fields {
-                          name
-                          type {
-                            name
-                            kind
-                            ofType {
-                              name
-                            }
-                          }
-                        }
-                      }
-                    }
-                }',
-                authenticate = FALSE
-            )
+            # Retrieve schema via introspection
+            types = self$get_api_types()
 
             self$schema = list()
-            iEndpoints = qry[['__schema']]$types$name == "Query"
-            endpoints = qry[['__schema']]$types$fields[ iEndpoints ][[1]]$name
+            iEndpoints = types$name == "Query"
+            endpoints = types$fields[ iEndpoints ][[1]]$name
 
             for(endpoint in endpoints){
-                iEndpoint = qry[['__schema']]$types$fields[ iEndpoints ][[1]]$name == endpoint
-                eType = qry[['__schema']]$types$fields[ iEndpoints ][[1]]$type$ofType$name[ iEndpoint ]
+                is_paginated = FALSE
+                iEndpoint = types$fields[ iEndpoints ][[1]]$name == endpoint
+                eType = types$fields[ iEndpoints ][[1]]$type$ofType$name[ iEndpoint ]
                 # If endpoint is of a special sub-type
                 if( is.na(eType) ){
-                    fType = qry[['__schema']]$types$fields[ iEndpoints ][[1]]$type$name[ iEndpoint ]
-                    iType = qry[['__schema']]$types$name == fType
-                    if( all(qry[['__schema']]$types$fields[ iType ][[1]]$type$kind == "SCALAR") ){
+                    fType = types$fields[ iEndpoints ][[1]]$type$name[ iEndpoint ]
+                    iType = types$name == fType
+                    if( all(types$fields[ iType ][[1]]$type$kind == "SCALAR") ){
                         eType = fType
                     } else {
-                        #if( any(qry[['__schema']]$types$fields[ iType ][[1]]$name == "records") ){
-                        #    i2Type = qry[['__schema']]$types$fields[ iType ][[1]]$name == "records"
-                        #    fType = qry[['__schema']]$types$fields[ i2Type ][[1]]$ofType$name[ i2Type ]
-                        #    iType = qry[['__schema']]$types$name == fType
-                        #}
-                        eType = qry[['__schema']]$types$fields[ iType ][[1]]$type$ofType$name[ iType ]
-
+                        if( any(types$fields[ iType ][[1]]$name == self$tpl_pagination_offset) ){
+                            is_paginated = TRUE
+                            i2Type = types$fields[ iType ][[1]]$type$kind == "LIST"
+                            fType = types$fields[ iType ][[1]]$name[ i2Type ]
+                            eType = types$fields[ iType ][[1]]$type$ofType$name[ i2Type ]
+                        } else {
+                            i2Type = types$fields[ iType ][[1]]$type$kind == "LIST"
+                            fType = NA
+                            eType = types$fields[ iType ][[1]]$type$ofType$name[ i2Type ]
+                        }
                     }
                 } else {
                     fType = NA
                 }
-                iType = qry[['__schema']]$types$name == eType
+                iType = types$name == eType
                 self$schema[[endpoint]] = list(
-                    grouping = fType,
-                    fields = qry[['__schema']]$types$fields[ iType ][[1]]$name
+                    subtype = fType,
+                    is_paginated = is_paginated,
+                    fields = types$fields[ iType ][[1]]$name
                 )
             }
 
@@ -149,9 +221,19 @@ namc_api = R6::R6Class(
         #' Executes a given graphql query against the API. If errors are returned execution is stopped.
         #'
         #'
+        #' @param query string Text containing a graphql query
+        #' @param load_all boolean When TRUE all data is loaded via pagination. When FALSE only the first pagination is returned.
+        #' @param authenticate boolean A logical TRUE/FALSE representing the required authentication state.
+        #' @param name string A name for the query.
+        #'
         #' @return data.frame A dataframe contained the query result.
         #'
         #' @examples
+        #'
+        #' api_config = list(...) # namc_api public or private variables
+        #' api = namc_api$new(argList = api_config)
+        #' data = api$query("graphql_query", ...)
+        #'
         query = function(query, load_all = TRUE, authenticate = TRUE, name = 'query'){
 
             if( !self$is_configured && authenticate ) self$configure()
@@ -185,6 +267,13 @@ namc_api = R6::R6Class(
         #' @return list A list containing the clientId and domain required for authentication.
         #'
         #' @examples
+        #'
+        #' api_config = list(...) # namc_api public or private variables
+        #' api = namc_api$new(argList = api_config)
+        #' auth = api$get_auth_info()
+        #' clientId = auth$clientId
+        #' domain = auth$domain
+        #'
         get_auth_info = function(){
 
             # Grab authentication data
@@ -207,9 +296,14 @@ namc_api = R6::R6Class(
         #'
         #' Access method for the oAuth2 authentication object stored within this namc_api object.
         #'
-        #' @return namc_oauth2 An R6 authentication class.
+        #' @return namc_api An R6 authentication class.
         #'
         #' @examples
+        #'
+        #' api_config = list(...) # namc_api public or private variables
+        #' api = namc_api$new(argList = api_config)
+        #' auth = api$get_auth_provider()
+        #'
         get_auth_provider = function(){
             return( private$.auth )
         },
@@ -223,6 +317,11 @@ namc_api = R6::R6Class(
         #' @return logical A logical TRUE/FALSE.
         #'
         #' @examples
+        #'
+        #' api_config = list(...) # namc_api public or private variables
+        #' api = namc_api$new(argList = api_config)
+        #' authenticated = api$is_authenticated()
+        #'
         is_authenticated = function(){
 
             # Grab authentication data
@@ -246,6 +345,11 @@ namc_api = R6::R6Class(
         #' @return vector A character vector.
         #'
         #' @examples
+        #'
+        #' api_config = list(...) # namc_api public or private variables
+        #' api = namc_api$new(argList = api_config)
+        #' endpoints = api$get_endpoints()
+        #'
         get_endpoints = function(){
 
             if( !self$is_configured ) self$configure()
@@ -264,6 +368,11 @@ namc_api = R6::R6Class(
         #' @return vector A character vector.
         #'
         #' @examples
+        #'
+        #' api_config = list(...) # namc_api public or private variables
+        #' api = namc_api$new(argList = api_config)
+        #' api$get_endpoint_fields(api_endpoint = 'sites')
+        #'
         get_endpoint_fields = function(api_endpoint){
 
             if( !self$is_configured ) self$configure()

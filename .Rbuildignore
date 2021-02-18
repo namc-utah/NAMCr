@@ -1,3 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.httr-oauth$
+^\.Rhistory
+^~/\.secrets/R/NAMCr/\.httr-oauth$

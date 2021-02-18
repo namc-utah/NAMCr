@@ -1,16 +1,15 @@
 Package: NAMCr
 Type: Package
-Title: NAMC Database and Analysis API
-Version: 0.1.0
+Title: NAMC Database Access API
+Version: 0.2.0
 Author: National Aquatic Monitoring Center
-Maintainer: National Aquatic Monitoring Center <usubuglab@gmail.com>
-Description: Updates and manages taxa entries and references within the NAMC database.
-    Taxa data is pulled and synced from multiple reference databases including ITIS, EOL and NCBI
+Maintainer: National Aquatic Monitoring Center <usubuglab+NAMCr@gmail.com>
+Description: Based on the permissions granted to the authenticated user, data can both be retrieved 
+    and updated from the NAMC databased via this packages R wrapper around the NAMC graphql API.
 Imports:
     jsonlite,
     ghql,
     R6,
-    yaml,
     httr,
     httpuv
 License: MIT

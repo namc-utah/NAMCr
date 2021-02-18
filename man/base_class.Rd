@@ -10,35 +10,61 @@ a `base_class` class (R6 class)
 R6 class for providing additional default R6 class features
 }
 \examples{
-initialize - Allow list based function initialization (easier to integrate with config files)
 
+new_class = R6::R6Class(
+  "new_class",
+  inherit = base_class,
+  portable = TRUE,
 
-## ------------------------------------------------
-## Method `base_class$new`
-## ------------------------------------------------
+  public = list(
+    ...
+  ),
+  private = list(
+    ...
+  )
+)
 
-dump - for debugging internal class values (puts var named tmpVar in global environment)
+Initialize object
+
+Allow list based function initialization (easier to integrate with config files)
 
 
 ## ------------------------------------------------
 ## Method `base_class$dump`
 ## ------------------------------------------------
 
-Title
+
+obj = some_R6_class$new()
+obj$dump()
+data = tmpVar$some_private_var_name
+data = tmpVar[["some_private_var_name"]]
+
+Get variable
+
+Gets a private variables value.
 
 
 ## ------------------------------------------------
 ## Method `base_class$get_var`
 ## ------------------------------------------------
 
-Title
+
+obj = some_R6_class$new()
+var_value = obj$get_var("var_name")
+
+Set variable
+
+Sets a private variables value.
+This method is chainable.
 
 
 ## ------------------------------------------------
 ## Method `base_class$set_var`
 ## ------------------------------------------------
 
-.set_from_list - sets all public and private fields from a name,value list
+
+obj = some_R6_class$new()
+obj$set_var("var_name", var_value)
 
 }
 \section{Methods}{
@@ -62,44 +88,42 @@ Title
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{...}}{}
+\item{\code{argList}}{A 'List' of name/value pairs to be passed in as arguments.}
+
+\item{\code{...}}{Name/Value pairs as arguments.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
+none Nothing is returned
 
+Dump object values
+
+Convenient for debugging private class values (puts var named tmpVar in global environment)
 }
-\subsection{Examples}{
-\if{html}{\out{<div class="r example copy">}}
-\preformatted{dump - for debugging internal class values (puts var named tmpVar in global environment)
-
-}
-\if{html}{\out{</div>}}
-
-}
-
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-dump"></a>}}
 \if{latex}{\out{\hypertarget{method-dump}{}}}
 \subsection{Method \code{dump()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{base_class$dump(val)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{base_class$dump()}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{val}}{}
-}
-\if{html}{\out{</div>}}
-}
 \subsection{Returns}{
-
+private The private environment of the object
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
-\preformatted{Title
+\preformatted{
+obj = some_R6_class$new()
+obj$dump()
+data = tmpVar$some_private_var_name
+data = tmpVar[["some_private_var_name"]]
+
+Get variable
+
+Gets a private variables value.
 
 }
 \if{html}{\out{</div>}}
@@ -118,16 +142,23 @@ Title
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{var_name}}{}
+\item{\code{var_name}}{The name of the private variable to return.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-
+var The value of the requested variable.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
-\preformatted{Title
+\preformatted{
+obj = some_R6_class$new()
+var_value = obj$get_var("var_name")
+
+Set variable
+
+Sets a private variables value.
+This method is chainable.
 
 }
 \if{html}{\out{</div>}}
@@ -146,16 +177,20 @@ Title
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{var_value}}{}
+\item{\code{var_name}}{The name of the private variable to set.}
+
+\item{\code{var_value}}{The value to assign to the desired private variable.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-
+object_ref The reference to the original object.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
-\preformatted{.set_from_list - sets all public and private fields from a name,value list
+\preformatted{
+obj = some_R6_class$new()
+obj$set_var("var_name", var_value)
 
 }
 \if{html}{\out{</div>}}

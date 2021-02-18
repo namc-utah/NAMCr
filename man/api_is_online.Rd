@@ -2,13 +2,13 @@
 % Please edit documentation in R/diagnostics.R
 \name{api_is_online}
 \alias{api_is_online}
-\title{Title}
+\title{API connectivity check}
 \usage{
 api_is_online()
 }
 \value{
-
+boolean
 }
 \description{
-Title
+API connectivity check
 }

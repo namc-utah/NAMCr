@@ -2,13 +2,13 @@
 % Please edit documentation in R/diagnostics.R
 \name{oauth_is_online}
 \alias{oauth_is_online}
-\title{Title}
+\title{oAuth2 provider check}
 \usage{
 oauth_is_online()
 }
 \value{
-
+boolean
 }
 \description{
-Title
+oAuth2 provider check
 }

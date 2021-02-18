@@ -6,13 +6,26 @@ NAMC Database and Analysis API for R
 Development version
 
 ```r
+install.packages("remotes")
 remotes::install_github("namc-utah/NAMCr")
 ```
 
 ## Example
 
-Simple Example
+Example via namespace
 
 ```r
-query("boxStates")
+requireNamespace("NAMCr")
+
+data = NAMCr::query("sites")
+View(data)
+```
+
+Example via package loading
+
+```r
+library("NAMCr")
+
+data = query("sites")
+View(data)
 ```
