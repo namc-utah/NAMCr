@@ -90,11 +90,11 @@ namc_api = R6::R6Class(
                     url     = self$URL,
                     headers = list(
                         Authorization = paste0("Bearer ",
-                            ifelse(
-                                test = authenticate,
-                                yes  = private$.auth$get_access_token(),
-                                no   = ""
-                            )
+                                               ifelse(
+                                                   test = authenticate,
+                                                   yes  = private$.auth$get_access_token(),
+                                                   no   = ""
+                                               )
                         )
                     )
                 )
@@ -122,28 +122,34 @@ namc_api = R6::R6Class(
                 ( self$query(
                     '{
                         __schema {
-                          types {
-                            name
-                            kind
-                            fields {
-                              name
-                              args {
-                                name
-                                type {
-                                  name
-                                  kind
-                                }
-                              }
-                              type {
-                                name
-                                kind
-                                ofType {
-                                  name
-                                }
-                              }
-                            }
-                          }
-                        }
+                           types {
+                             name
+                             kind
+                             ofType {
+                               name
+                             }
+                             fields {
+                               name
+                               description
+                               args {
+                                 name
+                                 defaultValue
+                                 description
+                                 type {
+                                   name
+                                   kind
+                                 }
+                               }
+                               type {
+                                 name
+                                 kind
+                                 ofType {
+                                   name
+                                 }
+                               }
+                             }
+                           }
+                         }
                     }',
                     authenticate = FALSE
                 ) )[['__schema']]$types

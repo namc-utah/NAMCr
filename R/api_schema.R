@@ -4,7 +4,7 @@
 #' @export
 #' @examples
 #'
-#' types = ( namc_api$new(argList=...) )$get_raw_schema()
+#' types = ( namc_api$new(argList=...) )$get_api_types()
 #' schema = api_schema$new(types = types)
 #'
 api_schema = R6::R6Class(
@@ -16,12 +16,33 @@ api_schema = R6::R6Class(
 
         types = NULL,
         tpl_pagination_offset = NULL,
-        endpoints = NULL
+        endpoints = NULL,
+
+        special_types = c("Query","Mutation","Subscription"),
+        fixed_types = c("Boolean","String","Int","Float"),
+        base_types = NULL,
+
+        query_types = NULL,
+        mutation_types = NULL,
+        subscription_types = NULL,
+
+
+
+        is_special_type = function(type_name){
+            return( any(type_name == private$special_types) )
+        }
 
     ),
 
     public = list(
 
+
+        initialize = function(argList=NULL, ...){
+            super$initialize(argList,...)
+            if (is.null(self$path.output)){
+                self$path.output = self$path
+            }
+        },
 
         #' Parse introspected schema
         #'
@@ -29,7 +50,7 @@ api_schema = R6::R6Class(
         #'
         #' @examples
         #'
-        #' types = ( namc_api$new(argList=...) )$get_raw_schema()
+        #' types = ( namc_api$new(argList=...) )$get_api_types()
         #' schema = api_schema$new(types = types)
         #' schema$parse_schema()
         #'
@@ -49,8 +70,8 @@ api_schema = R6::R6Class(
                         eType = fType
                     } else {
                         #if( any(private$types$fields[ iType ][[1]]$name == "records") ){
-                            i2Type = private$types$fields[ iType ][[1]]$name == "records"
-                            eType = private$types$fields[ iType ][[1]]$type$ofType$name[ i2Type ]
+                        i2Type = private$types$fields[ iType ][[1]]$name == "records"
+                        eType = private$types$fields[ iType ][[1]]$type$ofType$name[ i2Type ]
                         #}
                         #eType = private$types$fields[ iType ][[1]]$type$ofType$name[ i2Type ]
 
@@ -81,7 +102,7 @@ api_schema = R6::R6Class(
         #'
         #' @examples
         #'
-        #' types = ( namc_api$new(argList=...) )$get_raw_schema()
+        #' types = ( namc_api$new(argList=...) )$get_api_types()
         #' schema = api_schema$new(types = types)
         #' schema$get_type_info()
         #'
@@ -90,7 +111,16 @@ api_schema = R6::R6Class(
             label = type_name
             kind = private$types$kind[ iType ]
             fieldnames = private$types$fields[ iType ][[1]]$name
+            is_pagination = any(private$tpl_pagination_offset == fieldnames)
             fields = list()
+
+            if( kind != "SCALAR" && recurse ){
+
+                for(iField in 1:length(fieldnames)){
+                    fields[ fieldnames[iField] ] = self$get_type_info(type_name = fieldnames[iField])
+                }
+
+            }
 
             for(iField in 1:length(fieldnames)){
                 fields[ fieldnames[iField] ] = list(
@@ -102,14 +132,8 @@ api_schema = R6::R6Class(
                     )
                 )
             }
-            is_pagination = any(private$tpl_pagination_offset == fieldnames)
 
 
-            if( kind == "OBJECT" ){
-
-            } else if( kind == "SCALAR" ){
-
-            }
             return(
                 list(
                     label = label,

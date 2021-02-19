@@ -15,16 +15,16 @@ namc_oauth2 = R6::R6Class(
     private = list(
 
         oAuth2_appname = NULL,
-        IAM_protocol = NULL,
-        IAM_redirect_URL = NULL,
-        IAM_authorize_path = NULL,
-        IAM_access_path = NULL,
-        IAM_userpool_path = NULL,
-        IAM_base_path = NULL,
-        IAM_base_URL = NULL,
-        IAM_domain = NULL,
-        IAM_clientId = NULL,
-        IAM_scope = NULL,
+        protocol = NULL,
+        redirect_URL = NULL,
+        authorize_path = NULL,
+        access_path = NULL,
+        userpool_path = NULL,
+        base_path = NULL,
+        base_URL = NULL,
+        domain = NULL,
+        clientId = NULL,
+        scope = NULL,
         auto_token_refresh = NULL,
         cache_dir = NULL,
         cache_time = NULL,
@@ -42,8 +42,8 @@ namc_oauth2 = R6::R6Class(
         #'
         #' Sets the clientID and URL for the authentication provider
         #'
-        #' @param IAM_clientId string The auth clientID.
-        #' @param IAM_domain string The auth domain name.
+        #' @param clientId string The auth clientID.
+        #' @param domain string The auth domain name.
         #'
         #' @return namc_oauth2 An R6 class.
         #'
@@ -53,11 +53,11 @@ namc_oauth2 = R6::R6Class(
         #' auth = namc_oauth2$new(argList = auth_config)
         #' auth$set_connection_details("XXXXXXXXXX", "namc.XXXXXXX.edu")
         #'
-        set_connection_details = function(IAM_clientId, IAM_domain){
+        set_connection_details = function(clientId, domain){
 
-            private$IAM_domain   = IAM_domain
-            private$IAM_clientId = IAM_clientId
-            private$IAM_base_URL = paste0( private$IAM_protocol, IAM_domain, '/', private$IAM_base_path )
+            private$domain   = domain
+            private$clientId = clientId
+            private$base_URL = paste0( private$protocol, domain, '/', private$base_path )
 
             cache = gsub('.httr-oauth','',private$cache_dir)
             if(cache != '' && !dir.exists(cache)){
@@ -88,7 +88,7 @@ namc_oauth2 = R6::R6Class(
         #'
         get_user_info = function(){
 
-            userpool_URL = paste0( private$IAM_base_URL, '/', private$IAM_userpool_path )
+            userpool_URL = paste0( private$base_URL, '/', private$userpool_path )
 
             req = httr::GET(
                 url    = userpool_URL,
@@ -134,17 +134,17 @@ namc_oauth2 = R6::R6Class(
             return(
                 httr::oauth2.0_token(
                     endpoint = httr::oauth_endpoint(
-                        authorize = private$IAM_authorize_path,
-                        access    = private$IAM_access_path,
-                        base_url  = private$IAM_base_URL
+                        authorize = private$authorize_path,
+                        access    = private$access_path,
+                        base_url  = private$base_URL
                     ),
                     app = httr::oauth_app(
                         appname      = private$oAuth2_appname,
-                        key          = private$IAM_clientId,
+                        key          = private$clientId,
                         secret       = NULL,
-                        redirect_uri = private$IAM_redirect_URL
+                        redirect_uri = private$redirect_URL
                     ),
-                    scope = private$IAM_scope,
+                    scope = private$scope,
                     cache = private$cache_dir
                 )
             )

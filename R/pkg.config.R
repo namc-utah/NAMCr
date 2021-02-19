@@ -16,8 +16,8 @@ pkg.config = function(){
                 manage_credentials        = TRUE,
                 return_type               = 'R',
                 credential_store          = 'vault',
-                path.credential_store     = '~/R/.secrets/',
-                path.credential_store_key = '~/R/.secrets/'
+                path.credential_store     = '~/.secrets/R/NAMCr/',
+                path.credential_store_key = '~/.secrets/R/NAMCr/'
             ),
             api = list(
                 URL                   = 'https://54w15tgigd.execute-api.us-west-2.amazonaws.com/production/api',
@@ -29,15 +29,15 @@ pkg.config = function(){
             ),
             auth = list(
                 oAuth2_appname     = 'NAMCr',
-                IAM_protocol       = 'https://',
-                IAM_redirect_URL   = 'http://localhost:1410/',
-                IAM_authorize_path = 'authorize',
-                IAM_access_path    = 'token',
-                IAM_userpool_path  = 'userInfo',
-                IAM_base_path      = 'oauth2',
-                IAM_base_URL       = '',
-                IAM_clientId       = '',
-                IAM_scope          = c('openid','email'),
+                protocol           = 'https://',
+                redirect_URL       = 'http://localhost:1410/',
+                authorize_path     = 'authorize',
+                access_path        = 'token',
+                userpool_path      = 'userInfo',
+                base_path          = 'oauth2',
+                base_URL           = '',
+                clientId           = '',
+                scope              = c('openid','email'),
                 auto_token_refresh = TRUE,
                 cache_dir          = '~/.secrets/R/NAMCr/.httr-oauth'
             )
