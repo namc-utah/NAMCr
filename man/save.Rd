@@ -4,7 +4,7 @@
 \alias{save}
 \title{Save data}
 \usage{
-save(api_endpoint, data)
+save(api_endpoint, data, api = .pkgenv$api)
 }
 \arguments{
 \item{api_endpoint}{string A NAMC API endpoint name. Available endpoints can be found via the

@@ -4,10 +4,12 @@
 #' @export
 #'
 reinitiate = function(clear_credentials = FALSE){
-    if(clear_credentials) pkg.globals$api$get_auth_provider()$reset_token()
+    if(clear_credentials) .pkgenv$api$get_auth_provider()$reset_token()
 
-    return( pkg.globals$api$configure() )
+    return( .pkgenv$api$configure( force = TRUE ) )
 }
+
+
 
 #' Execute public API class method
 #'
@@ -17,7 +19,7 @@ reinitiate = function(clear_credentials = FALSE){
 #' @export
 #'
 execute_api_fn = function(fn_name){
-    return( pkg.globals$api[[fn_name]]() )
+    return( .pkgenv$api[[fn_name]]() )
 }
 
 
@@ -30,7 +32,7 @@ execute_api_fn = function(fn_name){
 #' @export
 #'
 get_api_var = function(var_name){
-    return( pkg.globals$api$get_var(var_name) )
+    return( .pkgenv$api$get_var(var_name) )
 }
 
 
@@ -65,9 +67,10 @@ diagnose_connection = function(){
 #'
 oauth_is_online = function(){
 
-    user_info = pkg.globals$api$get_auth_provider()$get_user_info()
+    auth = .pkgenv$api$get_auth_provider()
+    test_url = paste0( auth$get_var("base_URL"), '/', auth$get_var("userpool_path") )
 
-    return( user_info$status_code < 300 )
+    return( site_is_online( test_url ) )
 }
 
 
@@ -79,7 +82,25 @@ oauth_is_online = function(){
 #'
 api_is_online = function(){
     # Verify that the api address returns a forbidden status code
-    return( httr::GET( config$api$URL )$status_code == 403 )
+    return( site_is_online( .pkgenv$api$URL ) )
+}
+
+
+
+#' API connectivity check
+#'
+#' @param site_url is a url to check if it is accessible
+#'
+#' @return boolean
+#' @export
+#'
+site_is_online = function(site_url){
+    tryCatch({
+        isOnline = is.numeric(httr::GET(site_url)$status_code)
+    }, error = function(e){
+        isOnline <<- FALSE
+    })
+    return( isOnline )
 }
 
 

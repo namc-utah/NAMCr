@@ -7,19 +7,23 @@
 query(
   api_endpoint,
   args = list(),
-  fields = c(),
+  include = c(),
+  exclude = c(),
   filter = list(),
   sort = c(),
   limit = NA,
-  return_format = "dataframe",
+  api = .pkgenv$api,
   ...
 )
 }
 \arguments{
-\item{api_endpoint}{string A NAMC API endpoint name. Available endpoints can be found via the
-namc_api get_endpoints method.}
+\item{api_endpoint}{string A NAMC API endpoint name. Available endpoints can be found via the namc_api get_endpoints method.}
 
-\item{fields}{vector A vector of strings matching the desired api_endpoint fields to return.}
+\item{args}{a list of named arguments to pass to the API endpoint. Can also be passed individually in  ...}
+
+\item{include}{is a vector of fields to include from the endpoint.}
+
+\item{exclude}{is a vector of fields to exclude from the endpoint.}
 
 \item{filter}{list A list containing filter parameters.}
 
@@ -27,20 +31,23 @@ namc_api get_endpoints method.}
 
 \item{limit}{numeric The number of results to desired.}
 
-\item{return_format}{string One of 'dataframe', 'json'}
+\item{api}{namc_api An instance of the namc_api class having a default of a pre-initialized package object}
+
+\item{...}{named arguments to merge with args and pass to the API endpoint.}
 }
 \value{
 data.frame A dataframe containing the query results
 }
 \description{
 Providing a desired endpoint and filtering the function retrieves data from the NAMC database. If not already
-authenticated the will trigger the authentication / account creation routines.
+authenticated the will trigger the authentication / account creation routines. By default all fields are included.
+Use include and exclude arguments to limit returned fields.
 }
 \examples{
 
 sites = NAMCr::query(
   api_endpoint = 'sites',
-  fields = c('station','lat','long')),
+  include = c('station','lat','long')),
   filter = list(
     station = c('station1','station2'),
     lat = list(

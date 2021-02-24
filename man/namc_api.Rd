@@ -158,6 +158,34 @@ api_config = list(...) # namc_api public or private variables
 api = namc_api$new(argList = api_config)
 api$get_endpoint_fields(api_endpoint = 'sites')
 
+Retrieve arguments
+
+Retrieves the arguments associated with an API endpoint from the schema
+
+
+## ------------------------------------------------
+## Method `namc_api$get_endpoint_args`
+## ------------------------------------------------
+
+
+api_config = list(...) # namc_api public or private variables
+api = namc_api$new(argList = api_config)
+api$get_endpoint_args(api_endpoint = 'sites')
+
+Retrieve fields
+
+Retrieves the fields associated with an API endpoint from the schema
+
+
+## ------------------------------------------------
+## Method `namc_api$is_endpoint`
+## ------------------------------------------------
+
+
+api_config = list(...) # namc_api public or private variables
+api = namc_api$new(argList = api_config)
+api$get_endpoint_fields(api_endpoint = 'sites')
+
 }
 \section{Super class}{
 \code{\link[NAMCr:base_class]{NAMCr::base_class}} -> \code{namc_api}
@@ -165,6 +193,10 @@ api$get_endpoint_fields(api_endpoint = 'sites')
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
+\item{\code{auth}}{holds an oAuth2 object for authentication}
+
+\item{\code{retry_conn}}{is a boolean to allow for a query reattempt given an API timeout}
+
 \item{\code{is_configured}}{shows the configured state of the namc_api object}
 
 \item{\code{URL}}{is the API URL endpoint}
@@ -179,10 +211,23 @@ api$get_endpoint_fields(api_endpoint = 'sites')
 
 \item{\code{tpl_pagination_first}}{is the numeric first record to return}
 
-\item{\code{tpl_pagination_offset}}{is the numeric offset of the return
+\item{\code{tpl_pagination_offset}}{is the numeric offset of the return}
+
+\item{\code{tpl_pagination_offset}}{is the numeric offset of the return}
+
+\item{\code{required_kind}}{is string value of required argument kind
 Configure parameters
 
 Retrieves authentication and schema information via unauthenticated API queries}
+}
+\if{html}{\out{</div>}}
+}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{auth}}{holds an oAuth2 object for authentication}
+
+\item{\code{retry_conn}}{is a boolean to allow for a query reattempt given an API timeout}
 }
 \if{html}{\out{</div>}}
 }
@@ -199,6 +244,8 @@ Retrieves authentication and schema information via unauthenticated API queries}
 \item \href{#method-is_authenticated}{\code{namc_api$is_authenticated()}}
 \item \href{#method-get_endpoints}{\code{namc_api$get_endpoints()}}
 \item \href{#method-get_endpoint_fields}{\code{namc_api$get_endpoint_fields()}}
+\item \href{#method-get_endpoint_args}{\code{namc_api$get_endpoint_args()}}
+\item \href{#method-is_endpoint}{\code{namc_api$is_endpoint()}}
 \item \href{#method-clone}{\code{namc_api$clone()}}
 }
 }
@@ -217,9 +264,16 @@ Retrieves authentication and schema information via unauthenticated API queries}
 \if{latex}{\out{\hypertarget{method-configure}{}}}
 \subsection{Method \code{configure()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{namc_api$configure()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{namc_api$configure(force = FALSE)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{force}}{is a boolean TRUE/FALSE to force a reconfiguration}
+}
+\if{html}{\out{</div>}}
+}
 \subsection{Returns}{
 namc_api An R6 class.
 }
@@ -341,15 +395,13 @@ Executes a given graphql query against the API. If errors are returned execution
 \if{latex}{\out{\hypertarget{method-query}{}}}
 \subsection{Method \code{query()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{namc_api$query(query, load_all = TRUE, authenticate = TRUE, name = "query")}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{namc_api$query(query, authenticate = TRUE, name = "query")}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{query}}{string Text containing a graphql query}
-
-\item{\code{load_all}}{boolean When TRUE all data is loaded via pagination. When FALSE only the first pagination is returned.}
 
 \item{\code{authenticate}}{boolean A logical TRUE/FALSE representing the required authentication state.}
 
@@ -469,7 +521,7 @@ Retrieves the API endpoint names from the schema
 \if{latex}{\out{\hypertarget{method-get_endpoints}{}}}
 \subsection{Method \code{get_endpoints()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{namc_api$get_endpoints()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{namc_api$get_endpoints(special_type = "Query")}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{
@@ -497,7 +549,77 @@ Retrieves the fields associated with an API endpoint from the schema
 \if{latex}{\out{\hypertarget{method-get_endpoint_fields}{}}}
 \subsection{Method \code{get_endpoint_fields()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{namc_api$get_endpoint_fields(api_endpoint)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{namc_api$get_endpoint_fields(api_endpoint, special_type = "Query")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{api_endpoint}}{The name of an API endpoint.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+vector A character vector of fields.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{
+api_config = list(...) # namc_api public or private variables
+api = namc_api$new(argList = api_config)
+api$get_endpoint_fields(api_endpoint = 'sites')
+
+Retrieve arguments
+
+Retrieves the arguments associated with an API endpoint from the schema
+
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_endpoint_args"></a>}}
+\if{latex}{\out{\hypertarget{method-get_endpoint_args}{}}}
+\subsection{Method \code{get_endpoint_args()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{namc_api$get_endpoint_args(api_endpoint, special_type = "Query")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{api_endpoint}}{The name of an API endpoint.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+vector A character vector of arguments.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{
+api_config = list(...) # namc_api public or private variables
+api = namc_api$new(argList = api_config)
+api$get_endpoint_args(api_endpoint = 'sites')
+
+Retrieve fields
+
+Retrieves the fields associated with an API endpoint from the schema
+
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-is_endpoint"></a>}}
+\if{latex}{\out{\hypertarget{method-is_endpoint}{}}}
+\subsection{Method \code{is_endpoint()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{namc_api$is_endpoint(api_endpoint, stop_if_not = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

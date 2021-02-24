@@ -153,15 +153,15 @@ Sets the clientID and URL for the authentication provider}
 \if{latex}{\out{\hypertarget{method-set_connection_details}{}}}
 \subsection{Method \code{set_connection_details()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{namc_oauth2$set_connection_details(IAM_clientId, IAM_domain)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{namc_oauth2$set_connection_details(clientId, domain)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{IAM_clientId}}{string The auth clientID.}
+\item{\code{clientId}}{string The auth clientID.}
 
-\item{\code{IAM_domain}}{string The auth domain name.}
+\item{\code{domain}}{string The auth domain name.}
 }
 \if{html}{\out{</div>}}
 }

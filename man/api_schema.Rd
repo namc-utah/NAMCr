@@ -11,42 +11,82 @@ R6 class for handling the NAMC graphql schema
 }
 \examples{
 
-types = ( namc_api$new(argList=...) )$get_raw_schema()
+types = ( namc_api$new(argList=...) )$get_api_types()
 schema = api_schema$new(types = types)
+
+
+## ------------------------------------------------
+## Method `api_schema$configure`
+## ------------------------------------------------
 
 Parse introspected schema
 
 
 ## ------------------------------------------------
-## Method `api_schema$parse_schema`
+## Method `api_schema$parse_endpoints`
 ## ------------------------------------------------
 
 
-types = ( namc_api$new(argList=...) )$get_raw_schema()
+types = ( namc_api$new(argList=...) )$get_api_types()
 schema = api_schema$new(types = types)
 schema$parse_schema()
 
-Discover info on API type
+Discover info on API endpoint
 
 
 ## ------------------------------------------------
-## Method `api_schema$get_type_info`
+## Method `api_schema$parse_endpoint`
 ## ------------------------------------------------
 
 
-types = ( namc_api$new(argList=...) )$get_raw_schema()
+types = ( namc_api$new(argList=...) )$get_api_types()
 schema = api_schema$new(types = types)
-schema$get_type_info()
+schema$parse_endpoint("siteInfo","Query")
 
 }
 \section{Super class}{
 \code{\link[NAMCr:base_class]{NAMCr::base_class}} -> \code{api_schema}
 }
+\section{Public fields}{
+\if{html}{\out{<div class="r6-fields">}}
+\describe{
+\item{\code{raw_types}}{raw list of endpoints and fields for the API
+Title}
+
+\item{\code{tpl_pagination_first}}{is the numeric first record to return}
+
+\item{\code{tpl_pagination_offset}}{is the numeric offset of the return}
+
+\item{\code{tpl_pagination_offset}}{is the numeric offset of the return}
+
+\item{\code{tpl_page_fieldname}}{is the name of the field holding page data}
+
+\item{\code{required_kind}}{is string value of required argument kind
+Parse the API types}
+}
+\if{html}{\out{</div>}}
+}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{raw_types}}{raw list of endpoints and fields for the API
+Title}
+}
+\if{html}{\out{</div>}}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-parse_schema}{\code{api_schema$parse_schema()}}
-\item \href{#method-get_type_info}{\code{api_schema$get_type_info()}}
+\item \href{#method-configure}{\code{api_schema$configure()}}
+\item \href{#method-parse_endpoints}{\code{api_schema$parse_endpoints()}}
+\item \href{#method-parse_endpoint}{\code{api_schema$parse_endpoint()}}
+\item \href{#method-is_arg_numeric}{\code{api_schema$is_arg_numeric()}}
+\item \href{#method-has_edge}{\code{api_schema$has_edge()}}
+\item \href{#method-get_edge_name}{\code{api_schema$get_edge_name()}}
+\item \href{#method-get_endpoints}{\code{api_schema$get_endpoints()}}
+\item \href{#method-get_endpoint_fields}{\code{api_schema$get_endpoint_fields()}}
+\item \href{#method-is_argument}{\code{api_schema$is_argument()}}
+\item \href{#method-is_endpoint}{\code{api_schema$is_endpoint()}}
 \item \href{#method-clone}{\code{api_schema$clone()}}
 }
 }
@@ -61,24 +101,26 @@ schema$get_type_info()
 \out{</details>}
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-parse_schema"></a>}}
-\if{latex}{\out{\hypertarget{method-parse_schema}{}}}
-\subsection{Method \code{parse_schema()}}{
+\if{html}{\out{<a id="method-configure"></a>}}
+\if{latex}{\out{\hypertarget{method-configure}{}}}
+\subsection{Method \code{configure()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{api_schema$parse_schema()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$configure()}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{arg_name}}{}
+}
+\if{html}{\out{</div>}}
+}
 \subsection{Returns}{
-api_schema For method chaining
+
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
-\preformatted{
-types = ( namc_api$new(argList=...) )$get_raw_schema()
-schema = api_schema$new(types = types)
-schema$parse_schema()
-
-Discover info on API type
+\preformatted{Parse introspected schema
 
 }
 \if{html}{\out{</div>}}
@@ -87,19 +129,45 @@ Discover info on API type
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_type_info"></a>}}
-\if{latex}{\out{\hypertarget{method-get_type_info}{}}}
-\subsection{Method \code{get_type_info()}}{
+\if{html}{\out{<a id="method-parse_endpoints"></a>}}
+\if{latex}{\out{\hypertarget{method-parse_endpoints}{}}}
+\subsection{Method \code{parse_endpoints()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{api_schema$get_type_info(type_name, recurse = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$parse_endpoints()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+api_schema For method chaining
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{
+types = ( namc_api$new(argList=...) )$get_api_types()
+schema = api_schema$new(types = types)
+schema$parse_schema()
+
+Discover info on API endpoint
+
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-parse_endpoint"></a>}}
+\if{latex}{\out{\hypertarget{method-parse_endpoint}{}}}
+\subsection{Method \code{parse_endpoint()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$parse_endpoint(endpoint, special_type = NA)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{type_name}}{Name of API type to discover}
+\item{\code{endpoint}}{Name of API endpoint to discover}
 
-\item{\code{recurse}}{Recurse down field trees}
+\item{\code{special_type}}{Name of the type of the API endpoint}
 }
 \if{html}{\out{</div>}}
 }
@@ -109,13 +177,76 @@ list Info structure of API details
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{
-types = ( namc_api$new(argList=...) )$get_raw_schema()
+types = ( namc_api$new(argList=...) )$get_api_types()
 schema = api_schema$new(types = types)
-schema$get_type_info()
+schema$parse_endpoint("siteInfo","Query")
 
 }
 \if{html}{\out{</div>}}
 
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-is_arg_numeric"></a>}}
+\if{latex}{\out{\hypertarget{method-is_arg_numeric}{}}}
+\subsection{Method \code{is_arg_numeric()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$is_arg_numeric(special_type, endpoint, argname)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-has_edge"></a>}}
+\if{latex}{\out{\hypertarget{method-has_edge}{}}}
+\subsection{Method \code{has_edge()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$has_edge(special_type, endpoint)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_edge_name"></a>}}
+\if{latex}{\out{\hypertarget{method-get_edge_name}{}}}
+\subsection{Method \code{get_edge_name()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$get_edge_name(special_type, endpoint)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_endpoints"></a>}}
+\if{latex}{\out{\hypertarget{method-get_endpoints}{}}}
+\subsection{Method \code{get_endpoints()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$get_endpoints()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_endpoint_fields"></a>}}
+\if{latex}{\out{\hypertarget{method-get_endpoint_fields}{}}}
+\subsection{Method \code{get_endpoint_fields()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$get_endpoint_fields(special_type, endpoint)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-is_argument"></a>}}
+\if{latex}{\out{\hypertarget{method-is_argument}{}}}
+\subsection{Method \code{is_argument()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$is_argument(special_type, endpoint, argname)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-is_endpoint"></a>}}
+\if{latex}{\out{\hypertarget{method-is_endpoint}{}}}
+\subsection{Method \code{is_endpoint()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$is_endpoint(special_type, endpoint)}\if{html}{\out{</div>}}
 }
 
 }

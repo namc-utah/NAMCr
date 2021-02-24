@@ -14,7 +14,11 @@ namc_api = R6::R6Class(
 
     private = list(
 
-        .auth = NULL
+        #' @field auth holds an oAuth2 object for authentication
+        auth = NULL,
+
+        #' @field retry_conn is a boolean to allow for a query reattempt given an API timeout
+        retry_conn = TRUE
 
     ),
 
@@ -44,11 +48,17 @@ namc_api = R6::R6Class(
         #' @field tpl_pagination_offset is the numeric offset of the return
         tpl_pagination_offset = NULL,
 
+        #' @field tpl_pagination_offset is the numeric offset of the return
+        tpl_pagination_cursor = NULL,
 
+        #' @field required_kind is string value of required argument kind
+        required_kind = NULL,
 
         #' Configure parameters
         #'
         #' Retrieves authentication and schema information via unauthenticated API queries
+        #'
+        #' @param force is a boolean TRUE/FALSE to force a reconfiguration
         #'
         #' @return namc_api An R6 class.
         #'
@@ -58,12 +68,15 @@ namc_api = R6::R6Class(
         #' api = namc_api$new(argList = api_config)
         #' api$configure()
         #'
-        configure = function(){
+        configure = function(force = FALSE){
 
-            auth = self$build_schema()$get_auth_info()
-            private$.auth$set_connection_details( auth$clientId, auth$domain )
+            if( !self$is_configured || force ){
 
-            self$is_configured = TRUE
+                auth = self$build_schema()$get_auth_info()
+                private$auth$set_connection_details( auth$clientId, auth$domain )
+
+                self$is_configured = TRUE
+            }
 
             invisible(self)
         },
@@ -89,12 +102,13 @@ namc_api = R6::R6Class(
                 ghql::GraphqlClient$new(
                     url     = self$URL,
                     headers = list(
-                        Authorization = paste0("Bearer ",
-                                               ifelse(
-                                                   test = authenticate,
-                                                   yes  = private$.auth$get_access_token(),
-                                                   no   = ""
-                                               )
+                        Authorization = paste0(
+                            "Bearer ",
+                            ifelse(
+                                test = authenticate,
+                                yes  = private$auth$get_access_token(),
+                                no   = ""
+                            )
                         )
                     )
                 )
@@ -179,43 +193,47 @@ namc_api = R6::R6Class(
 
             # Retrieve schema via introspection
             types = self$get_api_types()
+            self$schema$set_var("types", types)$configure()
 
-            self$schema = list()
-            iEndpoints = types$name == "Query"
-            endpoints = types$fields[ iEndpoints ][[1]]$name
-
-            for(endpoint in endpoints){
-                is_paginated = FALSE
-                iEndpoint = types$fields[ iEndpoints ][[1]]$name == endpoint
-                eType = types$fields[ iEndpoints ][[1]]$type$ofType$name[ iEndpoint ]
-                # If endpoint is of a special sub-type
-                if( is.na(eType) ){
-                    fType = types$fields[ iEndpoints ][[1]]$type$name[ iEndpoint ]
-                    iType = types$name == fType
-                    if( all(types$fields[ iType ][[1]]$type$kind == "SCALAR") ){
-                        eType = fType
-                    } else {
-                        if( any(types$fields[ iType ][[1]]$name == self$tpl_pagination_offset) ){
-                            is_paginated = TRUE
-                            i2Type = types$fields[ iType ][[1]]$type$kind == "LIST"
-                            fType = types$fields[ iType ][[1]]$name[ i2Type ]
-                            eType = types$fields[ iType ][[1]]$type$ofType$name[ i2Type ]
-                        } else {
-                            i2Type = types$fields[ iType ][[1]]$type$kind == "LIST"
-                            fType = NA
-                            eType = types$fields[ iType ][[1]]$type$ofType$name[ i2Type ]
-                        }
-                    }
-                } else {
-                    fType = NA
-                }
-                iType = types$name == eType
-                self$schema[[endpoint]] = list(
-                    subtype = fType,
-                    is_paginated = is_paginated,
-                    fields = types$fields[ iType ][[1]]$name
-                )
-            }
+            # self$schema = list()
+            # iEndpoints = types$name == "Query"
+            # endpoints = types$fields[ iEndpoints ][[1]]$name
+            #
+            # for(endpoint in endpoints){
+            #     has_edge = FALSE
+            #     iEndpoint = types$fields[ iEndpoints ][[1]]$name == endpoint
+            #     eType = types$fields[ iEndpoints ][[1]]$type$ofType$name[ iEndpoint ]
+            #     # If endpoint is of a special sub-type
+            #     if( is.na(eType) ){
+            #         fType = types$fields[ iEndpoints ][[1]]$type$name[ iEndpoint ]
+            #         iType = types$name == fType
+            #         if( all(types$fields[ iType ][[1]]$type$kind == "SCALAR") ){
+            #             eType = fType
+            #         } else {
+            #             if( any(types$fields[ iType ][[1]]$name == self$tpl_pagination_cursor) ){
+            #                 has_edge = TRUE
+            #                 i2Type = types$fields[ iType ][[1]]$type$kind == "LIST"
+            #                 fType = types$fields[ iType ][[1]]$name[ i2Type ]
+            #                 eType = types$fields[ iType ][[1]]$type$ofType$name[ i2Type ]
+            #             } else {
+            #                 i2Type = types$fields[ iType ][[1]]$type$kind == "LIST"
+            #                 fType = NA
+            #                 eType = types$fields[ iType ][[1]]$type$ofType$name[ i2Type ]
+            #             }
+            #         }
+            #     } else {
+            #         fType = NA
+            #     }
+            #     iType = types$name == eType
+            #     self$schema[[endpoint]] = list(
+            #         edge_name = fType,
+            #         has_edge = has_edge,
+            #         fields = types$fields[ iType ][[1]]$name,
+            #         args = types$fields[ iEndpoints ][[1]]$args[iEndpoint][[1]]$name,
+            #         arg_is_numeric = types$fields[ iEndpoints ][[1]]$args[iEndpoint][[1]]$type$name == "Int",
+            #         arg_is_required = types$fields[ iEndpoints ][[1]]$args[iEndpoint][[1]]$type$kind == "NON_NULL"
+            #     )
+            # }
 
             invisible(self)
         },
@@ -228,7 +246,6 @@ namc_api = R6::R6Class(
         #'
         #'
         #' @param query string Text containing a graphql query
-        #' @param load_all boolean When TRUE all data is loaded via pagination. When FALSE only the first pagination is returned.
         #' @param authenticate boolean A logical TRUE/FALSE representing the required authentication state.
         #' @param name string A name for the query.
         #'
@@ -240,7 +257,7 @@ namc_api = R6::R6Class(
         #' api = namc_api$new(argList = api_config)
         #' data = api$query("graphql_query", ...)
         #'
-        query = function(query, load_all = TRUE, authenticate = TRUE, name = 'query'){
+        query = function(query, authenticate = TRUE, name = 'query'){
 
             if( !self$is_configured && authenticate ) self$configure()
 
@@ -252,12 +269,31 @@ namc_api = R6::R6Class(
             qry$query( name, query )
 
             # Execute query
-            res = jsonlite::fromJSON(
-                txt = con$exec( qry$queries[[ name ]] )
-            )
+            tryCatch({
+                res = jsonlite::fromJSON(
+                    txt = con$exec( qry$queries[[ name ]] )
+                )
+
+            }, error = function(e){
+                if( grepl("HTTP 504", e ) && private$retry_conn) {
+                    private$retry_conn = FALSE
+                    message("Connection timed out. Reattempting request...")
+                    return( self$query( query, authenticate, name ) )
+
+                } else if(!private$retry_conn) {
+                    stop("Reattempt failed. Service is down. Please try again later.", call. = FALSE)
+
+                } else {
+                    stop("QUERY ERROR", call. = FALSE )
+
+                }
+
+            }, finally = {
+                private$retry_conn = TRUE
+            })
 
             if( self$top_level_key_error %in% names(res) ) {
-                stop( paste0("Query Execution Error:\n\t", res[[ self$top_level_key_error ]]$message) )
+                stop( paste0("Query Execution Error:\n\t", res[[ self$top_level_key_error ]]$message), call. = FALSE )
             }
 
             return( res[[ self$top_level_key ]] )
@@ -311,7 +347,7 @@ namc_api = R6::R6Class(
         #' auth = api$get_auth_provider()
         #'
         get_auth_provider = function(){
-            return( private$.auth )
+            return( private$auth )
         },
 
 
@@ -356,11 +392,57 @@ namc_api = R6::R6Class(
         #' api = namc_api$new(argList = api_config)
         #' endpoints = api$get_endpoints()
         #'
-        get_endpoints = function(){
+        get_endpoints = function(special_type = "Query"){
 
             if( !self$is_configured ) self$configure()
 
-            return( names(self$schema) )
+            return( names( self$schema[[special_type]] ) )
+        },
+
+
+
+        #' Retrieve fields
+        #'
+        #' Retrieves the fields associated with an API endpoint from the schema
+        #'
+        #' @param api_endpoint The name of an API endpoint.
+        #'
+        #' @return vector A character vector of fields.
+        #'
+        #' @examples
+        #'
+        #' api_config = list(...) # namc_api public or private variables
+        #' api = namc_api$new(argList = api_config)
+        #' api$get_endpoint_fields(api_endpoint = 'sites')
+        #'
+        get_endpoint_fields = function(api_endpoint, special_type = "Query"){
+
+            if( !self$is_configured ) self$configure()
+
+            return( names( self$schema[[special_type]][[ api_endpoint ]]$fields ) )
+        },
+
+
+
+        #' Retrieve arguments
+        #'
+        #' Retrieves the arguments associated with an API endpoint from the schema
+        #'
+        #' @param api_endpoint The name of an API endpoint.
+        #'
+        #' @return vector A character vector of arguments.
+        #'
+        #' @examples
+        #'
+        #' api_config = list(...) # namc_api public or private variables
+        #' api = namc_api$new(argList = api_config)
+        #' api$get_endpoint_args(api_endpoint = 'sites')
+        #'
+        get_endpoint_args = function(api_endpoint, special_type = "Query"){
+
+            if( !self$is_configured ) self$configure()
+
+            return( names( self$schema[[special_type]][[ api_endpoint ]]$args ) )
         },
 
 
@@ -379,11 +461,22 @@ namc_api = R6::R6Class(
         #' api = namc_api$new(argList = api_config)
         #' api$get_endpoint_fields(api_endpoint = 'sites')
         #'
-        get_endpoint_fields = function(api_endpoint){
+        is_endpoint = function(api_endpoint, stop_if_not = FALSE){
 
             if( !self$is_configured ) self$configure()
 
-            return( self$schema[[ api_endpoint ]]$fields )
+            is_endpoint = self$schema$is_endpoint(endpoint = api_endpoint )
+
+            if(stop_if_not && !is_endpoint){
+                endpoints = paste( self$schema$get_endpoints(), collapse = ' ' )
+                msg = paste0(
+                    '"',api_endpoint,'" is not a valid endpoint. The endpoints available are:\n\t',
+                    endpoints
+                )
+                stop( msg, call. = FALSE )
+            }
+
+            return( is_endpoint )
         }
 
     )

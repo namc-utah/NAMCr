@@ -1,1 +1,1 @@
-pkg.globals = new.env( parent = emptyenv() )
+.pkgenv = new.env( parent = emptyenv() )

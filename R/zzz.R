@@ -10,8 +10,9 @@
     #c = yaml::yaml.load_file("./data-raw/config.yml")
     c = pkg.config()
 
-    c$api$.auth = namc_oauth2$new( argList = c$auth )
+    c$api$auth = namc_oauth2$new( argList = c$auth )
+    c$api$schema = api_schema$new( argList = c$schema )
 
-    pkg.globals$api <<- namc_api$new( argList = c$api )
+    .pkgenv$api <<- namc_api$new( argList = c$api )
 
 }

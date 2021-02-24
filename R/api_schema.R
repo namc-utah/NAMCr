@@ -14,35 +14,125 @@ api_schema = R6::R6Class(
 
     private = list(
 
+        #' @field raw_types raw list of endpoints and fields for the API
         types = NULL,
-        tpl_pagination_offset = NULL,
         endpoints = NULL,
 
         special_types = c("Query","Mutation","Subscription"),
+        numeric_types = c("Int","Float"),
+        string_types = c("Boolean","String"),
         fixed_types = c("Boolean","String","Int","Float"),
         base_types = NULL,
 
-        query_types = NULL,
-        mutation_types = NULL,
-        subscription_types = NULL,
+        Query = NULL,
+        Mutation = NULL,
+        Subscription = NULL,
+
+
+        new_endpoint = function(...){
+            return(
+                modifyList(
+                    list(
+                        edge_name = NA,
+                        has_edge  = FALSE,
+                        fields    = NULL,
+                        args      = NULL
+                    ),
+                    list(...)
+                )
+            )
+        },
+
+        new_field = function(...){
+            return(
+                modifyList(
+                    list(
+                        is_numeric    = FALSE,
+                        is_expandable = FALSE
+                    ),
+                    list(...)
+                )
+            )
+        },
+
+        new_argument = function(...){
+            return(
+                modifyList(
+                    list(
+                        is_numeric    = FALSE,
+                        is_required   = FALSE,
+                        is_for_paging = FALSE,
+                        default_value = NA
+                    ),
+                    list(...)
+                )
+            )
+        },
 
 
 
-        is_special_type = function(type_name){
-            return( any(type_name == private$special_types) )
+        discover_types = function(){
+            # Identify base building graphql types
+            private$base_types = private$types$name[grepl("__*",private$types$name)]
+
+            # Determine query, mutation and subscription endpoints
+            for(special_type in private$special_types){
+                iTypes = tolower(private$types$name) == tolower(special_type)
+                if( any(iTypes) ){
+                    for(endpoint in private$types$fields[iTypes][[1]]$name){
+                        private[[special_type]][[endpoint]] = private$new_endpoint()
+                    }
+                }
+            }
+            invisible(self)
+        },
+
+
+
+        #' Title
+        #'
+        #' @param arg_name
+        #'
+        #' @return
+        #' @export
+        #'
+        #' @examples
+        is_paging_arg = function(arg_name){
+            return( any(arg_name == c(self$tpl_pagination_first, self$tpl_pagination_offset)) )
         }
 
     ),
 
     public = list(
 
+        #' @field tpl_pagination_first is the numeric first record to return
+        tpl_pagination_first = NULL,
 
-        initialize = function(argList=NULL, ...){
-            super$initialize(argList,...)
-            if (is.null(self$path.output)){
-                self$path.output = self$path
-            }
+        #' @field tpl_pagination_offset is the numeric offset of the return
+        tpl_pagination_offset = NULL,
+
+        #' @field tpl_pagination_offset is the numeric offset of the return
+        tpl_pagination_cursor = NULL,
+
+        #' @field tpl_page_fieldname is the name of the field holding page data
+        tpl_page_fieldname = NULL,
+
+        #' @field required_kind is string value of required argument kind
+        required_kind = NULL,
+
+
+
+        #' Parse the API types
+        #'
+        #' @return
+        #'
+        #' @examples
+        configure = function(){
+            private$discover_types()$parse_endpoints()
+            invisible(self)
         },
+
+
 
         #' Parse introspected schema
         #'
@@ -54,37 +144,87 @@ api_schema = R6::R6Class(
         #' schema = api_schema$new(types = types)
         #' schema$parse_schema()
         #'
-        parse_schema = function(){
+        parse_endpoints = function(){
 
-            iEndpoints = private$types$name == "Query"
-            endpoints = private$types$fields[ iEndpoints ][[1]]$name
-
-            for(endpoint in endpoints){
-                iEndpoint = private$types$fields[ iEndpoints ][[1]]$name == endpoint
-                eType = private$types$fields[ iEndpoints ][[1]]$type$ofType$name[ iEndpoint ]
-                # If endpoint is of a special sub-type
-                if( is.na(eType) ){
-                    fType = private$types$fields[ iEndpoints ][[1]]$type$name[ iEndpoint ]
-                    iType = private$types$name == fType
-                    if( all(private$types$fields[ iType ][[1]]$type$kind == "SCALAR") ){
-                        eType = fType
-                    } else {
-                        #if( any(private$types$fields[ iType ][[1]]$name == "records") ){
-                        i2Type = private$types$fields[ iType ][[1]]$name == "records"
-                        eType = private$types$fields[ iType ][[1]]$type$ofType$name[ i2Type ]
-                        #}
-                        #eType = private$types$fields[ iType ][[1]]$type$ofType$name[ i2Type ]
-
-                    }
-                } else {
-                    fType = NA
+            for(special_type in private$special_types){
+                endpoints = names( private[[special_type]] )
+                for(endpoint in endpoints){
+                    self$parse_endpoint( endpoint, special_type )
                 }
-                iType = private$types$name == eType
-                private$endpoints[[endpoint]] = list(
-                    subtype = fType,
-                    #subfield_paginate = ,
-                    fields = private$types$fields[ iType ][[1]]$name,
-                    args = private$types$fields[ iEndpoints ][[1]]$args[ iEndpoint ][[1]]$name
+            }
+
+            invisible(self)
+        },
+
+
+
+        #' Discover info on API endpoint
+        #'
+        #' @param endpoint Name of API endpoint to discover
+        #' @param special_type Name of the type of the API endpoint
+        #'
+        #' @return list Info structure of API details
+        #'
+        #' @examples
+        #'
+        #' types = ( namc_api$new(argList=...) )$get_api_types()
+        #' schema = api_schema$new(types = types)
+        #' schema$parse_endpoint("siteInfo","Query")
+        #'
+        parse_endpoint = function(endpoint, special_type = NA){
+
+            iSpecialType = private$types$name == special_type
+            iEndpoint = private$types$fields[ iSpecialType ][[1]]$name == endpoint
+            no_type   = is.na(private$types$fields[ iSpecialType ][[1]]$type$ofType[ iEndpoint ])
+            data_type = ifelse(no_type, NA, private$types$fields[ iSpecialType ][[1]]$type$ofType$name[ iEndpoint ] )
+            edge_name = NA
+            has_edge  = FALSE
+
+            # Endpoint data is contained in a nested sub-type
+            if( is.na(data_type) ){
+                data_type = private$types$fields[ iSpecialType ][[1]]$type$name[ iEndpoint ]
+                iEdgeType = private$types$name == data_type
+
+                # Is cursor/edge paginated data
+                if( any(private$types$fields[ iEdgeType ][[1]]$name == self$tpl_pagination_cursor) ){
+                    has_edge = TRUE
+                    i2Type = private$types$fields[ iEdgeType ][[1]]$type$kind == "LIST"
+                    edge_name = private$types$fields[ iEdgeType ][[1]]$name[ i2Type ]
+                    data_type = private$types$fields[ iEdgeType ][[1]]$type$ofType$name[ i2Type ]
+
+                # Is nested non-paged structured data
+                } else if( any(private$types$fields[ iEdgeType ][[1]]$type$kind == "LIST") ){
+                    i2Type = private$types$fields[ iEdgeType ][[1]]$type$kind == "LIST"
+                    data_type = private$types$fields[ iEdgeType ][[1]]$type$ofType$name[ i2Type ]
+                }
+            }
+
+            iDataType = private$types$name == data_type
+            private[[ special_type ]][[ endpoint ]] = private$new_endpoint(
+                edge_name = edge_name,
+                has_edge  = has_edge
+            )
+
+            for(fieldname in private$types$fields[ iDataType ][[1]]$name){
+                iField = private$types$fields[ iDataType ][[1]]$name == fieldname
+                private[[ special_type ]][[ endpoint ]]$fields[[ fieldname ]] = private$new_field(
+                    is_numeric    = any( private$types$fields[ iDataType ][[1]]$type$name[ iField ] == private$numeric_types ),
+                    is_expandable = FALSE
+                )
+            }
+
+            for(argname in private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$name){
+                iArg = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$name == argname
+                is_numeric = any( private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$name[ iArg ] == private$numeric_types)
+                if(is.na(is_numeric)){
+                    is_numeric = TRUE
+                    try({is_numeric = private[[ special_type ]][[ endpoint ]]$fields[[ argname ]]$is_numeric},silent = TRUE)
+                }
+                private[[ special_type ]][[ endpoint ]]$args[[ argname ]] = private$new_argument(
+                    is_numeric    = is_numeric,
+                    is_required   = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$kind[ iArg ] == self$required_kind,
+                    is_for_paging = private$is_paging_arg( argname ),
+                    default_value = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$defaultValue[ iArg ]
                 )
             }
 
@@ -93,68 +233,51 @@ api_schema = R6::R6Class(
 
 
 
-        #' Discover info on API type
-        #'
-        #' @param type_name Name of API type to discover
-        #' @param recurse Recurse down field trees
-        #'
-        #' @return list Info structure of API details
-        #'
-        #' @examples
-        #'
-        #' types = ( namc_api$new(argList=...) )$get_api_types()
-        #' schema = api_schema$new(types = types)
-        #' schema$get_type_info()
-        #'
-        get_type_info = function(type_name, recurse = TRUE){
-            iType = private$types$name == type_name
-            label = type_name
-            kind = private$types$kind[ iType ]
-            fieldnames = private$types$fields[ iType ][[1]]$name
-            is_pagination = any(private$tpl_pagination_offset == fieldnames)
-            fields = list()
+        is_arg_numeric = function(special_type,endpoint,argname){
+            if( any(argname == names(private[[ special_type ]][[ endpoint ]]$args)) ){
+                return( private[[ special_type ]][[ endpoint ]]$args[[ argname ]]$is_numeric )
 
-            if( kind != "SCALAR" && recurse ){
-
-                for(iField in 1:length(fieldnames)){
-                    fields[ fieldnames[iField] ] = self$get_type_info(type_name = fieldnames[iField])
-                }
-
+            } else {
+                # Assume argument is numeric if no data available
+                return( TRUE )
             }
-
-            for(iField in 1:length(fieldnames)){
-                fields[ fieldnames[iField] ] = list(
-                    type_name = private$types$fields[ iType ][[1]]$type$name[ iField ],
-                    api_type = private$types$fields[ iType ][[1]]$type$ofType$name[ iField ],
-                    args = list(
-                        names = private$types$fields[ iType ][[1]]$args[[ iField ]]$name,
-                        type = private$types$fields[ iType ][[1]]$args[[ iField ]]$type$name
-                    )
-                )
-            }
-
-
-            return(
-                list(
-                    label = label,
-                    kind = kind,
-                    fields = fields,
-                    is_pagination = is_pagination
-                )
-            )
-        }#,
+        },
 
 
 
-        # get_fields = function(api_endpoint){
-        #
-        # },
-        #
-        #
-        #
-        # get_args = function(api_endpoint){
-        #
-        # }
+        has_edge = function(special_type,endpoint){
+            return( private[[ special_type ]][[ endpoint ]]$has_edge )
+        },
+
+
+
+        get_edge_name = function(special_type,endpoint){
+            return( private[[ special_type ]][[ endpoint ]]$edge_name )
+        },
+
+
+
+        get_endpoints = function(){
+            return( c(names(private$Query),names(private$Mutation),names(private$Subscription)) )
+        },
+
+
+
+        get_endpoint_fields = function(special_type,endpoint){
+            return( names(private[[ special_type ]][[ endpoint ]]$fields) )
+        },
+
+
+
+        is_argument = function(special_type,endpoint,argname){
+            return( any(argname == names(private[[ special_type ]][[ endpoint ]]$args)) )
+        },
+
+
+
+        is_endpoint = function(special_type,endpoint){
+            return( any( self$get_endpoints() == endpoint ) )
+        }
 
     )
 )

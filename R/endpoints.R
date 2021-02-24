@@ -9,7 +9,7 @@
 #' endpoints = NAMCr::get_endpoints()
 #'
 get_endpoints = function(){
-    return( pkg.globals$api$get_endpoints() )
+    return( .pkgenv$api$get_endpoints() )
 }
 
 
@@ -20,12 +20,30 @@ get_endpoints = function(){
 #'
 #' @param api_endpoint The name of an API endpoint.
 #'
-#' @return vector A character vector.
+#' @return vector A character vector of fields.
 #'
 #' @examples
 #'
-#' endpoints = NAMCr::get_endpoints( api_endpoint = "sites" )
+#' fields = NAMCr::get_endpoint_fields( api_endpoint = "sites" )
 #'
 get_endpoint_fields = function(api_endpoint){
-    return( pkg.globals$api$get_endpoints(api_endpoint) )
+    return( .pkgenv$api$get_endpoint_fields(api_endpoint) )
+}
+
+
+
+#' Retrieve fields
+#'
+#' Retrieves the fields associated with an API endpoint from the schema
+#'
+#' @param api_endpoint The name of an API endpoint.
+#'
+#' @return vector A character vector of arguments.
+#'
+#' @examples
+#'
+#' args = NAMCr::get_endpoint_args( api_endpoint = "sites" )
+#'
+get_endpoint_args = function(api_endpoint){
+    return( .pkgenv$api$get_endpoint_args(api_endpoint) )
 }

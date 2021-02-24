@@ -25,7 +25,16 @@ pkg.config = function(){
                 top_level_key         = 'data',
                 top_level_key_error   = 'errors',
                 tpl_pagination_first  = 'limit',
-                tpl_pagination_offset = 'nextToken'
+                tpl_pagination_offset = 'offset',
+                tpl_pagination_cursor = 'nextOffset',
+                required_kind         = 'NON_NULL'
+            ),
+            schema = list(
+                tpl_pagination_first  = 'limit',
+                tpl_pagination_offset = 'offset',
+                tpl_pagination_cursor = 'nextOffset',
+                tpl_page_fieldname    = 'records',
+                required_kind         = 'NON_NULL'
             ),
             auth = list(
                 oAuth2_appname     = 'NAMCr',
