@@ -74,15 +74,22 @@ query = function(api_endpoint, args = list(), include = c(), exclude = c(), filt
     }
 
     # Edge / Cursor Style Pagination
+    fields = api$schema$get_endpoint_fields( api_endpoint )
+    if(length(include) > 0){
+        fields = include
+    }
+    if(length(exclude) > 0){
+        fields = setdiff(fields, exclude)
+    }
     if( api$schema$has_edge( api_endpoint ) ){
         tpl_fields = sprintf(
             '%s{%s}%s',
             api$schema$get_edge_name( api_endpoint ),
-            paste(api$schema$get_endpoint_fields( api_endpoint ), collapse = ' '),
+            paste(fields, collapse = ' '),
             api$schema$tpl_pagination_cursor
         )
     } else {
-        tpl_fields = paste(api$schema$get_endpoint_fields( api_endpoint ), collapse = ' ')
+        tpl_fields = paste(fields, collapse = ' ')
     }
 
     paged_data = NA
