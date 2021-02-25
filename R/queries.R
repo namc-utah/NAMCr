@@ -145,9 +145,9 @@ query = function(api_endpoint, args = list(), include = c(), exclude = c(), filt
                 nrow(paged_data) + nrow( data[[api_endpoint]] )
             )
         }
-        if(is.na(page_offset) || nrow( data[[api_endpoint]] ) !=  page_limit){
+        if(is.na(page_offset) || nrow( data[[api_endpoint]] ) !=  page_limit || (!is.na(limit) && nrow( data[[api_endpoint]] ) >= limit) ){
             is_last_page = TRUE
-            if(is_paginated){
+            if(is_paginated && !is.na(paged_data)){
                 data[[api_endpoint]] = paged_data
             }
         } else if(!is.data.frame(paged_data)) {
