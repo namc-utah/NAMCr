@@ -42,10 +42,9 @@ api_cli = R6::R6Class(
             while(private$cli_position >= 1 && private$cli_position){
                 data = private[[ paste0("fn_",private$cli_positions[private$cli_position]) ]]()
             }
-
+            if( private$cli_position == 0 ) return( data )
             if( private$cli_position == -1 ) return()
-
-            return( data )
+            return()
         }
     ),
 
@@ -83,6 +82,12 @@ api_cli = R6::R6Class(
 
         increment = function(){
             private$cli_position = private$cli_position + 1
+        },
+
+
+
+        complete = function(){
+            private$cli_position = 0
         },
 
 
@@ -279,7 +284,7 @@ api_cli = R6::R6Class(
 
         fn_exec = function(){
 
-            private$exit()
+            private$complete()
 
             return(
                 query(

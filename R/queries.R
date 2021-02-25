@@ -143,6 +143,7 @@ query = function(api_endpoint, args = list(), include = c(), exclude = c(), filt
 
         if( api$schema$has_edge( api_endpoint ) ){
             page_offset = data[[api_endpoint]][[ api$schema$tpl_pagination_cursor ]]
+            if(is.null(page_offset)) page_offset = NA
             data[[api_endpoint]] = data[[api_endpoint]][[ api$schema$get_edge_name( api_endpoint ) ]]
 
         } else if(is_paginated) {
