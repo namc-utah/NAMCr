@@ -521,7 +521,7 @@ Retrieves the API endpoint names from the schema
 \if{latex}{\out{\hypertarget{method-get_endpoints}{}}}
 \subsection{Method \code{get_endpoints()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{namc_api$get_endpoints(special_type = "Query")}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{namc_api$get_endpoints()}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{
@@ -549,7 +549,7 @@ Retrieves the fields associated with an API endpoint from the schema
 \if{latex}{\out{\hypertarget{method-get_endpoint_fields}{}}}
 \subsection{Method \code{get_endpoint_fields()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{namc_api$get_endpoint_fields(api_endpoint, special_type = "Query")}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{namc_api$get_endpoint_fields(api_endpoint)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -584,7 +584,7 @@ Retrieves the arguments associated with an API endpoint from the schema
 \if{latex}{\out{\hypertarget{method-get_endpoint_args}{}}}
 \subsection{Method \code{get_endpoint_args()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{namc_api$get_endpoint_args(api_endpoint, special_type = "Query")}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{namc_api$get_endpoint_args(api_endpoint, no_paging = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

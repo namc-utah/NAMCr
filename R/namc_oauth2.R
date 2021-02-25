@@ -1,7 +1,6 @@
 #' @title namc_oauth2
 #' @description R6 class for handling NAMC oAuth2
 #' @return a `namc_oauth2` class (R6 class)
-#' @export
 #' @examples
 #'
 #' auth_config = list(...) # namc_oauth2 public or private variables

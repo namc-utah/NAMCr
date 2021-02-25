@@ -81,10 +81,15 @@ Title}
 \item \href{#method-parse_endpoints}{\code{api_schema$parse_endpoints()}}
 \item \href{#method-parse_endpoint}{\code{api_schema$parse_endpoint()}}
 \item \href{#method-is_arg_numeric}{\code{api_schema$is_arg_numeric()}}
+\item \href{#method-get_special_type_from_endpoint}{\code{api_schema$get_special_type_from_endpoint()}}
 \item \href{#method-has_edge}{\code{api_schema$has_edge()}}
 \item \href{#method-get_edge_name}{\code{api_schema$get_edge_name()}}
 \item \href{#method-get_endpoints}{\code{api_schema$get_endpoints()}}
+\item \href{#method-get_endpoint}{\code{api_schema$get_endpoint()}}
 \item \href{#method-get_endpoint_fields}{\code{api_schema$get_endpoint_fields()}}
+\item \href{#method-get_endpoint_args}{\code{api_schema$get_endpoint_args()}}
+\item \href{#method-get_argument}{\code{api_schema$get_argument()}}
+\item \href{#method-is_argument_required}{\code{api_schema$is_argument_required()}}
 \item \href{#method-is_argument}{\code{api_schema$is_argument()}}
 \item \href{#method-is_endpoint}{\code{api_schema$is_endpoint()}}
 \item \href{#method-clone}{\code{api_schema$clone()}}
@@ -192,7 +197,16 @@ schema$parse_endpoint("siteInfo","Query")
 \if{latex}{\out{\hypertarget{method-is_arg_numeric}{}}}
 \subsection{Method \code{is_arg_numeric()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{api_schema$is_arg_numeric(special_type, endpoint, argname)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$is_arg_numeric(endpoint, argname)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_special_type_from_endpoint"></a>}}
+\if{latex}{\out{\hypertarget{method-get_special_type_from_endpoint}{}}}
+\subsection{Method \code{get_special_type_from_endpoint()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$get_special_type_from_endpoint(endpoint)}\if{html}{\out{</div>}}
 }
 
 }
@@ -201,7 +215,7 @@ schema$parse_endpoint("siteInfo","Query")
 \if{latex}{\out{\hypertarget{method-has_edge}{}}}
 \subsection{Method \code{has_edge()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{api_schema$has_edge(special_type, endpoint)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$has_edge(endpoint)}\if{html}{\out{</div>}}
 }
 
 }
@@ -210,7 +224,7 @@ schema$parse_endpoint("siteInfo","Query")
 \if{latex}{\out{\hypertarget{method-get_edge_name}{}}}
 \subsection{Method \code{get_edge_name()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{api_schema$get_edge_name(special_type, endpoint)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$get_edge_name(endpoint)}\if{html}{\out{</div>}}
 }
 
 }
@@ -224,11 +238,47 @@ schema$parse_endpoint("siteInfo","Query")
 
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_endpoint"></a>}}
+\if{latex}{\out{\hypertarget{method-get_endpoint}{}}}
+\subsection{Method \code{get_endpoint()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$get_endpoint(endpoint)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-get_endpoint_fields"></a>}}
 \if{latex}{\out{\hypertarget{method-get_endpoint_fields}{}}}
 \subsection{Method \code{get_endpoint_fields()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{api_schema$get_endpoint_fields(special_type, endpoint)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$get_endpoint_fields(endpoint)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_endpoint_args"></a>}}
+\if{latex}{\out{\hypertarget{method-get_endpoint_args}{}}}
+\subsection{Method \code{get_endpoint_args()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$get_endpoint_args(endpoint, no_paging = FALSE)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_argument"></a>}}
+\if{latex}{\out{\hypertarget{method-get_argument}{}}}
+\subsection{Method \code{get_argument()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$get_argument(endpoint, argname)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-is_argument_required"></a>}}
+\if{latex}{\out{\hypertarget{method-is_argument_required}{}}}
+\subsection{Method \code{is_argument_required()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$is_argument_required(endpoint, argname)}\if{html}{\out{</div>}}
 }
 
 }
@@ -237,7 +287,7 @@ schema$parse_endpoint("siteInfo","Query")
 \if{latex}{\out{\hypertarget{method-is_argument}{}}}
 \subsection{Method \code{is_argument()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{api_schema$is_argument(special_type, endpoint, argname)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$is_argument(endpoint, argname)}\if{html}{\out{</div>}}
 }
 
 }
@@ -246,7 +296,7 @@ schema$parse_endpoint("siteInfo","Query")
 \if{latex}{\out{\hypertarget{method-is_endpoint}{}}}
 \subsection{Method \code{is_endpoint()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{api_schema$is_endpoint(special_type, endpoint)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$is_endpoint(endpoint)}\if{html}{\out{</div>}}
 }
 
 }

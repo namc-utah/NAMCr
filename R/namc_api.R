@@ -1,7 +1,6 @@
 #' @title namc_api
 #' @description R6 class for handling NAMC GraphQL queries
 #' @return a `namc_api` class (R6 class)
-#' @export
 #' @examples
 #'
 #' api_config = list(...) # namc_api public or private variables
@@ -53,6 +52,8 @@ namc_api = R6::R6Class(
 
         #' @field required_kind is string value of required argument kind
         required_kind = NULL,
+
+
 
         #' Configure parameters
         #'
@@ -136,34 +137,46 @@ namc_api = R6::R6Class(
                 ( self$query(
                     '{
                         __schema {
-                           types {
-                             name
-                             kind
-                             ofType {
-                               name
-                             }
-                             fields {
-                               name
-                               description
-                               args {
-                                 name
-                                 defaultValue
-                                 description
-                                 type {
-                                   name
-                                   kind
-                                 }
-                               }
-                               type {
-                                 name
-                                 kind
-                                 ofType {
-                                   name
-                                 }
-                               }
-                             }
-                           }
-                         }
+                            types {
+                                name
+                                kind
+                                ofType {
+                                    name
+                                }
+                                fields {
+                                    name
+                                    description
+                                    args {
+                                        name
+                                        defaultValue
+                                        description
+                                        type {
+                                            name
+                                            kind
+                                            ofType{
+                                                name
+                                                kind
+                                                ofType{
+                                                    name
+                                                    kind
+                                                    ofType{
+                                                        name
+                                                        kind
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    type {
+                                        name
+                                        kind
+                                        ofType {
+                                            name
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }',
                     authenticate = FALSE
                 ) )[['__schema']]$types
@@ -194,46 +207,6 @@ namc_api = R6::R6Class(
             # Retrieve schema via introspection
             types = self$get_api_types()
             self$schema$set_var("types", types)$configure()
-
-            # self$schema = list()
-            # iEndpoints = types$name == "Query"
-            # endpoints = types$fields[ iEndpoints ][[1]]$name
-            #
-            # for(endpoint in endpoints){
-            #     has_edge = FALSE
-            #     iEndpoint = types$fields[ iEndpoints ][[1]]$name == endpoint
-            #     eType = types$fields[ iEndpoints ][[1]]$type$ofType$name[ iEndpoint ]
-            #     # If endpoint is of a special sub-type
-            #     if( is.na(eType) ){
-            #         fType = types$fields[ iEndpoints ][[1]]$type$name[ iEndpoint ]
-            #         iType = types$name == fType
-            #         if( all(types$fields[ iType ][[1]]$type$kind == "SCALAR") ){
-            #             eType = fType
-            #         } else {
-            #             if( any(types$fields[ iType ][[1]]$name == self$tpl_pagination_cursor) ){
-            #                 has_edge = TRUE
-            #                 i2Type = types$fields[ iType ][[1]]$type$kind == "LIST"
-            #                 fType = types$fields[ iType ][[1]]$name[ i2Type ]
-            #                 eType = types$fields[ iType ][[1]]$type$ofType$name[ i2Type ]
-            #             } else {
-            #                 i2Type = types$fields[ iType ][[1]]$type$kind == "LIST"
-            #                 fType = NA
-            #                 eType = types$fields[ iType ][[1]]$type$ofType$name[ i2Type ]
-            #             }
-            #         }
-            #     } else {
-            #         fType = NA
-            #     }
-            #     iType = types$name == eType
-            #     self$schema[[endpoint]] = list(
-            #         edge_name = fType,
-            #         has_edge = has_edge,
-            #         fields = types$fields[ iType ][[1]]$name,
-            #         args = types$fields[ iEndpoints ][[1]]$args[iEndpoint][[1]]$name,
-            #         arg_is_numeric = types$fields[ iEndpoints ][[1]]$args[iEndpoint][[1]]$type$name == "Int",
-            #         arg_is_required = types$fields[ iEndpoints ][[1]]$args[iEndpoint][[1]]$type$kind == "NON_NULL"
-            #     )
-            # }
 
             invisible(self)
         },
@@ -270,6 +243,7 @@ namc_api = R6::R6Class(
 
             # Execute query
             tryCatch({
+
                 res = jsonlite::fromJSON(
                     txt = con$exec( qry$queries[[ name ]] )
                 )
@@ -392,11 +366,11 @@ namc_api = R6::R6Class(
         #' api = namc_api$new(argList = api_config)
         #' endpoints = api$get_endpoints()
         #'
-        get_endpoints = function(special_type = "Query"){
+        get_endpoints = function(){
 
             if( !self$is_configured ) self$configure()
 
-            return( names( self$schema[[special_type]] ) )
+            return( self$schema$get_endpoints() )
         },
 
 
@@ -415,11 +389,11 @@ namc_api = R6::R6Class(
         #' api = namc_api$new(argList = api_config)
         #' api$get_endpoint_fields(api_endpoint = 'sites')
         #'
-        get_endpoint_fields = function(api_endpoint, special_type = "Query"){
+        get_endpoint_fields = function(api_endpoint){
 
             if( !self$is_configured ) self$configure()
 
-            return( names( self$schema[[special_type]][[ api_endpoint ]]$fields ) )
+            return( self$schema$get_endpoint_fields(special_type, api_endpoint) )
         },
 
 
@@ -438,11 +412,11 @@ namc_api = R6::R6Class(
         #' api = namc_api$new(argList = api_config)
         #' api$get_endpoint_args(api_endpoint = 'sites')
         #'
-        get_endpoint_args = function(api_endpoint, special_type = "Query"){
+        get_endpoint_args = function(api_endpoint, no_paging = FALSE){
 
             if( !self$is_configured ) self$configure()
 
-            return( names( self$schema[[special_type]][[ api_endpoint ]]$args ) )
+            return( self$schema$get_endpoint_args(api_endpoint, no_paging) )
         },
 
 

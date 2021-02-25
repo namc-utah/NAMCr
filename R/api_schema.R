@@ -1,7 +1,6 @@
 #' @title api_schema
 #' @description R6 class for handling the NAMC graphql schema
 #' @return a `namc_oauth2` class (R6 class)
-#' @export
 #' @examples
 #'
 #' types = ( namc_api$new(argList=...) )$get_api_types()
@@ -60,6 +59,7 @@ api_schema = R6::R6Class(
                 modifyList(
                     list(
                         is_numeric    = FALSE,
+                        is_array      = FALSE,
                         is_required   = FALSE,
                         is_for_paging = FALSE,
                         default_value = NA
@@ -216,12 +216,21 @@ api_schema = R6::R6Class(
             for(argname in private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$name){
                 iArg = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$name == argname
                 is_numeric = any( private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$name[ iArg ] == private$numeric_types)
+                is_array = FALSE
+                if( any("ofType" == names(private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type)) ){
+                   # is_array = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$ofType$kind[ iArg ] == "LIST"
+                #    if(is_array == TRUE){
+                  #      is_numeric = any( private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$ofType$ofType$name[ iArg ] == private$numeric_types)
+                 #   }
+                }
                 if(is.na(is_numeric)){
                     is_numeric = TRUE
                     try({is_numeric = private[[ special_type ]][[ endpoint ]]$fields[[ argname ]]$is_numeric},silent = TRUE)
+                    if(is.null(is_numeric)) is_numeric = TRUE
                 }
                 private[[ special_type ]][[ endpoint ]]$args[[ argname ]] = private$new_argument(
                     is_numeric    = is_numeric,
+                    is_array      = is_array,
                     is_required   = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$kind[ iArg ] == self$required_kind,
                     is_for_paging = private$is_paging_arg( argname ),
                     default_value = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$defaultValue[ iArg ]
@@ -233,7 +242,8 @@ api_schema = R6::R6Class(
 
 
 
-        is_arg_numeric = function(special_type,endpoint,argname){
+        is_arg_numeric = function(endpoint,argname){
+            special_type = self$get_special_type_from_endpoint( endpoint )
             if( any(argname == names(private[[ special_type ]][[ endpoint ]]$args)) ){
                 return( private[[ special_type ]][[ endpoint ]]$args[[ argname ]]$is_numeric )
 
@@ -245,37 +255,92 @@ api_schema = R6::R6Class(
 
 
 
-        has_edge = function(special_type,endpoint){
+        get_special_type_from_endpoint = function(endpoint){
+            for(special_type in private$special_types){
+                if( any(endpoint == names(private[[special_type]])) ){
+                    return( special_type )
+                }
+            }
+            return(NA)
+        },
+
+
+
+        has_edge = function(endpoint){
+            special_type = self$get_special_type_from_endpoint( endpoint )
             return( private[[ special_type ]][[ endpoint ]]$has_edge )
         },
 
 
 
-        get_edge_name = function(special_type,endpoint){
+        get_edge_name = function(endpoint){
+            special_type = self$get_special_type_from_endpoint( endpoint )
             return( private[[ special_type ]][[ endpoint ]]$edge_name )
         },
 
 
 
         get_endpoints = function(){
-            return( c(names(private$Query),names(private$Mutation),names(private$Subscription)) )
+            endpoints = c()
+            for(special_type in private$special_types){
+                endpoints = c(endpoints,names(private[[ special_type ]]))
+            }
+            return( endpoints )
         },
 
 
 
-        get_endpoint_fields = function(special_type,endpoint){
+        get_endpoint = function(endpoint){
+            return( private[[ special_type ]][[ endpoint ]] )
+        },
+
+
+
+        get_endpoint_fields = function(endpoint){
+            special_type = self$get_special_type_from_endpoint( endpoint )
             return( names(private[[ special_type ]][[ endpoint ]]$fields) )
         },
 
 
 
-        is_argument = function(special_type,endpoint,argname){
+        get_endpoint_args = function(endpoint, no_paging = FALSE){
+            special_type = self$get_special_type_from_endpoint( endpoint )
+            paging_args = c()
+            if( no_paging ){
+                paging_args = c(self$tpl_pagination_first, self$tpl_pagination_offset)
+            }
+            return(
+                setdiff(
+                    names(private[[ special_type ]][[ endpoint ]]$args),
+                    paging_args
+                )
+            )
+        },
+
+
+
+        get_argument = function(endpoint,argname){
+            special_type = self$get_special_type_from_endpoint( endpoint )
+            return( private[[ special_type ]][[ endpoint ]]$args[[ argname ]] )
+        },
+
+
+
+        is_argument_required = function(endpoint,argname){
+            special_type = self$get_special_type_from_endpoint( endpoint )
+            return( private[[ special_type ]][[ endpoint ]]$args[[ argname ]]$is_required )
+        },
+
+
+
+        is_argument = function(endpoint,argname){
+            special_type = self$get_special_type_from_endpoint( endpoint )
             return( any(argname == names(private[[ special_type ]][[ endpoint ]]$args)) )
         },
 
 
 
-        is_endpoint = function(special_type,endpoint){
+        is_endpoint = function(endpoint){
             return( any( self$get_endpoints() == endpoint ) )
         }
 

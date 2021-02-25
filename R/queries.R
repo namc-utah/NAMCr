@@ -38,8 +38,6 @@ query = function(api_endpoint, args = list(), include = c(), exclude = c(), filt
     # Verify endpoint exists
     api$is_endpoint(api_endpoint, stop_if_not = TRUE)
 
-    special_type = "Query"
-
     # Collect all arguments and remove any pagination keys
     endpoint_args = modifyList(args, list(...))
 
@@ -52,10 +50,10 @@ query = function(api_endpoint, args = list(), include = c(), exclude = c(), filt
         # Place Arguments
         tpl_args = '('
         for(arg in arg_names){
-            if( api$schema$is_arg_numeric(special_type, api_endpoint, arg) ) {
-                arg_vals = paste0(endpoint_args[arg], collapse = ",")
+            if( api$schema$is_arg_numeric(api_endpoint, arg) ) {
+                arg_vals = paste0(endpoint_args[[arg]], collapse = ",")
             } else {
-                arg_vals = paste0('"', paste0(endpoint_args[arg], collapse = '","'), '"')
+                arg_vals = paste0('"', paste0(endpoint_args[[arg]], collapse = '","'), '"')
             }
             is_vector = grepl(",",arg_vals)
             tpl_args = paste0(
@@ -76,15 +74,15 @@ query = function(api_endpoint, args = list(), include = c(), exclude = c(), filt
     }
 
     # Edge / Cursor Style Pagination
-    if( api$schema$has_edge(special_type, api_endpoint) ){
+    if( api$schema$has_edge( api_endpoint ) ){
         tpl_fields = sprintf(
             '%s{%s}%s',
-            api$schema$get_edge_name(special_type, api_endpoint),
-            paste(api$schema$get_endpoint_fields( special_type, api_endpoint ), collapse = ' '),
+            api$schema$get_edge_name( api_endpoint ),
+            paste(api$schema$get_endpoint_fields( api_endpoint ), collapse = ' '),
             api$schema$tpl_pagination_cursor
         )
     } else {
-        tpl_fields = paste(api$schema$get_endpoint_fields( special_type, api_endpoint ), collapse = ' ')
+        tpl_fields = paste(api$schema$get_endpoint_fields( api_endpoint ), collapse = ' ')
     }
 
     paged_data = NA
@@ -92,16 +90,19 @@ query = function(api_endpoint, args = list(), include = c(), exclude = c(), filt
     page_limit = api$pagination_limit
     page_offset = NA
     is_paginated = FALSE
+    page_index = 0
 
     cat("Retrieving data: ")
 
     while(!is_last_page){
-
+        page_index = page_index + 1
 
         # Setup Pagination
         tpl_pagination = ''
         tpl_all_args = tpl_args
-        if( api$schema$is_argument(special_type, api_endpoint, api$tpl_pagination_first ) ){
+
+        # Check if the named "limit" argument is a part of the endpoint
+        if( api$schema$is_argument( api_endpoint, api$tpl_pagination_first ) ){
             is_paginated = TRUE
             tpl_pagination = sprintf('%s:%s ', api$tpl_pagination_first, page_limit)
             endpoint_args[ api$tpl_pagination_first ] = page_limit
@@ -129,14 +130,20 @@ query = function(api_endpoint, args = list(), include = c(), exclude = c(), filt
         )
 
         data = api$query( tpl_query )
-        cat(".")
 
-        if( api$schema$has_edge(special_type, api_endpoint) ){
+        msg = ifelse( page_index%%61 == 0, "\t.\n", ".")
+        cat(msg)
+
+        if( api$schema$has_edge( api_endpoint ) ){
             page_offset = data[[api_endpoint]][[ api$schema$tpl_pagination_cursor ]]
-            data[[api_endpoint]] = data[[api_endpoint]][[ api$schema$get_edge_name(special_type, api_endpoint) ]]
+            data[[api_endpoint]] = data[[api_endpoint]][[ api$schema$get_edge_name( api_endpoint ) ]]
 
         } else if(is_paginated) {
-            page_offset = ifelse( !is.data.frame(paged_data), page_limit, nrow(paged_data) + nrow( data[[api_endpoint]] ) )
+            page_offset = ifelse(
+                !is.data.frame(paged_data),
+                page_limit,
+                nrow(paged_data) + nrow( data[[api_endpoint]] )
+            )
         }
         if(is.na(page_offset) || nrow( data[[api_endpoint]] ) !=  page_limit){
             is_last_page = TRUE
