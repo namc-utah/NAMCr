@@ -146,7 +146,7 @@ api_cli = R6::R6Class(
             cat(
                 "Welcome to the NAMC API CLI\n",
                 "---------------------------\n",
-                'Type "e" at any time to exit\n'
+                'Type "e" at any prompt to exit\n'
             )
             private$increment()
             invisible(self)
@@ -175,7 +175,7 @@ api_cli = R6::R6Class(
                     if( res$exit_required) return()
                 }
                 private$endpoint_name = private$endpoints[res$data]
-                cat("Preparing to query (",res$data,")\n\n")
+                cat("Preparing to query ( ",private$endpoints[res$data]," )...\n")
             }
             private$increment()
             invisible(self)
@@ -201,7 +201,7 @@ api_cli = R6::R6Class(
             all_args = private$api$get_endpoint_args( private$endpoint_name, no_paging = TRUE )
 
             if( length( private$args ) == 0 && length(all_args) != 0 ){
-                cat("\nSeparate multiple values with commas(,).\n")
+                cat("\nSeparate multiple values with a (,)\n")
                 required_args = c()
                 for(arg in all_args){
                     arg_info = private$api$schema$get_argument( private$endpoint_name, arg)
@@ -285,6 +285,7 @@ api_cli = R6::R6Class(
         fn_exec = function(){
 
             private$complete()
+            cat('\n***Press (ESC) to exit before data is received***\n\n')
 
             return(
                 query(

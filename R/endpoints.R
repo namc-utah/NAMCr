@@ -3,6 +3,7 @@
 #' Retrieves the API endpoint names from the schema
 #'
 #' @return vector A character vector.
+#' @export
 #'
 #' @examples
 #'

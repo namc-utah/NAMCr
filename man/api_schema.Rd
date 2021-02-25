@@ -43,6 +43,85 @@ types = ( namc_api$new(argList=...) )$get_api_types()
 schema = api_schema$new(types = types)
 schema$parse_endpoint("siteInfo","Query")
 
+Title
+
+
+## ------------------------------------------------
+## Method `api_schema$is_arg_numeric`
+## ------------------------------------------------
+
+Title
+
+
+## ------------------------------------------------
+## Method `api_schema$get_special_type_from_endpoint`
+## ------------------------------------------------
+
+Title
+
+
+## ------------------------------------------------
+## Method `api_schema$has_edge`
+## ------------------------------------------------
+
+Title
+
+
+## ------------------------------------------------
+## Method `api_schema$get_edge_name`
+## ------------------------------------------------
+
+Title
+
+
+## ------------------------------------------------
+## Method `api_schema$get_endpoints`
+## ------------------------------------------------
+
+Title
+
+
+## ------------------------------------------------
+## Method `api_schema$get_endpoint`
+## ------------------------------------------------
+
+Title
+
+
+## ------------------------------------------------
+## Method `api_schema$get_endpoint_fields`
+## ------------------------------------------------
+
+Title
+
+
+## ------------------------------------------------
+## Method `api_schema$get_endpoint_args`
+## ------------------------------------------------
+
+Title
+
+
+## ------------------------------------------------
+## Method `api_schema$get_argument`
+## ------------------------------------------------
+
+Title
+
+
+## ------------------------------------------------
+## Method `api_schema$is_argument_required`
+## ------------------------------------------------
+
+Title
+
+
+## ------------------------------------------------
+## Method `api_schema$is_argument`
+## ------------------------------------------------
+
+Title
+
 }
 \section{Super class}{
 \code{\link[NAMCr:base_class]{NAMCr::base_class}} -> \code{api_schema}
@@ -186,6 +265,8 @@ types = ( namc_api$new(argList=...) )$get_api_types()
 schema = api_schema$new(types = types)
 schema$parse_endpoint("siteInfo","Query")
 
+Title
+
 }
 \if{html}{\out{</div>}}
 
@@ -200,6 +281,25 @@ schema$parse_endpoint("siteInfo","Query")
 \if{html}{\out{<div class="r">}}\preformatted{api_schema$is_arg_numeric(endpoint, argname)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{argname}}{}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{Title
+
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-get_special_type_from_endpoint"></a>}}
@@ -207,6 +307,25 @@ schema$parse_endpoint("siteInfo","Query")
 \subsection{Method \code{get_special_type_from_endpoint()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{api_schema$get_special_type_from_endpoint(endpoint)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{endpoint}}{}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{Title
+
+}
+\if{html}{\out{</div>}}
+
 }
 
 }
@@ -218,6 +337,25 @@ schema$parse_endpoint("siteInfo","Query")
 \if{html}{\out{<div class="r">}}\preformatted{api_schema$has_edge(endpoint)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{endpoint}}{}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{Title
+
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-get_edge_name"></a>}}
@@ -225,6 +363,25 @@ schema$parse_endpoint("siteInfo","Query")
 \subsection{Method \code{get_edge_name()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{api_schema$get_edge_name(endpoint)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{endpoint}}{}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{Title
+
+}
+\if{html}{\out{</div>}}
+
 }
 
 }
@@ -236,6 +393,18 @@ schema$parse_endpoint("siteInfo","Query")
 \if{html}{\out{<div class="r">}}\preformatted{api_schema$get_endpoints()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{Title
+
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-get_endpoint"></a>}}
@@ -243,6 +412,25 @@ schema$parse_endpoint("siteInfo","Query")
 \subsection{Method \code{get_endpoint()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{api_schema$get_endpoint(endpoint)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{endpoint}}{}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{Title
+
+}
+\if{html}{\out{</div>}}
+
 }
 
 }
@@ -254,6 +442,25 @@ schema$parse_endpoint("siteInfo","Query")
 \if{html}{\out{<div class="r">}}\preformatted{api_schema$get_endpoint_fields(endpoint)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{endpoint}}{}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{Title
+
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-get_endpoint_args"></a>}}
@@ -261,6 +468,25 @@ schema$parse_endpoint("siteInfo","Query")
 \subsection{Method \code{get_endpoint_args()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{api_schema$get_endpoint_args(endpoint, no_paging = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{no_paging}}{}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{Title
+
+}
+\if{html}{\out{</div>}}
+
 }
 
 }
@@ -272,6 +498,25 @@ schema$parse_endpoint("siteInfo","Query")
 \if{html}{\out{<div class="r">}}\preformatted{api_schema$get_argument(endpoint, argname)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{argname}}{}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{Title
+
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-is_argument_required"></a>}}
@@ -279,6 +524,25 @@ schema$parse_endpoint("siteInfo","Query")
 \subsection{Method \code{is_argument_required()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{api_schema$is_argument_required(endpoint, argname)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{argname}}{}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{Title
+
+}
+\if{html}{\out{</div>}}
+
 }
 
 }
@@ -290,6 +554,25 @@ schema$parse_endpoint("siteInfo","Query")
 \if{html}{\out{<div class="r">}}\preformatted{api_schema$is_argument(endpoint, argname)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{argname}}{}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{Title
+
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-is_endpoint"></a>}}
@@ -299,6 +582,16 @@ schema$parse_endpoint("siteInfo","Query")
 \if{html}{\out{<div class="r">}}\preformatted{api_schema$is_endpoint(endpoint)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{endpoint}}{}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

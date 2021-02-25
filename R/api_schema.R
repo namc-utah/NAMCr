@@ -242,6 +242,15 @@ api_schema = R6::R6Class(
 
 
 
+        #' Title
+        #'
+        #' @param endpoint
+        #' @param argname
+        #'
+        #' @return
+        #' @export
+        #'
+        #' @examples
         is_arg_numeric = function(endpoint,argname){
             special_type = self$get_special_type_from_endpoint( endpoint )
             if( any(argname == names(private[[ special_type ]][[ endpoint ]]$args)) ){
@@ -255,6 +264,14 @@ api_schema = R6::R6Class(
 
 
 
+        #' Title
+        #'
+        #' @param endpoint
+        #'
+        #' @return
+        #' @export
+        #'
+        #' @examples
         get_special_type_from_endpoint = function(endpoint){
             for(special_type in private$special_types){
                 if( any(endpoint == names(private[[special_type]])) ){
@@ -266,6 +283,14 @@ api_schema = R6::R6Class(
 
 
 
+        #' Title
+        #'
+        #' @param endpoint
+        #'
+        #' @return
+        #' @export
+        #'
+        #' @examples
         has_edge = function(endpoint){
             special_type = self$get_special_type_from_endpoint( endpoint )
             return( private[[ special_type ]][[ endpoint ]]$has_edge )
@@ -273,6 +298,14 @@ api_schema = R6::R6Class(
 
 
 
+        #' Title
+        #'
+        #' @param endpoint
+        #'
+        #' @return
+        #' @export
+        #'
+        #' @examples
         get_edge_name = function(endpoint){
             special_type = self$get_special_type_from_endpoint( endpoint )
             return( private[[ special_type ]][[ endpoint ]]$edge_name )
@@ -280,6 +313,12 @@ api_schema = R6::R6Class(
 
 
 
+        #' Title
+        #'
+        #' @return
+        #' @export
+        #'
+        #' @examples
         get_endpoints = function(){
             endpoints = c()
             for(special_type in private$special_types){
@@ -290,12 +329,28 @@ api_schema = R6::R6Class(
 
 
 
+        #' Title
+        #'
+        #' @param endpoint
+        #'
+        #' @return
+        #' @export
+        #'
+        #' @examples
         get_endpoint = function(endpoint){
             return( private[[ special_type ]][[ endpoint ]] )
         },
 
 
 
+        #' Title
+        #'
+        #' @param endpoint
+        #'
+        #' @return
+        #' @export
+        #'
+        #' @examples
         get_endpoint_fields = function(endpoint){
             special_type = self$get_special_type_from_endpoint( endpoint )
             return( names(private[[ special_type ]][[ endpoint ]]$fields) )
@@ -303,6 +358,15 @@ api_schema = R6::R6Class(
 
 
 
+        #' Title
+        #'
+        #' @param endpoint
+        #' @param no_paging
+        #'
+        #' @return
+        #' @export
+        #'
+        #' @examples
         get_endpoint_args = function(endpoint, no_paging = FALSE){
             special_type = self$get_special_type_from_endpoint( endpoint )
             paging_args = c()
@@ -319,6 +383,15 @@ api_schema = R6::R6Class(
 
 
 
+        #' Title
+        #'
+        #' @param endpoint
+        #' @param argname
+        #'
+        #' @return
+        #' @export
+        #'
+        #' @examples
         get_argument = function(endpoint,argname){
             special_type = self$get_special_type_from_endpoint( endpoint )
             return( private[[ special_type ]][[ endpoint ]]$args[[ argname ]] )
@@ -326,6 +399,15 @@ api_schema = R6::R6Class(
 
 
 
+        #' Title
+        #'
+        #' @param endpoint
+        #' @param argname
+        #'
+        #' @return
+        #' @export
+        #'
+        #' @examples
         is_argument_required = function(endpoint,argname){
             special_type = self$get_special_type_from_endpoint( endpoint )
             return( private[[ special_type ]][[ endpoint ]]$args[[ argname ]]$is_required )
@@ -333,6 +415,15 @@ api_schema = R6::R6Class(
 
 
 
+        #' Title
+        #'
+        #' @param endpoint
+        #' @param argname
+        #'
+        #' @return
+        #' @export
+        #'
+        #' @examples
         is_argument = function(endpoint,argname){
             special_type = self$get_special_type_from_endpoint( endpoint )
             return( any(argname == names(private[[ special_type ]][[ endpoint ]]$args)) )
@@ -340,6 +431,14 @@ api_schema = R6::R6Class(
 
 
 
+        #' Title
+        #'
+        #' @param endpoint
+        #'
+        #' @return
+        #' @export
+        #'
+        #' @examples
         is_endpoint = function(endpoint){
             return( any( self$get_endpoints() == endpoint ) )
         }
