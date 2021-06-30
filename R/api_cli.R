@@ -136,7 +136,7 @@ api_cli = R6::R6Class(
                     val$is_valid = TRUE
                 }
             }
-            if(!val$is_valid) cat("Invalid input. Try again.\n")
+            if(!val$is_valid  && !allow_blank) cat("Invalid input. Try again.\n")
             return( val )
         },
 
@@ -170,7 +170,7 @@ api_cli = R6::R6Class(
                 is_valid = FALSE
                 while( !is_valid ){
                     user_input = readline(prompt = "Enter a data source number: ")
-                    res = private$validate( user_input, c(1:length(private$endpoints)), "numeric")
+                    res = private$validate( user_input, c(1:length(private$endpoints)), "numeric", FALSE)
                     is_valid = res$is_valid
                     if( res$exit_required) return()
                 }
