@@ -229,7 +229,7 @@ api_cli = R6::R6Class(
                         if( res$skip ) break
                         if( res$exit_required) return()
 
-                        arg = pther_args[ res$data ]
+                        arg = other_args[ res$data ]
                         arg_info = private$api$schema$get_argument( private$endpoint_name, arg)
                         res = private$get_arg(arg, arg_info)
                         if( res$exit_required ) return()
