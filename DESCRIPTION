@@ -1,18 +1,19 @@
 Package: NAMCr
 Type: Package
 Title: NAMC Database Access API
-Version: 0.4.6
+Version: 0.5.1
 Author: National Aquatic Monitoring Center
 Maintainer: National Aquatic Monitoring Center <usubuglab+NAMCr@gmail.com>
 Description: Based on the permissions granted to the authenticated user, data can both be retrieved 
-    and updated from the NAMC databased via this packages R wrapper around the NAMC graphql API.
+    and updated from the NAMC database via this packages R wrapper around the NAMC graphql API.
 Imports:
     jsonlite,
     ghql,
     R6,
     httr,
     httpuv,
-    data.table
+    data.table,
+    promises
 License: MIT
 Encoding: UTF-8
 LazyData: true
@@ -25,3 +26,4 @@ VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)
 RoxygenNote: 7.1.1
+Roxygen: list(markdown = TRUE)

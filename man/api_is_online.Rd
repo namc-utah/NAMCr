@@ -7,7 +7,7 @@
 api_is_online()
 }
 \value{
-boolean
+logical
 }
 \description{
 API connectivity check

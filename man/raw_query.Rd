@@ -23,3 +23,11 @@ sites = NAMCr::raw_query(
 )
 
 }
+\seealso{
+\code{\link[=info]{info()}},\code{browseVignettes("NAMC-API-Overview")}
+
+Other query functions: 
+\code{\link{query}()},
+\code{\link{save}()}
+}
+\concept{query functions}

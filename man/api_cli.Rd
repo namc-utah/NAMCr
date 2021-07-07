@@ -4,7 +4,7 @@
 \alias{api_cli}
 \title{api_cli}
 \value{
-a `api_cli` class (R6 class)
+a \code{api_cli} class (R6 class)
 }
 \description{
 R6 class for handling NAMC cli driven api calls
@@ -13,6 +13,8 @@ R6 class for handling NAMC cli driven api calls
 
 auth_config = list(...) # api_cli public or private variables
 auth = api_cli$new(api,args)
+
+Starts an api cli instance
 
 }
 \section{Methods}{
@@ -40,6 +42,32 @@ auth = api_cli$new(api,args)
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{api_endpoint}}{String name of endpoint}
+
+\item{\code{args}}{List of named arguments to pass to the endpoint}
+
+\item{\code{include}}{List of fields to include}
+
+\item{\code{exclude}}{List of fields to exclude}
+
+\item{\code{filter}}{List of fieldname / filter combinations}
+
+\item{\code{sort}}{Array of fields to sort by}
+
+\item{\code{limit}}{Number of results to limit the return by}
+
+\item{\code{api}}{NAMC api instance}
+
+\item{\code{...}}{}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+nothing is returned
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

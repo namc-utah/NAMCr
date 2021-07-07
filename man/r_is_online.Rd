@@ -7,7 +7,7 @@
 r_is_online()
 }
 \value{
-boolean
+locical
 }
 \description{
 R internet check

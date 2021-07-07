@@ -58,12 +58,40 @@ NAMCr::reinitiate(TRUE)
 
 ```
 
+View API Documentation
+
+```r
+requireNamespace("NAMCr")
+
+NAMCr::docs()
+
+```
+
+View Information on all Endpoint
+
+```r
+requireNamespace("NAMCr")
+
+NAMCr::info()
+
+```
+
+
+View Information on an Individual Endpoint
+
+```r
+requireNamespace("NAMCr")
+
+NAMCr::info("samples")
+
+```
+
 List Available Endpoints
 
 ```r
 requireNamespace("NAMCr")
 
-NAMCr::get_endpoints()
+NAMCr::endpoints()
 
 ```
 

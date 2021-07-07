@@ -6,11 +6,8 @@
 \usage{
 diagnose_connection()
 }
-\value{
-none No return
-}
 \description{
-Diagnose connection issues
+\code{diagnose_connection} checks for connectivity of the internet, API, and authentication service
 }
 \examples{
 

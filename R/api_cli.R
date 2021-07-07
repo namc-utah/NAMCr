@@ -4,6 +4,9 @@
 #' @export
 #'
 #' @examples
+#'
+#' NAMCr::cli()
+#'
 cli = function(api = .pkgenv$api, ...){
 
     api$configure()
@@ -27,11 +30,26 @@ api_cli = R6::R6Class(
 
     public = list(
 
+        #' Starts an api cli instance
+        #'
+        #' @param api_endpoint String name of endpoint
+        #' @param args List of named arguments to pass to the endpoint
+        #' @param include List of fields to include
+        #' @param exclude List of fields to exclude
+        #' @param filter List of fieldname / filter combinations
+        #' @param sort Array of fields to sort by
+        #' @param limit Number of results to limit the return by
+        #' @param api NAMC api instance
+        #' @param ...
+        #'
+        #' @return nothing is returned
+        #'
+        # @examples
         start = function(api_endpoint = NA, args = list(), include = c(), exclude = c(), filter = list(), sort = c(), limit = NA, api = NULL, ...){
             private$restart()
 
             private$api           = api
-            private$endpoint_name = api_endpoint
+            private$api_endpoint  = api_endpoint
             private$args          = modifyList(args, list(...))
             private$include       = include
             private$exclude       = exclude
@@ -51,7 +69,7 @@ api_cli = R6::R6Class(
     private = list(
 
         api           = NULL,
-        endpoint_name = NA,
+        api_endpoint  = NA,
         args          = list(),
         include       = c(),
         exclude       = c(),
@@ -67,7 +85,7 @@ api_cli = R6::R6Class(
 
         restart = function(){
             private$api           = NULL
-            private$endpoint_name = NA
+            private$api_endpoint  = NA
             private$args          = list()
             private$include       = c()
             private$exclude       = c()
@@ -157,15 +175,18 @@ api_cli = R6::R6Class(
         fn_endpoint = function(){
             private$endpoints = private$api$get_endpoints()
 
-            if( is.na(private$endpoint_name) || !any(private$endpoint_name == private$endpoints) ){
+            if( is.na(private$api_endpoint) || !any(private$api_endpoint == private$endpoints) ){
                 cat(
-                    "\nDatasources:\n",
-                    paste0("\t",
-                        c(1:length(private$endpoints)),
-                        ") ",
-                        private$endpoints,
-                        collapse = "\n"
+                    paste0(
+                        "\nDatasources:\n",
+                        columnize(private$endpoints, numberItems = TRUE)
                     )
+                    # paste0("\t",
+                    #     c(1:length(private$endpoints)),
+                    #     ") ",
+                    #     private$endpoints,
+                    #     collapse = "\n"
+                    # )
                 )
                 is_valid = FALSE
                 while( !is_valid ){
@@ -174,7 +195,7 @@ api_cli = R6::R6Class(
                     is_valid = res$is_valid
                     if( res$exit_required) return()
                 }
-                private$endpoint_name = private$endpoints[res$data]
+                private$api_endpoint = private$endpoints[res$data]
                 cat("Preparing to query ( ",private$endpoints[res$data]," )...\n")
             }
             private$increment()
@@ -198,13 +219,13 @@ api_cli = R6::R6Class(
 
 
         fn_args = function(){
-            all_args = private$api$get_endpoint_args( private$endpoint_name, no_paging = TRUE )
+            all_args = private$api$get_endpoint_args( private$api_endpoint, no_paging = TRUE )
 
             if( length( private$args ) == 0 && length(all_args) != 0 ){
                 cat("\nSeparate multiple values with a (,)\n")
                 required_args = c()
                 for(arg in all_args){
-                    arg_info = private$api$schema$get_argument( private$endpoint_name, arg)
+                    arg_info = private$api$schema$get_argument( private$api_endpoint, arg)
                     required_args = c(required_args,arg_info$is_required)
                     if( arg_info$is_required ){
                         res = private$get_arg(arg, arg_info)
@@ -230,7 +251,7 @@ api_cli = R6::R6Class(
                         if( res$exit_required) return()
 
                         arg = other_args[ res$data ]
-                        arg_info = private$api$schema$get_argument( private$endpoint_name, arg)
+                        arg_info = private$api$schema$get_argument( private$api_endpoint, arg)
                         res = private$get_arg(arg, arg_info)
                         if( res$exit_required ) return()
                     }
@@ -282,21 +303,51 @@ api_cli = R6::R6Class(
 
 
 
+        fn_print_command = function(queryType){
+
+            if(tolower(queryType) == "query"){
+                argument_names = formalArgs("query")
+            } else {
+                argument_names = formalArgs("save")
+            }
+            cat(argument_names)
+            past_first_arg = FALSE
+
+            tpl = 'Use the following command to obtain the same results in a script:\n\n'
+            tpl = paste0(tpl, "\tres = ", tolower(queryType), "(")
+
+            for(arg in argument_names){
+                if( arg != "api" && !length(private[[arg]])==0 && !is.na(private[[arg]]) ) {
+                    tpl = paste0( tpl, ifelse(past_first_arg,",",""),"\n\t\t", arg, " = ", deparse(private[[arg]]) )
+                    past_first_arg = TRUE
+                }
+            }
+            tpl = paste0(tpl,"\n\t)\n\n\n")
+
+
+            cat(tpl)
+        },
+
+
+
         fn_exec = function(){
 
             private$complete()
-            cat('\n***Press (ESC) to exit before data is received***\n\n')
+            message('***Press (ESC) to exit before data is received***')
+
+            queryType = private$api$schema$get_special_type_from_endpoint(private$api_endpoint)
+            private$fn_print_command(queryType)
 
             return(
                 query(
-                  api_endpoint = private$endpoint_name,
-                  args         = private$args,
-                  include      = private$include,
-                  exclude      = private$exclude,
-                  filter       = private$filter,
-                  sort         = private$sort,
-                  limit        = private$limit,
-                  api          = private$api
+                    api_endpoint = private$api_endpoint,
+                    args         = private$args,
+                    include      = private$include,
+                    exclude      = private$exclude,
+                    filter       = private$filter,
+                    sort         = private$sort,
+                    limit        = private$limit,
+                    api          = private$api
                 )
             )
         }

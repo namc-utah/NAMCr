@@ -4,16 +4,20 @@
 \alias{save}
 \title{Save data}
 \usage{
-save(api_endpoint, data, api = .pkgenv$api)
+save(api_endpoint, args = list(), api = .pkgenv$api, ...)
 }
 \arguments{
-\item{api_endpoint}{string A NAMC API endpoint name. Available endpoints can be found via the
+\item{api_endpoint}{string A NAMC API endpoint name. Available endpoints can be found via the}
+
+\item{args}{a list of named arguments to pass to the API endpoint. Can also be passed individually in  ...
 namc_api get_endpoints method.}
 
-\item{data}{data.frame or list The data to upsert into the database.}
+\item{api}{namc_api An instance of the namc_api class having a default of a pre-initialized package object}
+
+\item{...}{named arguments to merge with data and pass to the API endpoint.}
 }
 \value{
-data.frame A dataframe containing any fields added to the Query
+data.frame A dataframe containing output from the save query
 }
 \description{
 Update NAMC database data via the API. Upsert routines are used.
@@ -28,8 +32,25 @@ site = list(
 )
 
 sites = NAMCr::save(
-  api_endpoint = 'sites',
-  data = site
+  api_endpoint = 'updateSite',
+  args = site
+)
+
+# Alternative
+
+sites = NAMCr::save(
+  api_endpoint = 'updateSite',
+  station = 'myStation',
+  lat = 45.555,
+  long = -123.555
 )
 
 }
+\seealso{
+\code{\link[=info]{info()}},\code{browseVignettes("NAMC-API-Overview")}
+
+Other query functions: 
+\code{\link{query}()},
+\code{\link{raw_query}()}
+}
+\concept{query functions}

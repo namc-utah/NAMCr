@@ -10,7 +10,7 @@ site_is_online(site_url)
 \item{site_url}{is a url to check if it is accessible}
 }
 \value{
-boolean
+logical
 }
 \description{
 API connectivity check

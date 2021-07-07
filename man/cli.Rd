@@ -12,3 +12,8 @@ cli(api = .pkgenv$api, ...)
 \description{
 CLI for the NAMC API
 }
+\examples{
+
+NAMCr::cli()
+
+}

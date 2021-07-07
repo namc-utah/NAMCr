@@ -4,7 +4,7 @@
 \alias{api_schema}
 \title{api_schema}
 \value{
-a `namc_oauth2` class (R6 class)
+a \code{namc_oauth2} class (R6 class)
 }
 \description{
 R6 class for handling the NAMC graphql schema
@@ -19,6 +19,11 @@ schema = api_schema$new(types = types)
 ## Method `api_schema$configure`
 ## ------------------------------------------------
 
+
+types = ( namc_api$new(argList=...) )$get_api_types()
+schema = api_schema$new(types = types)
+schema$configure()
+
 Parse introspected schema
 
 
@@ -29,7 +34,7 @@ Parse introspected schema
 
 types = ( namc_api$new(argList=...) )$get_api_types()
 schema = api_schema$new(types = types)
-schema$parse_schema()
+schema$parse_endpoints()
 
 Discover info on API endpoint
 
@@ -43,84 +48,15 @@ types = ( namc_api$new(argList=...) )$get_api_types()
 schema = api_schema$new(types = types)
 schema$parse_endpoint("siteInfo","Query")
 
-Title
+Check if argument is numeric
 
 
 ## ------------------------------------------------
-## Method `api_schema$is_arg_numeric`
+## Method `api_schema$info`
 ## ------------------------------------------------
 
-Title
 
-
-## ------------------------------------------------
-## Method `api_schema$get_special_type_from_endpoint`
-## ------------------------------------------------
-
-Title
-
-
-## ------------------------------------------------
-## Method `api_schema$has_edge`
-## ------------------------------------------------
-
-Title
-
-
-## ------------------------------------------------
-## Method `api_schema$get_edge_name`
-## ------------------------------------------------
-
-Title
-
-
-## ------------------------------------------------
-## Method `api_schema$get_endpoints`
-## ------------------------------------------------
-
-Title
-
-
-## ------------------------------------------------
-## Method `api_schema$get_endpoint`
-## ------------------------------------------------
-
-Title
-
-
-## ------------------------------------------------
-## Method `api_schema$get_endpoint_fields`
-## ------------------------------------------------
-
-Title
-
-
-## ------------------------------------------------
-## Method `api_schema$get_endpoint_args`
-## ------------------------------------------------
-
-Title
-
-
-## ------------------------------------------------
-## Method `api_schema$get_argument`
-## ------------------------------------------------
-
-Title
-
-
-## ------------------------------------------------
-## Method `api_schema$is_argument_required`
-## ------------------------------------------------
-
-Title
-
-
-## ------------------------------------------------
-## Method `api_schema$is_argument`
-## ------------------------------------------------
-
-Title
+info()
 
 }
 \section{Super class}{
@@ -129,27 +65,16 @@ Title
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{raw_types}}{raw list of endpoints and fields for the API
-Title}
-
 \item{\code{tpl_pagination_first}}{is the numeric first record to return}
 
 \item{\code{tpl_pagination_offset}}{is the numeric offset of the return}
 
-\item{\code{tpl_pagination_offset}}{is the numeric offset of the return}
+\item{\code{tpl_pagination_cursor}}{is the cursor used to fetch data at}
 
 \item{\code{tpl_page_fieldname}}{is the name of the field holding page data}
 
 \item{\code{required_kind}}{is string value of required argument kind
 Parse the API types}
-}
-\if{html}{\out{</div>}}
-}
-\section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{raw_types}}{raw list of endpoints and fields for the API
-Title}
 }
 \if{html}{\out{</div>}}
 }
@@ -165,12 +90,14 @@ Title}
 \item \href{#method-get_edge_name}{\code{api_schema$get_edge_name()}}
 \item \href{#method-get_endpoints}{\code{api_schema$get_endpoints()}}
 \item \href{#method-get_endpoint}{\code{api_schema$get_endpoint()}}
-\item \href{#method-get_endpoint_fields}{\code{api_schema$get_endpoint_fields()}}
-\item \href{#method-get_endpoint_args}{\code{api_schema$get_endpoint_args()}}
+\item \href{#method-get_fields}{\code{api_schema$get_fields()}}
+\item \href{#method-get_field}{\code{api_schema$get_field()}}
+\item \href{#method-get_arguments}{\code{api_schema$get_arguments()}}
 \item \href{#method-get_argument}{\code{api_schema$get_argument()}}
 \item \href{#method-is_argument_required}{\code{api_schema$is_argument_required()}}
 \item \href{#method-is_argument}{\code{api_schema$is_argument()}}
 \item \href{#method-is_endpoint}{\code{api_schema$is_endpoint()}}
+\item \href{#method-info}{\code{api_schema$info()}}
 \item \href{#method-clone}{\code{api_schema$clone()}}
 }
 }
@@ -192,19 +119,17 @@ Title}
 \if{html}{\out{<div class="r">}}\preformatted{api_schema$configure()}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{arg_name}}{}
-}
-\if{html}{\out{</div>}}
-}
 \subsection{Returns}{
-
+api_schema For method chaining
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
-\preformatted{Parse introspected schema
+\preformatted{
+types = ( namc_api$new(argList=...) )$get_api_types()
+schema = api_schema$new(types = types)
+schema$configure()
+
+Parse introspected schema
 
 }
 \if{html}{\out{</div>}}
@@ -228,7 +153,7 @@ api_schema For method chaining
 \preformatted{
 types = ( namc_api$new(argList=...) )$get_api_types()
 schema = api_schema$new(types = types)
-schema$parse_schema()
+schema$parse_endpoints()
 
 Discover info on API endpoint
 
@@ -265,7 +190,7 @@ types = ( namc_api$new(argList=...) )$get_api_types()
 schema = api_schema$new(types = types)
 schema$parse_endpoint("siteInfo","Query")
 
-Title
+Check if argument is numeric
 
 }
 \if{html}{\out{</div>}}
@@ -284,22 +209,17 @@ Title
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{argname}}{}
+\item{\code{endpoint}}{String name of api endpoint}
+
+\item{\code{argname}}{String name of api endpoint argument}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
+logical TRUE/FALSE if argument is numeric
 
+Get the sub-type contained within an api endpoint
 }
-\subsection{Examples}{
-\if{html}{\out{<div class="r example copy">}}
-\preformatted{Title
-
-}
-\if{html}{\out{</div>}}
-
-}
-
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-get_special_type_from_endpoint"></a>}}
@@ -312,22 +232,12 @@ Title
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{endpoint}}{}
+\item{\code{endpoint}}{String name of api endpoint
+
+Determine if an endpoint has an edge}
 }
 \if{html}{\out{</div>}}
 }
-\subsection{Returns}{
-
-}
-\subsection{Examples}{
-\if{html}{\out{<div class="r example copy">}}
-\preformatted{Title
-
-}
-\if{html}{\out{</div>}}
-
-}
-
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-has_edge"></a>}}
@@ -340,22 +250,12 @@ Title
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{endpoint}}{}
+\item{\code{endpoint}}{String name of api endpoint
+
+Get the name of the graphql edge contained in an endpoint}
 }
 \if{html}{\out{</div>}}
 }
-\subsection{Returns}{
-
-}
-\subsection{Examples}{
-\if{html}{\out{<div class="r example copy">}}
-\preformatted{Title
-
-}
-\if{html}{\out{</div>}}
-
-}
-
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-get_edge_name"></a>}}
@@ -368,22 +268,15 @@ Title
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{endpoint}}{}
+\item{\code{endpoint}}{String name of api endpoint}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
+String name of endpoint edge
 
+Get all available endpoint names
 }
-\subsection{Examples}{
-\if{html}{\out{<div class="r example copy">}}
-\preformatted{Title
-
-}
-\if{html}{\out{</div>}}
-
-}
-
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-get_endpoints"></a>}}
@@ -394,17 +287,10 @@ Title
 }
 
 \subsection{Returns}{
+Array of endpoint names
 
+Get info about an endpoint
 }
-\subsection{Examples}{
-\if{html}{\out{<div class="r example copy">}}
-\preformatted{Title
-
-}
-\if{html}{\out{</div>}}
-
-}
-
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-get_endpoint"></a>}}
@@ -417,78 +303,68 @@ Title
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{endpoint}}{}
+\item{\code{endpoint}}{String name of api endpoint
+
+Get all available field names for an endpoint}
 }
 \if{html}{\out{</div>}}
 }
-\subsection{Returns}{
-
-}
-\subsection{Examples}{
-\if{html}{\out{<div class="r example copy">}}
-\preformatted{Title
-
-}
-\if{html}{\out{</div>}}
-
-}
-
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_endpoint_fields"></a>}}
-\if{latex}{\out{\hypertarget{method-get_endpoint_fields}{}}}
-\subsection{Method \code{get_endpoint_fields()}}{
+\if{html}{\out{<a id="method-get_fields"></a>}}
+\if{latex}{\out{\hypertarget{method-get_fields}{}}}
+\subsection{Method \code{get_fields()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{api_schema$get_endpoint_fields(endpoint)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$get_fields(endpoint)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{endpoint}}{}
+\item{\code{endpoint}}{String name of api endpoint
+
+Get info about an endpoint field}
 }
 \if{html}{\out{</div>}}
 }
-\subsection{Returns}{
-
-}
-\subsection{Examples}{
-\if{html}{\out{<div class="r example copy">}}
-\preformatted{Title
-
-}
-\if{html}{\out{</div>}}
-
-}
-
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_endpoint_args"></a>}}
-\if{latex}{\out{\hypertarget{method-get_endpoint_args}{}}}
-\subsection{Method \code{get_endpoint_args()}}{
+\if{html}{\out{<a id="method-get_field"></a>}}
+\if{latex}{\out{\hypertarget{method-get_field}{}}}
+\subsection{Method \code{get_field()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{api_schema$get_endpoint_args(endpoint, no_paging = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$get_field(endpoint, field)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{no_paging}}{}
+\item{\code{endpoint}}{String name of api endpoint}
+
+\item{\code{field}}{String name for a field of the endpoint
+
+Get all arguments for and endpoint}
 }
 \if{html}{\out{</div>}}
 }
-\subsection{Returns}{
-
 }
-\subsection{Examples}{
-\if{html}{\out{<div class="r example copy">}}
-\preformatted{Title
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_arguments"></a>}}
+\if{latex}{\out{\hypertarget{method-get_arguments}{}}}
+\subsection{Method \code{get_arguments()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$get_arguments(endpoint, no_paging = FALSE)}\if{html}{\out{</div>}}
+}
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{endpoint}}{String name of api endpoint}
+
+\item{\code{no_paging}}{Get info about an argument}
 }
 \if{html}{\out{</div>}}
-
 }
-
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-get_argument"></a>}}
@@ -501,22 +377,12 @@ Title
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{argname}}{}
+\item{\code{endpoint}}{String name of api endpoint}
+
+\item{\code{argname}}{Checks if an argument is required}
 }
 \if{html}{\out{</div>}}
 }
-\subsection{Returns}{
-
-}
-\subsection{Examples}{
-\if{html}{\out{<div class="r example copy">}}
-\preformatted{Title
-
-}
-\if{html}{\out{</div>}}
-
-}
-
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-is_argument_required"></a>}}
@@ -529,22 +395,12 @@ Title
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{argname}}{}
+\item{\code{endpoint}}{String name of api endpoint}
+
+\item{\code{argname}}{Checks if argument name is valid for an endpoint}
 }
 \if{html}{\out{</div>}}
 }
-\subsection{Returns}{
-
-}
-\subsection{Examples}{
-\if{html}{\out{<div class="r example copy">}}
-\preformatted{Title
-
-}
-\if{html}{\out{</div>}}
-
-}
-
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-is_argument"></a>}}
@@ -557,22 +413,12 @@ Title
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{argname}}{}
+\item{\code{endpoint}}{String name of api endpoint}
+
+\item{\code{argname}}{Check if endpoint exists}
 }
 \if{html}{\out{</div>}}
 }
-\subsection{Returns}{
-
-}
-\subsection{Examples}{
-\if{html}{\out{<div class="r example copy">}}
-\preformatted{Title
-
-}
-\if{html}{\out{</div>}}
-
-}
-
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-is_endpoint"></a>}}
@@ -585,13 +431,50 @@ Title
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{endpoint}}{}
+\item{\code{endpoint}}{String name of api endpoint
+
+Describe an Endpoint.}
 }
 \if{html}{\out{</div>}}
 }
-\subsection{Returns}{
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-info"></a>}}
+\if{latex}{\out{\hypertarget{method-info}{}}}
+\subsection{Method \code{info()}}{
+\code{info} prints text to the console describing an endpoint
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$info(endpoint, no_paging = FALSE, format = "text")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{endpoint}}{api endpoint name to get information about.}
+
+\item{\code{no_paging}}{Logical that omits the paging arguments by default}
+
+\item{\code{format}}{One of: 'markdown', 'text' (default)
+argument inclusion}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Details}{
+This function presents a text block describing an endpoint
+and its corresponding input parameters. Inputs are marked as
+required where applicable.
+}
+
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{
+info()
 
 }
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

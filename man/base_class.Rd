@@ -4,7 +4,7 @@
 \alias{base_class}
 \title{base_class}
 \value{
-a `base_class` class (R6 class)
+a \code{base_class} class (R6 class)
 }
 \description{
 R6 class for providing additional default R6 class features

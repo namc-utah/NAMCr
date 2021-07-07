@@ -3,3 +3,5 @@
 ^\.httr-oauth$
 ^\.Rhistory
 ^~/\.secrets/R/NAMCr/\.httr-oauth$
+^Meta$
+^doc$

@@ -13,10 +13,10 @@ namc_api = R6::R6Class(
 
     private = list(
 
-        #' @field auth holds an oAuth2 object for authentication
+        # @field auth holds an oAuth2 object for authentication
         auth = NULL,
 
-        #' @field retry_conn is a boolean to allow for a query reattempt given an API timeout
+        # @field retry_conn is a boolean to allow for a query reattempt given an API timeout
         retry_conn = TRUE
 
     ),
@@ -47,7 +47,7 @@ namc_api = R6::R6Class(
         #' @field tpl_pagination_offset is the numeric offset of the return
         tpl_pagination_offset = NULL,
 
-        #' @field tpl_pagination_offset is the numeric offset of the return
+        #' @field tpl_pagination_cursor is the numeric cursor of the return
         tpl_pagination_cursor = NULL,
 
         #' @field required_kind is string value of required argument kind
@@ -393,7 +393,7 @@ namc_api = R6::R6Class(
 
             if( !self$is_configured ) self$configure()
 
-            return( self$schema$get_endpoint_fields(special_type, api_endpoint) )
+            return( self$schema$get_fields(api_endpoint) )
         },
 
 
@@ -403,6 +403,7 @@ namc_api = R6::R6Class(
         #' Retrieves the arguments associated with an API endpoint from the schema
         #'
         #' @param api_endpoint The name of an API endpoint.
+        #' @param no_paging Logical that omits the paging arguments by default
         #'
         #' @return vector A character vector of arguments.
         #'
@@ -416,7 +417,7 @@ namc_api = R6::R6Class(
 
             if( !self$is_configured ) self$configure()
 
-            return( self$schema$get_endpoint_args(api_endpoint, no_paging) )
+            return( self$schema$get_arguments(api_endpoint, no_paging) )
         },
 
 
@@ -426,6 +427,7 @@ namc_api = R6::R6Class(
         #' Retrieves the fields associated with an API endpoint from the schema
         #'
         #' @param api_endpoint The name of an API endpoint.
+        #' @param stop_if_not Logical TRUE/FALSE switch giving stop control to caller functions
         #'
         #' @return vector A character vector.
         #'

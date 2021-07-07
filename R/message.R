@@ -11,7 +11,7 @@ messages = R6::R6Class(
 
     private = list(
 
-        #' @field levels is an array of the 4 level types.
+        # @field levels is an array of the 4 level types.
         levels = c("NONE", "INFO", "WARNING", "DEBUG")
 
     ),
@@ -23,10 +23,7 @@ messages = R6::R6Class(
 
         #' Initialize object
         #'
-        #' Allow list based function initialization (easier to integrate with config files)
-        #'
-        #' @param argList A 'List' of name/value pairs to be passed in as arguments.
-        #' @param ... Name/Value pairs as arguments.
+        #' @param level The text message type to initialize messaging to
         #'
         #' @return none Nothing is returned
         #'
@@ -45,6 +42,10 @@ messages = R6::R6Class(
         #' @export
         #'
         #' @examples
+        #'
+        #' msg = messages::new(level = 'DEBUG')
+        #' msg$display("this is a message")
+        #'
         display = function(msg, type = "INFO"){
 
             iLevel = which(type == private$levels)

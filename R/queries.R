@@ -1,20 +1,30 @@
-#' Query NAMC database
+#' Query NAMC database.
 #'
-#' Providing a desired endpoint and filtering the function retrieves data from the NAMC database. If not already
-#' authenticated the will trigger the authentication / account creation routines. By default all fields are included.
-#' Use include and exclude arguments to limit returned fields.
+#' @description `query` retrieves data from NAMC given a specified API endpoint
+#' name.
 #'
-#' @param api_endpoint string A NAMC API endpoint name. Available endpoints can be found via the namc_api get_endpoints method.
-#' @param args a list of named arguments to pass to the API endpoint. Can also be passed individually in  ...
+#' @details Providing a desired endpoint and filtering the function retrieves
+#' data from the NAMC database. If not already authenticated the will trigger
+#' the authentication / account creation routines. By default all fields are
+#' included. Use include and exclude arguments to limit returned fields.
+#'
+#' @family query functions
+#' @seealso [info()],`browseVignettes("NAMC-API-Overview")`
+#'
+#' @param api_endpoint string A NAMC API endpoint name. Available endpoints can
+#'   be found via the [endpoints()] function.
+#' @param args a list of named arguments to pass to the API endpoint. Can also
+#'   be passed individually in  ...
 #' @param include is a vector of fields to include from the endpoint.
 #' @param exclude is a vector of fields to exclude from the endpoint.
 #' @param filter list A list containing filter parameters.
 #' @param sort list A list containing fields / directions to sort by.
-#' @param limit numeric The number of results to desired.
-#' @param api namc_api An instance of the namc_api class having a default of a pre-initialized package object
+#' @param limit numeric The number of results desired.
+#' @param api namc_api An instance of the namc_api class having a default of a
+#'   pre-initialized package object
 #' @param ... named arguments to merge with args and pass to the API endpoint.
 #'
-#' @return data.frame A dataframe containing the query results
+#' @return data.frame A dataframe containing the query results.
 #' @export
 #'
 #' @examples
@@ -33,7 +43,20 @@
 #'   limit = 50
 #' )
 #'
-query = function(api_endpoint, args = list(), include = c(), exclude = c(), filter = list(), sort = c(), limit = NA, api = .pkgenv$api, ...){
+#' # View full API docs in console
+#' NAMCr::info()
+#'
+query = function(
+    api_endpoint,
+    args    = list(),
+    include = c(),
+    exclude = c(),
+    filter  = list(),
+    sort    = c(),
+    limit   = NA,
+    api     = .pkgenv$api,
+    ...
+){
 
     # Verify endpoint exists
     api$is_endpoint(api_endpoint, stop_if_not = TRUE)
@@ -74,7 +97,7 @@ query = function(api_endpoint, args = list(), include = c(), exclude = c(), filt
     }
 
     # Edge / Cursor Style Pagination
-    fields = api$schema$get_endpoint_fields( api_endpoint )
+    fields = api$schema$get_fields( api_endpoint )
     if(length(include) > 0){
         fields = include
     }
@@ -176,11 +199,16 @@ query = function(api_endpoint, args = list(), include = c(), exclude = c(), filt
 #'
 #' Update NAMC database data via the API. Upsert routines are used.
 #'
-#' @param data data.frame or list The data to upsert into the database.
-#' @param api_endpoint string A NAMC API endpoint name. Available endpoints can be found via the
-#' namc_api get_endpoints method.
+#' @family query functions
+#' @seealso [info()],`browseVignettes("NAMC-API-Overview")`
 #'
-#' @return data.frame A dataframe containing any fields added to the Query
+#' @param api_endpoint string A NAMC API endpoint name. Available endpoints can be found via the
+#' @param args a list of named arguments to pass to the API endpoint. Can also be passed individually in  ...
+#' namc_api get_endpoints method.
+#' @param api namc_api An instance of the namc_api class having a default of a pre-initialized package object
+#' @param ... named arguments to merge with data and pass to the API endpoint.
+#'
+#' @return data.frame A dataframe containing output from the save query
 #' @export
 #'
 #' @examples
@@ -193,14 +221,31 @@ query = function(api_endpoint, args = list(), include = c(), exclude = c(), filt
 #' )
 #'
 #' sites = NAMCr::save(
-#'   api_endpoint = 'sites',
-#'   data = site
+#'   api_endpoint = 'updateSite',
+#'   args = site
 #' )
 #'
-save = function(api_endpoint, data, api = .pkgenv$api){
+#' # Alternative
+#'
+#' sites = NAMCr::save(
+#'   api_endpoint = 'updateSite',
+#'   station = 'myStation',
+#'   lat = 45.555,
+#'   long = -123.555
+#' )
+#'
+save = function(
+    api_endpoint,
+    args = list(),
+    api = .pkgenv$api,
+    ...
+){
 
     tpl_variables = ''
     tpl_fields = ''
+
+    # Collect all arguments and remove any pagination keys
+    endpoint_args = modifyList(data, list(...))
 
     data = .pkgenv$api$query( sprintf(
         'mutation rMutation{
@@ -209,7 +254,7 @@ save = function(api_endpoint, data, api = .pkgenv$api){
             }
         }',
         api_endpoint,
-        jsonlite::serializeJSON( data )
+        jsonlite::serializeJSON( endpoint_args )
     ) )
 
     return( data )
@@ -218,6 +263,9 @@ save = function(api_endpoint, data, api = .pkgenv$api){
 
 
 #' Execute raw graphql query
+#'
+#' @family query functions
+#' @seealso [info()],`browseVignettes("NAMC-API-Overview")`
 #'
 #' @return data.frame A dataframe contained the query result.
 #' @export

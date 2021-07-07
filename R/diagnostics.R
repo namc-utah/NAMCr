@@ -1,45 +1,9 @@
-#' Reinitiate the package state
-#'
-#' @return namc_api Package configured API object.
-#' @export
-#'
-reinitiate = function(clear_credentials = FALSE){
-    if(clear_credentials) .pkgenv$api$get_auth_provider()$reset_token()
-
-    return( .pkgenv$api$configure( force = TRUE ) )
-}
-
-
-
-#' Execute public API class method
-#'
-#' @param fn_name Name of namc_api public method
-#'
-#' @return variable Depends on function executed. See public methods of namc_api
-#' @export
-#'
-execute_api_fn = function(fn_name){
-    return( .pkgenv$api[[fn_name]]() )
-}
-
-
-
-#' Get API class variable
-#'
-#' @param var_name Name of namc_api variable name
-#'
-#' @return variable Depends on variable requested. See variables of namc_api
-#' @export
-#'
-get_api_var = function(var_name){
-    return( .pkgenv$api$get_var(var_name) )
-}
-
-
-
 #' Diagnose connection issues
 #'
-#' @return none No return
+#' @description
+#' `diagnose_connection` checks for connectivity of the internet, API, and authentication service
+#'
+#' @return NULL
 #' @export
 #'
 #' @examples
@@ -54,8 +18,9 @@ diagnose_connection = function(){
     } else if(!oauth_is_online){
         message("oAuth2 provider is not accessible.")
     } else {
-        message("Everything is connected and accessible.")
+        message("Internet, API and oAuth2 provider are all available and online.")
     }
+    return()
 }
 
 
@@ -63,7 +28,6 @@ diagnose_connection = function(){
 #' oAuth2 provider check
 #'
 #' @return boolean
-#' @export
 #'
 oauth_is_online = function(){
 
@@ -77,8 +41,7 @@ oauth_is_online = function(){
 
 #' API connectivity check
 #'
-#' @return boolean
-#' @export
+#' @return logical
 #'
 api_is_online = function(){
     # Verify that the api address returns a forbidden status code
@@ -91,8 +54,7 @@ api_is_online = function(){
 #'
 #' @param site_url is a url to check if it is accessible
 #'
-#' @return boolean
-#' @export
+#' @return logical
 #'
 site_is_online = function(site_url){
     tryCatch({
@@ -107,8 +69,7 @@ site_is_online = function(site_url){
 
 #' R internet check
 #'
-#' @return boolean
-#' @export
+#' @return locical
 #'
 r_is_online = function(){
     tryCatch({

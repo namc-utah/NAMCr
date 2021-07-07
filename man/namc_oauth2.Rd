@@ -4,7 +4,7 @@
 \alias{namc_oauth2}
 \title{namc_oauth2}
 \value{
-a `namc_oauth2` class (R6 class)
+a \code{namc_oauth2} class (R6 class)
 }
 \description{
 R6 class for handling NAMC oAuth2

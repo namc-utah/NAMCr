@@ -13,7 +13,6 @@ api_schema = R6::R6Class(
 
     private = list(
 
-        #' @field raw_types raw list of endpoints and fields for the API
         types = NULL,
         endpoints = NULL,
 
@@ -32,10 +31,11 @@ api_schema = R6::R6Class(
             return(
                 modifyList(
                     list(
-                        edge_name = NA,
-                        has_edge  = FALSE,
-                        fields    = NULL,
-                        args      = NULL
+                        edge_name   = NA,
+                        has_edge    = FALSE,
+                        fields      = NULL,
+                        args        = NULL,
+                        description = NA
                     ),
                     list(...)
                 )
@@ -46,8 +46,10 @@ api_schema = R6::R6Class(
             return(
                 modifyList(
                     list(
+                        data_type     = NA,
                         is_numeric    = FALSE,
-                        is_expandable = FALSE
+                        is_expandable = FALSE,
+                        description   = NA
                     ),
                     list(...)
                 )
@@ -62,7 +64,8 @@ api_schema = R6::R6Class(
                         is_array      = FALSE,
                         is_required   = FALSE,
                         is_for_paging = FALSE,
-                        default_value = NA
+                        default_value = NA,
+                        description   = NA
                     ),
                     list(...)
                 )
@@ -89,14 +92,6 @@ api_schema = R6::R6Class(
 
 
 
-        #' Title
-        #'
-        #' @param arg_name
-        #'
-        #' @return
-        #' @export
-        #'
-        #' @examples
         is_paging_arg = function(arg_name){
             return( any(arg_name == c(self$tpl_pagination_first, self$tpl_pagination_offset)) )
         }
@@ -111,7 +106,7 @@ api_schema = R6::R6Class(
         #' @field tpl_pagination_offset is the numeric offset of the return
         tpl_pagination_offset = NULL,
 
-        #' @field tpl_pagination_offset is the numeric offset of the return
+        #' @field tpl_pagination_cursor is the cursor used to fetch data at
         tpl_pagination_cursor = NULL,
 
         #' @field tpl_page_fieldname is the name of the field holding page data
@@ -124,9 +119,14 @@ api_schema = R6::R6Class(
 
         #' Parse the API types
         #'
-        #' @return
+        #' @return api_schema For method chaining
         #'
         #' @examples
+        #'
+        #' types = ( namc_api$new(argList=...) )$get_api_types()
+        #' schema = api_schema$new(types = types)
+        #' schema$configure()
+        #'
         configure = function(){
             private$discover_types()$parse_endpoints()
             invisible(self)
@@ -142,7 +142,7 @@ api_schema = R6::R6Class(
         #'
         #' types = ( namc_api$new(argList=...) )$get_api_types()
         #' schema = api_schema$new(types = types)
-        #' schema$parse_schema()
+        #' schema$parse_endpoints()
         #'
         parse_endpoints = function(){
 
@@ -176,6 +176,7 @@ api_schema = R6::R6Class(
             iSpecialType = private$types$name == special_type
             iEndpoint = private$types$fields[ iSpecialType ][[1]]$name == endpoint
             no_type   = is.na(private$types$fields[ iSpecialType ][[1]]$type$ofType[ iEndpoint ])
+            no_description = is.na(private$types$fields[ iSpecialType ][[1]]$description[ iEndpoint ])
             data_type = ifelse(no_type, NA, private$types$fields[ iSpecialType ][[1]]$type$ofType$name[ iEndpoint ] )
             edge_name = NA
             has_edge  = FALSE
@@ -201,21 +202,27 @@ api_schema = R6::R6Class(
 
             iDataType = private$types$name == data_type
             private[[ special_type ]][[ endpoint ]] = private$new_endpoint(
-                edge_name = edge_name,
-                has_edge  = has_edge
+                edge_name   = edge_name,
+                has_edge    = has_edge,
+                description = ifelse(no_description, NA, private$types$fields[ iSpecialType ][[1]]$description[ iEndpoint ])
             )
 
             for(fieldname in private$types$fields[ iDataType ][[1]]$name){
                 iField = private$types$fields[ iDataType ][[1]]$name == fieldname
+                no_description = is.na(private$types$fields[ iDataType ][[1]]$description[iField])
+                no_type = is.empty(private$types$fields[ iDataType ][[1]]$type$name[ iField ])
                 private[[ special_type ]][[ endpoint ]]$fields[[ fieldname ]] = private$new_field(
+                    data_type     = ifelse(no_type,NA,private$types$fields[ iDataType ][[1]]$type$name[ iField ]),
                     is_numeric    = any( private$types$fields[ iDataType ][[1]]$type$name[ iField ] == private$numeric_types ),
-                    is_expandable = FALSE
+                    is_expandable = FALSE,
+                    description   = ifelse(no_description, NA, private$types$fields[ iDataType ][[1]]$description[iField])
                 )
             }
 
             for(argname in private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$name){
                 iArg = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$name == argname
                 is_numeric = any( private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$name[ iArg ] == private$numeric_types)
+                no_description = is.na(private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$description[ iArg ])
                 is_array = FALSE
                 if( any("ofType" == names(private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type)) ){
                    # is_array = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$ofType$kind[ iArg ] == "LIST"
@@ -233,7 +240,8 @@ api_schema = R6::R6Class(
                     is_array      = is_array,
                     is_required   = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$kind[ iArg ] == self$required_kind,
                     is_for_paging = private$is_paging_arg( argname ),
-                    default_value = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$defaultValue[ iArg ]
+                    default_value = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$defaultValue[ iArg ],
+                    description   = ifelse(no_description, NA, private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$description[ iArg ])
                 )
             }
 
@@ -242,15 +250,14 @@ api_schema = R6::R6Class(
 
 
 
-        #' Title
+        #' Check if argument is numeric
         #'
-        #' @param endpoint
-        #' @param argname
+        #' @param endpoint String name of api endpoint
+        #' @param argname String name of api endpoint argument
         #'
-        #' @return
-        #' @export
+        #' @return logical TRUE/FALSE if argument is numeric
         #'
-        #' @examples
+        # @examples
         is_arg_numeric = function(endpoint,argname){
             special_type = self$get_special_type_from_endpoint( endpoint )
             if( any(argname == names(private[[ special_type ]][[ endpoint ]]$args)) ){
@@ -264,14 +271,13 @@ api_schema = R6::R6Class(
 
 
 
-        #' Title
+        #' Get the sub-type contained within an api endpoint
         #'
-        #' @param endpoint
+        #' @param endpoint String name of api endpoint
         #'
-        #' @return
-        #' @export
+        # @return
         #'
-        #' @examples
+        # @examples
         get_special_type_from_endpoint = function(endpoint){
             for(special_type in private$special_types){
                 if( any(endpoint == names(private[[special_type]])) ){
@@ -283,14 +289,13 @@ api_schema = R6::R6Class(
 
 
 
-        #' Title
+        #' Determine if an endpoint has an edge
         #'
-        #' @param endpoint
+        #' @param endpoint String name of api endpoint
         #'
-        #' @return
-        #' @export
+        # @return
         #'
-        #' @examples
+        # @examples
         has_edge = function(endpoint){
             special_type = self$get_special_type_from_endpoint( endpoint )
             return( private[[ special_type ]][[ endpoint ]]$has_edge )
@@ -298,14 +303,13 @@ api_schema = R6::R6Class(
 
 
 
-        #' Title
+        #' Get the name of the graphql edge contained in an endpoint
         #'
-        #' @param endpoint
+        #' @param endpoint String name of api endpoint
         #'
-        #' @return
-        #' @export
+        #' @return String name of endpoint edge
         #'
-        #' @examples
+        # @examples
         get_edge_name = function(endpoint){
             special_type = self$get_special_type_from_endpoint( endpoint )
             return( private[[ special_type ]][[ endpoint ]]$edge_name )
@@ -313,12 +317,11 @@ api_schema = R6::R6Class(
 
 
 
-        #' Title
+        #' Get all available endpoint names
         #'
-        #' @return
-        #' @export
+        #' @return Array of endpoint names
         #'
-        #' @examples
+        # @examples
         get_endpoints = function(){
             endpoints = c()
             for(special_type in private$special_types){
@@ -329,45 +332,58 @@ api_schema = R6::R6Class(
 
 
 
-        #' Title
+        #' Get info about an endpoint
         #'
-        #' @param endpoint
+        #' @param endpoint String name of api endpoint
         #'
-        #' @return
-        #' @export
+        # @return
         #'
-        #' @examples
+        # @examples
         get_endpoint = function(endpoint){
+            special_type = self$get_special_type_from_endpoint( endpoint )
             return( private[[ special_type ]][[ endpoint ]] )
         },
 
 
 
-        #' Title
+        #' Get all available field names for an endpoint
         #'
-        #' @param endpoint
+        #' @param endpoint String name of api endpoint
         #'
-        #' @return
-        #' @export
+        # @return
         #'
-        #' @examples
-        get_endpoint_fields = function(endpoint){
+        # @examples
+        get_fields = function(endpoint){
             special_type = self$get_special_type_from_endpoint( endpoint )
             return( names(private[[ special_type ]][[ endpoint ]]$fields) )
         },
 
 
 
-        #' Title
+        #' Get info about an endpoint field
         #'
-        #' @param endpoint
+        #' @param endpoint String name of api endpoint
+        #' @param field String name for a field of the endpoint
+        #'
+        # @return
+        #'
+        # @examples
+        get_field = function(endpoint, field){
+            special_type = self$get_special_type_from_endpoint( endpoint )
+            return( private[[ special_type ]][[ endpoint ]]$fields[[ field ]] )
+        },
+
+
+
+        #' Get all arguments for and endpoint
+        #'
+        #' @param endpoint String name of api endpoint
         #' @param no_paging
         #'
-        #' @return
-        #' @export
+        # @return
         #'
-        #' @examples
-        get_endpoint_args = function(endpoint, no_paging = FALSE){
+        # @examples
+        get_arguments = function(endpoint, no_paging = FALSE){
             special_type = self$get_special_type_from_endpoint( endpoint )
             paging_args = c()
             if( no_paging ){
@@ -383,15 +399,14 @@ api_schema = R6::R6Class(
 
 
 
-        #' Title
+        #' Get info about an argument
         #'
-        #' @param endpoint
+        #' @param endpoint String name of api endpoint
         #' @param argname
         #'
-        #' @return
-        #' @export
+        # @return
         #'
-        #' @examples
+        # @examples
         get_argument = function(endpoint,argname){
             special_type = self$get_special_type_from_endpoint( endpoint )
             return( private[[ special_type ]][[ endpoint ]]$args[[ argname ]] )
@@ -399,15 +414,14 @@ api_schema = R6::R6Class(
 
 
 
-        #' Title
+        #' Checks if an argument is required
         #'
-        #' @param endpoint
+        #' @param endpoint String name of api endpoint
         #' @param argname
         #'
-        #' @return
-        #' @export
+        # @return
         #'
-        #' @examples
+        # @examples
         is_argument_required = function(endpoint,argname){
             special_type = self$get_special_type_from_endpoint( endpoint )
             return( private[[ special_type ]][[ endpoint ]]$args[[ argname ]]$is_required )
@@ -415,15 +429,14 @@ api_schema = R6::R6Class(
 
 
 
-        #' Title
+        #' Checks if argument name is valid for an endpoint
         #'
-        #' @param endpoint
+        #' @param endpoint String name of api endpoint
         #' @param argname
         #'
-        #' @return
-        #' @export
+        # @return
         #'
-        #' @examples
+        # @examples
         is_argument = function(endpoint,argname){
             special_type = self$get_special_type_from_endpoint( endpoint )
             return( any(argname == names(private[[ special_type ]][[ endpoint ]]$args)) )
@@ -431,16 +444,129 @@ api_schema = R6::R6Class(
 
 
 
-        #' Title
+        #' Check if endpoint exists
         #'
-        #' @param endpoint
+        #' @param endpoint String name of api endpoint
         #'
-        #' @return
+        # @return
+        #'
+        # @examples
+        is_endpoint = function(endpoint){
+            return( any( self$get_endpoints() == endpoint ) )
+        },
+
+
+
+        #' Describe an Endpoint.
+        #'
+        #' @description `info` prints text to the console describing an endpoint
+        #'
+        #' @details This function presents a text block describing an endpoint
+        #'   and its corresponding input parameters. Inputs are marked as
+        #'   required where applicable.
+        #'
+        #' @param endpoint api endpoint name to get information about.
+        #' @param no_paging Logical that omits the paging arguments by default
+        #' @param format One of: 'markdown', 'text' (default)
+        #'   argument inclusion
+        #'
         #' @export
         #'
         #' @examples
-        is_endpoint = function(endpoint){
-            return( any( self$get_endpoints() == endpoint ) )
+        #'
+        #' info()
+        #'
+        info = function(endpoint, no_paging = FALSE, format = "text" ){
+
+            # crude function to format text in markdown or console appropriate
+            # text output styles
+            wrap_text = function(txt, style, appendTo = '' ){
+                styles = list(
+                    h1 = list(
+                        text = c('',' ------------------------------\n'),
+                        markdown = c('\n## ','\n')
+                    ),
+                    h2 = list(
+                        text = c('\n\t',':\n'),
+                        markdown = c('\n### ','\n')
+                    ),
+                    h3 = list(
+                        text = c('\t\t',':\n'),
+                        markdown = c('\n### ','\n')
+                    ),
+                    h4 = list(
+                        text = c('\t\t\t',':\n'),
+                        markdown = c('\n#### ','\n')
+                    ),
+                    t1 = list(
+                        text = c('\t','\n\n'),
+                        markdown = c('','')
+                    ),
+                    l1 = list(
+                        text = c('\t\t\t','\n'),
+                        markdown = c('* ','')
+                    ),
+                    k1 = list(
+                        text = c('',':\t'),
+                        markdown = c('**','**')
+                    ),
+                    k2 = list(
+                        text = c('',':\t\t'),
+                        markdown = c('* ','')
+                    )
+                )
+                return(
+                    paste0(
+                        appendTo,
+                        styles[[style]][[format]][1],
+                        txt,
+                        styles[[style]][[format]][2]
+                    )
+                )
+            }
+
+            e = endpoint
+            e_info = self$get_endpoint(e)
+            tpl = wrap_text(e,'h1')
+            tpl = wrap_text(
+                paste0(wrap_text('Description','k1'), ifelse(is.empty(e_info$description),'',e_info$description))
+                ,'t1',tpl
+            )
+
+            tpl = wrap_text('Input Parameters','h2',tpl)
+            parameters = self$get_arguments(e, no_paging)
+            if(length(parameters) == 0){
+                tpl = wrap_text('none','t1',tpl)
+            } else {
+                for(p in parameters){
+                    tpl = wrap_text(p,'h3',tpl)
+                    p_info = self$get_argument(e,p)
+                    for(attribute_name in names(p_info)){
+                        if( !is.empty(p_info[[attribute_name]]) ){
+                            tpl = wrap_text( paste0( wrap_text(gsub("_"," ",attribute_name),'k1'), p_info[[attribute_name]]), 'l1', tpl)
+                        }
+                    }
+                    tpl = paste0(tpl, '\n')
+                }
+            }
+            tpl = wrap_text('Output Fields','h2',tpl)
+            fields = self$get_fields(e)
+            if(length(fields) == 0) {
+                tpl = wrap_text('none','t1',tpl)
+            }
+            for(f in fields){
+                tpl = wrap_text(f,'h3',tpl)
+                f_info = self$get_field(e,f)
+                for(attribute_name in names(f_info)){
+                    if( !is.empty(f_info[[attribute_name]]) ){
+                        tpl = wrap_text( paste0( wrap_text(gsub("_"," ",attribute_name),'k1'), f_info[[attribute_name]]), 'l1', tpl)
+                    }
+                }
+                tpl = paste0(tpl, '\n')
+            }
+            tpl = paste0(tpl,'\n\n')
+
+            return(tpl)
         }
 
     )
