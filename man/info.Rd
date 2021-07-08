@@ -116,6 +116,9 @@ is expandable
 
 \subsection{siteId}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
@@ -388,6 +391,9 @@ description
 }
 
 \subsection{modelId}{
+
+data type
+:Int
 
 is numeric
 :TRUE
@@ -694,6 +700,9 @@ is expandable
 
 \subsection{modelId}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
@@ -782,6 +791,9 @@ is expandable
 }
 
 \subsection{sampleId}{
+
+data type
+:Int
 
 is numeric
 :TRUE
@@ -1219,6 +1231,9 @@ is expandable
 }
 
 \subsection{boxId}{
+
+data type
+:Int
 
 is numeric
 :TRUE
@@ -1961,11 +1976,14 @@ is expandable
 
 \subsection{usState}{
 
+data type
+:String
+
 is numeric
 :FALSE
 
 is array
-:FALSE
+:TRUE
 
 is required
 :FALSE
@@ -2442,6 +2460,9 @@ is expandable
 
 \subsection{modelId}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
@@ -2703,6 +2724,9 @@ is expandable
 
 \subsection{siteId}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
@@ -2868,6 +2892,9 @@ description
 
 \subsection{sampleId}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
@@ -2992,6 +3019,9 @@ is expandable
 }
 
 \subsection{modelId}{
+
+data type
+:Int
 
 is numeric
 :TRUE
@@ -3205,11 +3235,14 @@ description
 
 \subsection{sampleIds}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
 is array
-:FALSE
+:TRUE
 
 is required
 :TRUE
@@ -3550,6 +3583,9 @@ is expandable
 
 \subsection{taxonomyId}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
@@ -3751,6 +3787,9 @@ is expandable
 
 \subsection{taxonomyId}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
@@ -3875,6 +3914,9 @@ is expandable
 }
 
 \subsection{translationId}{
+
+data type
+:Int
 
 is numeric
 :TRUE
@@ -4561,11 +4603,14 @@ is expandable
 
 \subsection{sampleIds}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
 is array
-:FALSE
+:TRUE
 
 is required
 :FALSE
@@ -4842,11 +4887,14 @@ is expandable
 
 \subsection{sampleIds}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
 is array
-:FALSE
+:TRUE
 
 is required
 :FALSE
@@ -4857,11 +4905,14 @@ is for paging
 
 \subsection{boxIds}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
 is array
-:FALSE
+:TRUE
 
 is required
 :FALSE
@@ -4872,11 +4923,14 @@ is for paging
 
 \subsection{projectIds}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
 is array
-:FALSE
+:TRUE
 
 is required
 :FALSE
@@ -5022,6 +5076,9 @@ description
 }
 
 \subsection{sampleId}{
+
+data type
+:Int
 
 is numeric
 :TRUE
@@ -5196,6 +5253,9 @@ is expandable
 
 \subsection{sampleId}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
@@ -5210,6 +5270,9 @@ is for paging
 }
 
 \subsection{translationId}{
+
+data type
+:Int
 
 is numeric
 :TRUE
@@ -5348,6 +5411,9 @@ is expandable
 
 \subsection{sampleId}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
@@ -5363,6 +5429,9 @@ is for paging
 
 \subsection{translationId}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
@@ -5377,6 +5446,9 @@ is for paging
 }
 
 \subsection{fixedCount}{
+
+data type
+:Int
 
 is numeric
 :TRUE
@@ -5467,6 +5539,9 @@ is expandable
 
 \subsection{longitude}{
 
+data type
+:Float
+
 is numeric
 :TRUE
 
@@ -5482,6 +5557,9 @@ is for paging
 
 \subsection{latitude}{
 
+data type
+:Float
+
 is numeric
 :TRUE
 
@@ -5496,6 +5574,9 @@ is for paging
 }
 
 \subsection{distance}{
+
+data type
+:Float
 
 is numeric
 :TRUE
@@ -5648,8 +5729,11 @@ description
 
 \subsection{polygon}{
 
+data type
+:String
+
 is numeric
-:TRUE
+:FALSE
 
 is array
 :FALSE
@@ -5983,11 +6067,14 @@ is expandable
 
 \subsection{sampleIds}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
 is array
-:FALSE
+:TRUE
 
 is required
 :FALSE
@@ -5998,11 +6085,14 @@ is for paging
 
 \subsection{boxIds}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
 is array
-:FALSE
+:TRUE
 
 is required
 :FALSE
@@ -6013,11 +6103,14 @@ is for paging
 
 \subsection{projectIds}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
 is array
-:FALSE
+:TRUE
 
 is required
 :FALSE
@@ -6027,6 +6120,9 @@ is for paging
 }
 
 \subsection{translationId}{
+
+data type
+:Int
 
 is numeric
 :TRUE
@@ -6042,6 +6138,9 @@ is for paging
 }
 
 \subsection{fixedCount}{
+
+data type
+:Int
 
 is numeric
 :TRUE
@@ -6144,6 +6243,9 @@ is expandable
 
 \subsection{siteId}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
@@ -6158,6 +6260,9 @@ is for paging
 }
 
 \subsection{predictorId}{
+
+data type
+:Int
 
 is numeric
 :TRUE
@@ -6174,8 +6279,11 @@ is for paging
 
 \subsection{value}{
 
+data type
+:String
+
 is numeric
-:TRUE
+:FALSE
 
 is array
 :FALSE
@@ -6205,6 +6313,9 @@ none
 
 \subsection{sampleId}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
@@ -6219,6 +6330,9 @@ is for paging
 }
 
 \subsection{predictorId}{
+
+data type
+:Int
 
 is numeric
 :TRUE
@@ -6235,8 +6349,11 @@ is for paging
 
 \subsection{value}{
 
+data type
+:String
+
 is numeric
-:TRUE
+:FALSE
 
 is array
 :FALSE
@@ -6266,6 +6383,9 @@ none
 
 \subsection{siteId}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
@@ -6281,8 +6401,11 @@ is for paging
 
 \subsection{catchment}{
 
+data type
+:String
+
 is numeric
-:TRUE
+:FALSE
 
 is array
 :FALSE
@@ -6312,8 +6435,11 @@ none
 
 \subsection{translationName}{
 
+data type
+:String
+
 is numeric
-:TRUE
+:FALSE
 
 is array
 :FALSE
@@ -6326,6 +6452,9 @@ is for paging
 }
 
 \subsection{description}{
+
+data type
+:String
 
 is numeric
 :FALSE
@@ -6358,6 +6487,9 @@ none
 
 \subsection{translationId}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
@@ -6372,6 +6504,9 @@ is for paging
 }
 
 \subsection{taxonomyId}{
+
+data type
+:Int
 
 is numeric
 :TRUE
@@ -6388,6 +6523,9 @@ is for paging
 
 \subsection{alias}{
 
+data type
+:String
+
 is numeric
 :FALSE
 
@@ -6402,6 +6540,9 @@ is for paging
 }
 
 \subsection{isFinal}{
+
+data type
+:Boolean
 
 is numeric
 :FALSE
@@ -6434,6 +6575,9 @@ none
 
 \subsection{translationId}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
@@ -6448,6 +6592,9 @@ is for paging
 }
 
 \subsection{taxonomyId}{
+
+data type
+:Int
 
 is numeric
 :TRUE
@@ -6480,6 +6627,9 @@ none
 
 \subsection{taxonomyId}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
@@ -6495,8 +6645,11 @@ is for paging
 
 \subsection{scientificName}{
 
+data type
+:String
+
 is numeric
-:TRUE
+:FALSE
 
 is array
 :FALSE
@@ -6509,6 +6662,9 @@ is for paging
 }
 
 \subsection{levelId}{
+
+data type
+:Int
 
 is numeric
 :TRUE
@@ -6525,6 +6681,9 @@ is for paging
 
 \subsection{parentId}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
@@ -6539,6 +6698,9 @@ is for paging
 }
 
 \subsection{author}{
+
+data type
+:String
 
 is numeric
 :FALSE
@@ -6555,6 +6717,9 @@ is for paging
 
 \subsection{year}{
 
+data type
+:String
+
 is numeric
 :FALSE
 
@@ -6570,6 +6735,9 @@ is for paging
 
 \subsection{notes}{
 
+data type
+:String
+
 is numeric
 :FALSE
 
@@ -6584,6 +6752,9 @@ is for paging
 }
 
 \subsection{metadata}{
+
+data type
+:String
 
 is numeric
 :FALSE
@@ -6616,8 +6787,11 @@ none
 
 \subsection{projectName}{
 
+data type
+:String
+
 is numeric
-:TRUE
+:FALSE
 
 is array
 :FALSE
@@ -6630,6 +6804,9 @@ is for paging
 }
 
 \subsection{isPrivate}{
+
+data type
+:Boolean
 
 is numeric
 :FALSE
@@ -6646,6 +6823,9 @@ is for paging
 
 \subsection{description}{
 
+data type
+:String
+
 is numeric
 :FALSE
 
@@ -6661,6 +6841,9 @@ is for paging
 
 \subsection{metadata}{
 
+data type
+:String
+
 is numeric
 :FALSE
 
@@ -6675,6 +6858,9 @@ is for paging
 }
 
 \subsection{contactId}{
+
+data type
+:Int
 
 is numeric
 :TRUE
@@ -6707,6 +6893,9 @@ none
 
 \subsection{projectId}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
@@ -6722,11 +6911,14 @@ is for paging
 
 \subsection{sampleIds}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
 is array
-:FALSE
+:TRUE
 
 is required
 :FALSE
@@ -6753,6 +6945,9 @@ none
 
 \subsection{projectId}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
@@ -6768,11 +6963,14 @@ is for paging
 
 \subsection{boxIds}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
 is array
-:FALSE
+:TRUE
 
 is required
 :FALSE
@@ -6799,6 +6997,9 @@ none
 
 \subsection{projectId}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
@@ -6814,11 +7015,14 @@ is for paging
 
 \subsection{sampleIds}{
 
+data type
+:Int
+
 is numeric
 :TRUE
 
 is array
-:FALSE
+:TRUE
 
 is required
 :FALSE
@@ -6844,6 +7048,9 @@ none
 }
 
 \subsection{projectId}{
+
+data type
+:Int
 
 is numeric
 :TRUE

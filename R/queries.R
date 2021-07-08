@@ -304,7 +304,6 @@ raw_query = function( query_string ){
 #'
 #' @return graphql formatted query string
 #'
-#' @examples
 format_arguments = function(api_endpoint, endpoint_args, api){
     # Build Argument Template
     if(length(endpoint_args) != 0){

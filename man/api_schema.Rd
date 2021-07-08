@@ -73,7 +73,11 @@ info()
 
 \item{\code{tpl_page_fieldname}}{is the name of the field holding page data}
 
-\item{\code{required_kind}}{is string value of required argument kind
+\item{\code{required_kind}}{is string value of required argument kind}
+
+\item{\code{singular_kind}}{is string value of singular argument kind}
+
+\item{\code{array_kind}}{is string value of array argument kind
 Parse the API types}
 }
 \if{html}{\out{</div>}}
@@ -85,6 +89,7 @@ Parse the API types}
 \item \href{#method-parse_endpoints}{\code{api_schema$parse_endpoints()}}
 \item \href{#method-parse_endpoint}{\code{api_schema$parse_endpoint()}}
 \item \href{#method-is_arg_numeric}{\code{api_schema$is_arg_numeric()}}
+\item \href{#method-is_arg_boolean}{\code{api_schema$is_arg_boolean()}}
 \item \href{#method-get_special_type_from_endpoint}{\code{api_schema$get_special_type_from_endpoint()}}
 \item \href{#method-has_edge}{\code{api_schema$has_edge()}}
 \item \href{#method-get_edge_name}{\code{api_schema$get_edge_name()}}
@@ -204,6 +209,29 @@ Check if argument is numeric
 \subsection{Method \code{is_arg_numeric()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{api_schema$is_arg_numeric(endpoint, argname)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{endpoint}}{String name of api endpoint}
+
+\item{\code{argname}}{String name of api endpoint argument}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+logical TRUE/FALSE if argument is numeric
+
+Check if argument is numeric
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-is_arg_boolean"></a>}}
+\if{latex}{\out{\hypertarget{method-is_arg_boolean}{}}}
+\subsection{Method \code{is_arg_boolean()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{api_schema$is_arg_boolean(endpoint, argname)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

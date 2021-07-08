@@ -116,10 +116,10 @@ api_schema = R6::R6Class(
         #' @field required_kind is string value of required argument kind
         required_kind = NULL,
 
-        #' @field required_kind is string value of required argument kind
+        #' @field singular_kind is string value of singular argument kind
         singular_kind = NULL,
 
-        #' @field required_kind is string value of required argument kind
+        #' @field array_kind is string value of array argument kind
         array_kind = NULL,
 
 

@@ -17,7 +17,7 @@ namc_api get_endpoints method.}
 \item{...}{named arguments to merge with data and pass to the API endpoint.}
 }
 \value{
-data.frame A dataframe containing output from the save query
+data.frame An identifier of an inserted record OR a data.frame containing the modified record
 }
 \description{
 Update NAMC database data via the API. Upsert routines are used.
