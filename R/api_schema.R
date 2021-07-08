@@ -60,6 +60,7 @@ api_schema = R6::R6Class(
             return(
                 modifyList(
                     list(
+                        data_type     = NA,
                         is_numeric    = FALSE,
                         is_array      = FALSE,
                         is_required   = FALSE,
@@ -115,6 +116,11 @@ api_schema = R6::R6Class(
         #' @field required_kind is string value of required argument kind
         required_kind = NULL,
 
+        #' @field required_kind is string value of required argument kind
+        singular_kind = NULL,
+
+        #' @field required_kind is string value of required argument kind
+        array_kind = NULL,
 
 
         #' Parse the API types
@@ -173,13 +179,13 @@ api_schema = R6::R6Class(
         #'
         parse_endpoint = function(endpoint, special_type = NA){
 
-            iSpecialType = private$types$name == special_type
-            iEndpoint = private$types$fields[ iSpecialType ][[1]]$name == endpoint
-            no_type   = is.na(private$types$fields[ iSpecialType ][[1]]$type$ofType[ iEndpoint ])
+            iSpecialType   = private$types$name == special_type
+            iEndpoint      = private$types$fields[ iSpecialType ][[1]]$name == endpoint
+            no_type        = is.na(private$types$fields[ iSpecialType ][[1]]$type$ofType[ iEndpoint ])
             no_description = is.na(private$types$fields[ iSpecialType ][[1]]$description[ iEndpoint ])
-            data_type = ifelse(no_type, NA, private$types$fields[ iSpecialType ][[1]]$type$ofType$name[ iEndpoint ] )
-            edge_name = NA
-            has_edge  = FALSE
+            data_type      = ifelse(no_type, NA, private$types$fields[ iSpecialType ][[1]]$type$ofType$name[ iEndpoint ] )
+            edge_name      = NA
+            has_edge       = FALSE
 
             # Endpoint data is contained in a nested sub-type
             if( is.na(data_type) ){
@@ -188,14 +194,14 @@ api_schema = R6::R6Class(
 
                 # Is cursor/edge paginated data
                 if( any(private$types$fields[ iEdgeType ][[1]]$name == self$tpl_pagination_cursor) ){
-                    has_edge = TRUE
-                    i2Type = private$types$fields[ iEdgeType ][[1]]$type$kind == "LIST"
+                    has_edge  = TRUE
+                    i2Type    = private$types$fields[ iEdgeType ][[1]]$type$kind == "LIST"
                     edge_name = private$types$fields[ iEdgeType ][[1]]$name[ i2Type ]
                     data_type = private$types$fields[ iEdgeType ][[1]]$type$ofType$name[ i2Type ]
 
                 # Is nested non-paged structured data
                 } else if( any(private$types$fields[ iEdgeType ][[1]]$type$kind == "LIST") ){
-                    i2Type = private$types$fields[ iEdgeType ][[1]]$type$kind == "LIST"
+                    i2Type    = private$types$fields[ iEdgeType ][[1]]$type$kind == "LIST"
                     data_type = private$types$fields[ iEdgeType ][[1]]$type$ofType$name[ i2Type ]
                 }
             }
@@ -208,9 +214,10 @@ api_schema = R6::R6Class(
             )
 
             for(fieldname in private$types$fields[ iDataType ][[1]]$name){
-                iField = private$types$fields[ iDataType ][[1]]$name == fieldname
+                iField         = private$types$fields[ iDataType ][[1]]$name == fieldname
                 no_description = is.na(private$types$fields[ iDataType ][[1]]$description[iField])
-                no_type = is.empty(private$types$fields[ iDataType ][[1]]$type$name[ iField ])
+                no_type        = is.empty(private$types$fields[ iDataType ][[1]]$type$name[ iField ])
+
                 private[[ special_type ]][[ endpoint ]]$fields[[ fieldname ]] = private$new_field(
                     data_type     = ifelse(no_type,NA,private$types$fields[ iDataType ][[1]]$type$name[ iField ]),
                     is_numeric    = any( private$types$fields[ iDataType ][[1]]$type$name[ iField ] == private$numeric_types ),
@@ -220,22 +227,33 @@ api_schema = R6::R6Class(
             }
 
             for(argname in private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$name){
-                iArg = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$name == argname
-                is_numeric = any( private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$name[ iArg ] == private$numeric_types)
+                iArg           = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$name == argname
                 no_description = is.na(private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$description[ iArg ])
-                is_array = FALSE
-                if( any("ofType" == names(private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type)) ){
-                   # is_array = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$ofType$kind[ iArg ] == "LIST"
-                #    if(is_array == TRUE){
-                  #      is_numeric = any( private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$ofType$ofType$name[ iArg ] == private$numeric_types)
-                 #   }
-                }
-                if(is.na(is_numeric)){
-                    is_numeric = TRUE
-                    try({is_numeric = private[[ special_type ]][[ endpoint ]]$fields[[ argname ]]$is_numeric},silent = TRUE)
-                    if(is.null(is_numeric)) is_numeric = TRUE
+                is_array       = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$kind[ iArg ] == self$array_kind
+                is_required    = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$kind[ iArg ] == self$required_kind
+
+                if( is_required ){
+                    is_array       = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$ofType$kind[ iArg ] == self$array_kind
+                    if( is_array){
+                        is_numeric = any( private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$ofType$ofType$name[ iArg ] == private$numeric_types)
+                        data_type  = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$ofType$ofType$name[ iArg ]
+
+                    } else {
+                        is_numeric = any( private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$ofType$name[ iArg ] == private$numeric_types)
+                        data_type  = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$ofType$name[ iArg ]
+
+                    }
+
+                } else if( is_array){
+                    is_numeric = any( private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$ofType$name[ iArg ] == private$numeric_types)
+                    data_type  = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$ofType$name[ iArg ]
+
+                } else {
+                    is_numeric = any( private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$name[ iArg ] == private$numeric_types)
+                    data_type  = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$name[ iArg ]
                 }
                 private[[ special_type ]][[ endpoint ]]$args[[ argname ]] = private$new_argument(
+                    data_type     = data_type,
                     is_numeric    = is_numeric,
                     is_array      = is_array,
                     is_required   = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$kind[ iArg ] == self$required_kind,
@@ -266,6 +284,27 @@ api_schema = R6::R6Class(
             } else {
                 # Assume argument is numeric if no data available
                 return( TRUE )
+            }
+        },
+
+
+
+        #' Check if argument is numeric
+        #'
+        #' @param endpoint String name of api endpoint
+        #' @param argname String name of api endpoint argument
+        #'
+        #' @return logical TRUE/FALSE if argument is numeric
+        #'
+        # @examples
+        is_arg_boolean = function(endpoint,argname){
+            special_type = self$get_special_type_from_endpoint( endpoint )
+            if( any(argname == names(private[[ special_type ]][[ endpoint ]]$args)) ){
+                return( private[[ special_type ]][[ endpoint ]]$args[[ argname ]]$data_type == "Boolean" )
+
+            } else {
+                # Assume argument is not boolean if no data available
+                return( FALSE )
             }
         },
 
@@ -504,11 +543,15 @@ api_schema = R6::R6Class(
                     ),
                     l1 = list(
                         text = c('\t\t\t','\n'),
-                        markdown = c('* ','')
+                        markdown = c('\n','\n')
+                    ),
+                    l2 = list(
+                        text = c('\t\t\t','\n'),
+                        markdown = c('','')
                     ),
                     k1 = list(
                         text = c('',':\t'),
-                        markdown = c('**','**')
+                        markdown = c('','\n  :')
                     ),
                     k2 = list(
                         text = c('',':\t\t'),
@@ -530,7 +573,7 @@ api_schema = R6::R6Class(
             tpl = wrap_text(e,'h1')
             tpl = wrap_text(
                 paste0(wrap_text('Description','k1'), ifelse(is.empty(e_info$description),'',e_info$description))
-                ,'t1',tpl
+                ,'h2',tpl
             )
 
             tpl = wrap_text('Input Parameters','h2',tpl)

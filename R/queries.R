@@ -75,6 +75,8 @@ query = function(
         for(arg in arg_names){
             if( api$schema$is_arg_numeric(api_endpoint, arg) ) {
                 arg_vals = paste0(endpoint_args[[arg]], collapse = ",")
+            } else if( api$schema$is_arg_boolean(api_endpoint, arg) ) {
+                arg_vals = paste0(gsub(TRUE,"true",gsub(1,"true",endpoint_args[[arg]])), collapse = ",")
             } else {
                 arg_vals = paste0('"', paste0(endpoint_args[[arg]], collapse = '","'), '"')
             }
@@ -208,7 +210,7 @@ query = function(
 #' @param api namc_api An instance of the namc_api class having a default of a pre-initialized package object
 #' @param ... named arguments to merge with data and pass to the API endpoint.
 #'
-#' @return data.frame A dataframe containing output from the save query
+#' @return data.frame An identifier of an inserted record OR a data.frame containing the modified record
 #' @export
 #'
 #' @examples
@@ -244,18 +246,24 @@ save = function(
     tpl_variables = ''
     tpl_fields = ''
 
-    # Collect all arguments and remove any pagination keys
-    endpoint_args = modifyList(data, list(...))
+    # Verify endpoint exists
+    api$is_endpoint(api_endpoint, stop_if_not = TRUE)
 
-    data = .pkgenv$api$query( sprintf(
+    # Collect all arguments and remove any pagination keys
+    endpoint_args = modifyList(args, list(...))
+
+    tpl_args = format_arguments(api_endpoint, endpoint_args, api)
+
+    tpl_query = sprintf(
         'mutation rMutation{
-            %s {
-                %s
-            }
+            %s%s
         }',
         api_endpoint,
-        jsonlite::serializeJSON( endpoint_args )
-    ) )
+        tpl_args
+    )
+
+    data = api$query( tpl_query )
+
 
     return( data )
 }
@@ -282,4 +290,54 @@ save = function(
 #'
 raw_query = function( query_string ){
     return( .pkgenv$api$query( query_string ) )
+}
+
+
+
+#' format user passed arguments for graphql queries
+#'
+#' @param api_endpoint string A NAMC API endpoint name. Available endpoints can
+#'   be found via the [endpoints()] function.
+#' @param endpoint_args a list of named arguments to pass to the API endpoint. Can also
+#'   be passed individually in  ...
+#' @param api instance of a namc_api class
+#'
+#' @return graphql formatted query string
+#'
+#' @examples
+format_arguments = function(api_endpoint, endpoint_args, api){
+    # Build Argument Template
+    if(length(endpoint_args) != 0){
+        arg_names = names( endpoint_args )
+
+        # LET GRAPHQL ERRORS FALL THROUGH | NO ARGUMENT VALIDATION IS PERFORMED
+
+        # Place Arguments
+        tpl_args = '('
+        for(arg in arg_names){
+            if( api$schema$is_arg_numeric(api_endpoint, arg) ) {
+                arg_vals = paste0(endpoint_args[[arg]], collapse = ",")
+            } else if( api$schema$is_arg_boolean(api_endpoint, arg) ) {
+                arg_vals = paste0(gsub(TRUE,"true",gsub(1,"true",endpoint_args[[arg]])), collapse = ",")
+            } else {
+                arg_vals = paste0('"', paste0(endpoint_args[[arg]], collapse = '","'), '"')
+            }
+            is_vector = grepl(",",arg_vals)
+            tpl_args = paste0(
+                tpl_args,
+                sprintf(
+                    '%s:%s%s%s ',
+                    arg,
+                    ifelse(is_vector,'[',''),
+                    arg_vals,
+                    ifelse(is_vector,']','')
+                )
+            )
+        }
+        tpl_args = paste0(tpl_args,')')
+
+    } else {
+        tpl_args = ''
+    }
+    return(tpl_args)
 }

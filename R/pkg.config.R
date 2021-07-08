@@ -34,7 +34,9 @@ pkg.config = function(){
                 tpl_pagination_offset = 'offset',
                 tpl_pagination_cursor = 'nextOffset',
                 tpl_page_fieldname    = 'records',
-                required_kind         = 'NON_NULL'
+                required_kind         = 'NON_NULL',
+                singular_kind         = 'SCALAR',
+                array_kind            = 'LIST'
             ),
             auth = list(
                 oAuth2_appname     = 'NAMCr',

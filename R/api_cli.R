@@ -207,7 +207,14 @@ api_cli = R6::R6Class(
         get_arg = function(arg, arg_info){
                 is_valid = FALSE
                 while( !is_valid ){
-                    user_input = readline(prompt = paste0("Enter value(s) for ",arg,": "))
+                    user_input = readline(
+                        prompt = paste0(
+                            ifelse(
+                                arg_info$is_array,
+                                "Enter value(s) for ",
+                                "Enter a single value for "),
+                            arg,": ")
+                    )
                     res = private$validate( user_input = user_input, type = ifelse(arg_info$is_numeric, "numeric", "") )
                     is_valid = res$is_valid
                     if( res$exit_required ) break
@@ -222,7 +229,7 @@ api_cli = R6::R6Class(
             all_args = private$api$get_endpoint_args( private$api_endpoint, no_paging = TRUE )
 
             if( length( private$args ) == 0 && length(all_args) != 0 ){
-                cat("\nSeparate multiple values with a (,)\n")
+                cat("\nSeparate multiple values with a (,) where allowed\n")
                 required_args = c()
                 for(arg in all_args){
                     arg_info = private$api$schema$get_argument( private$api_endpoint, arg)
@@ -310,11 +317,10 @@ api_cli = R6::R6Class(
             } else {
                 argument_names = formalArgs("save")
             }
-            cat(argument_names)
             past_first_arg = FALSE
 
             tpl = 'Use the following command to obtain the same results in a script:\n\n'
-            tpl = paste0(tpl, "\tres = ", tolower(queryType), "(")
+            tpl = paste0(tpl, "\tresult = ", tolower(queryType), "(")
 
             for(arg in argument_names){
                 if( arg != "api" && !length(private[[arg]])==0 && !is.na(private[[arg]]) ) {

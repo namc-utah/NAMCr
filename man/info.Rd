@@ -30,8 +30,11 @@ required where applicable. Endpoint descriptions can be subset by providing
 an endpoint name as input.
 NAMC API:
 \subsection{auth}{
+\subsection{Description}{
 
-\strong{Description}
+:
+}
+
 \subsection{Input Parameters}{
 
 none
@@ -41,711 +44,1434 @@ none
 }
 
 \subsection{loggedIn}{
-\itemize{
-\item \strong{data type}Boolean* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:Boolean
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{userPool}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{clientId}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{region}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{domain}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{siteInfo}{
+\subsection{Description}{
 
-\strong{Description}Detailed information about a single site. Includes the point location and upstream catchment geometries as GeoJSON.
+:Detailed information about a single site. Includes the point location and upstream catchment geometries as GeoJSON.
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{siteId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{siteId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}Unique database generated integer that uniquely identifies each site
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:Unique database generated integer that uniquely identifies each site
 }
 
 \subsection{siteName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}Unique text identifier for each site
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:Unique text identifier for each site
 }
 
 \subsection{system}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The ecological system (e.g. lake, pond, reservoir) in which the site is located.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The ecological system (e.g. lake, pond, reservoir) in which the site is located.
 }
 
 \subsection{ecosystem}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The ecosystem in which the site is located.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The ecosystem in which the site is located.
 }
 
 \subsection{location}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}GeoJSON point location of the site in \href{https://epsg.io/4326}{EPSG:4326} spatial reference.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:GeoJSON point location of the site in \href{https://epsg.io/4326}{EPSG:4326} spatial reference.
 }
 
 \subsection{longitude}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}Longtidue of the site location in decimal degrees.
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:Longtidue of the site location in decimal degrees.
 }
 
 \subsection{latitude}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}Latitude of the site location in decimal degrees.
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:Latitude of the site location in decimal degrees.
 }
 
 \subsection{usState}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}US State in which the site is located.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:US State in which the site is located.
 }
 
 \subsection{waterbodyType}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}If the site has a waterbody code, then the waterbody type identifies the system that
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:If the site has a waterbody code, then the waterbody type identifies the system that
 this identifier pertains to. The waterbody type might be NHDPlus 1:100,000 or
 NHDPlusHR 1:24,000 etc.
 }
-}
 
 \subsection{waterbodyCode}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The identifier of the waterbody on which this site occurs. Can be null. If a
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The identifier of the waterbody on which this site occurs. Can be null. If a
 waterbody code exists, then the waterbodyType can be used to determine which
 system the code belongs to, such as NHDPlus or NHDPlusHR.
 }
-}
 
 \subsection{waterbodyName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The string name of the waterbody on which the site occurs. Typicall this is the stream name.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The string name of the waterbody on which the site occurs. Typicall this is the stream name.
 }
 
 \subsection{geometryChanged}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The latest date and time that either the site location (point) or catchment (polygon) were changed.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The latest date and time that either the site location (point) or catchment (polygon) were changed.
 }
 
 \subsection{createdDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The system generated date and time that the site record was created in the database.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The system generated date and time that the site record was created in the database.
 }
 
 \subsection{updatedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The system generated date and time that the site record was last changed in the database.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The system generated date and time that the site record was last changed in the database.
 }
 
 \subsection{catchment}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}GeoJSON polygon of the upstream area that drains into this site in \href{https://epsg.io/4326}{EPSG:4326} spatial reference.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:GeoJSON polygon of the upstream area that drains into this site in \href{https://epsg.io/4326}{EPSG:4326} spatial reference.
 }
 
 \subsection{sampleCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}The number of samples that are available for this site.
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:The number of samples that are available for this site.
 }
 
 }
 
 \subsection{modelInfo}{
+\subsection{Description}{
 
-\strong{Description}Detailed information about a single model, including the number of predictors associated with the model.
+:Detailed information about a single model, including the number of predictors associated with the model.
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{modelId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{modelId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{modelName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{abbreviation}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{modelType}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{translationId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{translation}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{extentDescription}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{platform}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{referenceSites}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{groupCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{minimumCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{oeMean}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{oeStdev}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{taxonomicEffort}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{isActive}{
-\itemize{
-\item \strong{data type}Boolean* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:Boolean
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{fixedCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{units}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{description}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{metadata}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{predictorCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{createdDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{updatedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{extent}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{modelThresholds}{
+\subsection{Description}{
 
-\strong{Description}List of all thresholds (e.g. good, fair, poor) for a particular model
+:List of all thresholds (e.g. good, fair, poor) for a particular model
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{modelId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{modelId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{thresholdId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{threshold}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{displayText}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{description}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{sampleInfo}{
+\subsection{Description}{
 
-\strong{Description}Detailed information about a single sample, including information about the box and customer.
+:Detailed information about a single sample, including information about the box and customer.
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{sampleId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{sampleId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{boxId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{customerName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{customerAbbreviation}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{submittedBy}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{boxState}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{siteId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{siteName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{usState}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{siteLocation}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{siteLongitude}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{siteLatitude}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{visitId}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{sampleDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{sampleTime}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{sampleType}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{sampleMethod}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{habitat}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{sampleLocation}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{sampleLongitude}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{sampleLatitude}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{area}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{fieldSplit}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{fieldNotes}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{labSplit}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{jarCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{qualitative}{
-\itemize{
-\item \strong{data type}Boolean* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:Boolean
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{labNotes}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{mesh}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{createdDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{updatedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{sampleDateChanged}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{qaSampleId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{metadata}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{boxInfo}{
+\subsection{Description}{
 
-\strong{Description}Detailed information about a single box, including information about the customer and number of samples associated with the box.
+:Detailed information about a single box, including information about the customer and number of samples associated with the box.
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{boxId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{boxId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{customerId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{customerName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{customerAbbreviation}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{submitterId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{submittedBy}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{boxStateId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{boxState}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{boxReceivedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{processingCompleteDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{projectedCompleteDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{sampleCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{description}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{metadata}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{measurements}{
-\itemize{
-\item \strong{data type}Boolean* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:Boolean
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{sorterQa}{
-\itemize{
-\item \strong{data type}Boolean* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:Boolean
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{taxaQa}{
-\itemize{
-\item \strong{data type}Boolean* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:Boolean
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{createdDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{updatedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{samples}{
+\subsection{Description}{
 
-\strong{Description}List of all samples in the system, including high level information about the associated box and customer.
+:List of all samples in the system, including high level information about the associated box and customer.
+}
+
 \subsection{Input Parameters}{
 
 none
@@ -755,339 +1481,666 @@ none
 }
 
 \subsection{sampleId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{boxId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{customerName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{boxStateName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{boxStateId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{submitterName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{siteId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{siteName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{siteLatitude}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{siteLongitude}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{siteState}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{sampleDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{sampleYear}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{sampleLatitude}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{sampleLongitude}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{sampleType}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{sampleMethod}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{habitatName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{area}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{fieldSplit}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{labSplit}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{jarCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{qualitative}{
-\itemize{
-\item \strong{data type}Boolean* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:Boolean
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{mesh}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{createdDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{updatedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{qaSampleId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{diameter}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{subSampleCount}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{towLength}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{volume}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{aliquot}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{siteInterval}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{towType}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{netArea}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{netDuration}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{streamDepth}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{netDepth}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{netVelocity}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{sites}{
+\subsection{Description}{
 
-\strong{Description}Summary information for all sites, including location coordinates and number of samples. Use the siteInfo query to get more detailed information about a single site.
+:Summary information for all sites, including location coordinates and number of samples. Use the siteInfo query to get more detailed information about a single site.
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{usState}{
-\itemize{
-\item \strong{is numeric}FALSE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:FALSE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{siteId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{siteName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{system}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{ecosystem}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{longitude}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{latitude}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{usState}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{waterbodyType}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{waterbodyCode}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{waterbodyName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{createdDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{updatedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{hasCatchment}{
-\itemize{
-\item \strong{data type}Boolean* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:Boolean
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{boxes}{
+\subsection{Description}{
 
-\strong{Description}Summary information for all boxes, including the customer name and number of samples within the box. Use the boxInfo query to get more detailed information about a single box.
+:Summary information for all boxes, including the customer name and number of samples within the box. Use the boxInfo query to get more detailed information about a single box.
+}
+
 \subsection{Input Parameters}{
 
 none
@@ -1097,70 +2150,133 @@ none
 }
 
 \subsection{boxId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{customerId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{customerName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{submitterId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{submittedBy}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{boxState}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{boxReceivedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{sampleCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{processingCompleteDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{projectedCompleteDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{projects}{
+\subsection{Description}{
 
-\strong{Description}Summary information about all projects in the system. Use the projectInfo query to get more detailed about a single project.
+:Summary information about all projects in the system. Use the projectInfo query to get more detailed about a single project.
+}
+
 \subsection{Input Parameters}{
 
 none
@@ -1170,171 +2286,330 @@ none
 }
 
 \subsection{projectId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{projectName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{projectType}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{isPrivate}{
-\itemize{
-\item \strong{data type}Boolean* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:Boolean
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{contactId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{contactName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{autoUpdateSamples}{
-\itemize{
-\item \strong{data type}Boolean* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:Boolean
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{description}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{sampleCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{modelCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{createdDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{updatedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{predictors}{
+\subsection{Description}{
 
-\strong{Description}List of all predictors in the system. Includes summary information about how many models rely on each predictor.
+:List of all predictors in the system. Includes summary information about how many models rely on each predictor.
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{modelId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{predictorId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{predictorName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{abbreviation}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{description}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{units}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{calculationScript}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{predictorTypeId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{predictorTypeName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{isTemporal}{
-\itemize{
-\item \strong{data type}Boolean* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:Boolean
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{updatedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{createdDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{modelCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{models}{
+\subsection{Description}{
 
-\strong{Description}List of all models in the system. Includes summary information about how many predictors are used by the model as well as the translation that might be required.
+:List of all models in the system. Includes summary information about how many predictors are used by the model as well as the translation that might be required.
+}
+
 \subsection{Input Parameters}{
 
 none
@@ -1344,370 +2619,772 @@ none
 }
 
 \subsection{modelId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{modelName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{abbreviation}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{isActive}{
-\itemize{
-\item \strong{data type}Boolean* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:Boolean
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{description}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{predictorCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{sitePredictorValues}{
+\subsection{Description}{
 
-\strong{Description}List of predictor values at a single site. Site predictors are non-temporal. The value is common to all samples at the specific site.
+:List of predictor values at a single site. Site predictors are non-temporal. The value is common to all samples at the specific site.
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{siteId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{predictorId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}The unique system generated identifier for the predictor.
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:The unique system generated identifier for the predictor.
 }
 
 \subsection{predictorName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The unique textual name for the predictor.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The unique textual name for the predictor.
 }
 
 \subsection{abbreviation}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The unique shorthand abbreviation for the predictor.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The unique shorthand abbreviation for the predictor.
 }
 
 \subsection{description}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}Long form information about the predictor.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:Long form information about the predictor.
 }
 
 \subsection{predictorType}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The predictor type (e.g. metrics, atmosphere, geology, anthro).
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The predictor type (e.g. metrics, atmosphere, geology, anthro).
 }
 
 \subsection{predictorValue}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The predictor value for this site. The value is always a string, even
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The predictor value for this site. The value is always a string, even
 if it represents an integer or floating point value.
-}
 }
 
 \subsection{createdDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The system generated date and time that the site record was created in the database.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The system generated date and time that the site record was created in the database.
 }
 
 \subsection{updatedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The system generated date and time that the site record was last changed in the database.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The system generated date and time that the site record was last changed in the database.
 }
 
 \subsection{calculationScript}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}Optional name of the R function that performs the calculation for this predictor.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:Optional name of the R function that performs the calculation for this predictor.
 }
 
 }
 
 \subsection{samplePredictorValues}{
+\subsection{Description}{
 
-\strong{Description}List of all predictor values for a single sample. This includes both temporal and non-temporal predictors as well as their calculation status (current, missing, expired).
+:List of all predictor values for a single sample. This includes both temporal and non-temporal predictors as well as their calculation status (current, missing, expired).
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{sampleId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{predictorId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{abbreviation}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{calculationScript}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{isTemporal}{
-\itemize{
-\item \strong{data type}Boolean* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:Boolean
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{predictorMetadata}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{predictorValue}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{predictorValueUpdatedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{status}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{modelPredictors}{
+\subsection{Description}{
 
-\strong{Description}List of predictors required by a single model.
+:List of predictors required by a single model.
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{modelId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{predictorId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}The unique system generated identifier for the predictor.
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:The unique system generated identifier for the predictor.
 }
 
 \subsection{predictorName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The unique textual name for the predictor.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The unique textual name for the predictor.
 }
 
 \subsection{abbreviation}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The unique shorthand abbreviation for the predictor.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The unique shorthand abbreviation for the predictor.
 }
 
 \subsection{units}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The units in which the predictor values are stored.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The units in which the predictor values are stored.
 }
 
 \subsection{predictorType}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The predictor type (e.g. metrics, atmosphere, geology, anthro).
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The predictor type (e.g. metrics, atmosphere, geology, anthro).
 }
 
 \subsection{isTemporal}{
-\itemize{
-\item \strong{data type}Boolean* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}Boolean representing whether the predictor varies over time or whether
+
+data type
+:Boolean
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:Boolean representing whether the predictor varies over time or whether
 there is just a single value for the site. True indicates that the predictor
 is temporal and values are stored for each sample. False indicates that there
 is only one predictor value for each site.
 }
-}
 
 \subsection{description}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}Long form information about the predictor.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:Long form information about the predictor.
 }
 
 \subsection{metadata}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}Miscellaneou structured metadata in GeoJSON format.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:Miscellaneou structured metadata in GeoJSON format.
 }
 
 \subsection{modelCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}The number of models that use the predictor
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:The number of models that use the predictor
 }
 
 \subsection{createdDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The system generated date and time that the site record was created in the database.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The system generated date and time that the site record was created in the database.
 }
 
 \subsection{updatedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The system generated date and time that the site record was last changed in the database.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The system generated date and time that the site record was last changed in the database.
 }
 
 \subsection{calculationScript}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}Optional name of the R function that performs the calculation for this predictor.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:Optional name of the R function that performs the calculation for this predictor.
 }
 
 }
 
 \subsection{modelResults}{
+\subsection{Description}{
 
-\strong{Description}
+:
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{sampleIds}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{sampleId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{siteId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{siteName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{modelId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{modelName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{modelVersion}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{modelResult}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{condition}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{fixCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{notes}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{metadata}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{createdDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{updatedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{taxonomy}{
+\subsection{Description}{
 
-\strong{Description}List of all taxa in the system. Includes information about each level of the taxonomic hierarchy above each taxa.
+:List of all taxa in the system. Includes information about each level of the taxonomic hierarchy above each taxa.
+}
+
 \subsection{Input Parameters}{
 
 none
@@ -1717,129 +3394,246 @@ none
 }
 
 \subsection{taxonomyId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{scientificName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{levelId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{levelName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{parentTaxonomyId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{parentScientificName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{parentLevelId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{parentLevelName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{notes}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{metadata}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{createdDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{updatedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{taxonomyTree}{
+\subsection{Description}{
 
-\strong{Description}list all parents for a particular taxa
+:list all parents for a particular taxa
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{taxonomyId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{taxonomyId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{scientificName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{levelId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{levelName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{parentId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{attributes}{
+\subsection{Description}{
 
-\strong{Description}List of all attributes in the system.
+:List of all attributes in the system.
+}
+
 \subsection{Input Parameters}{
 
 none
@@ -1849,188 +3643,359 @@ none
 }
 
 \subsection{attributeId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{attributeName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{attributeType}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{label}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{description}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{metadata}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{createdDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{updatedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{taxaAttributes}{
+\subsection{Description}{
 
-\strong{Description}List of all attributes that exist for a single taxa
+:List of all attributes that exist for a single taxa
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{taxonomyId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{taxonomyId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{scientificName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{levelId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{levelName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{attributeName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{attributeType}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{label}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{attributeValue}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{translationTaxa}{
+\subsection{Description}{
 
-\strong{Description}List all the taxa within a specific translation (OTU)
+:List all the taxa within a specific translation (OTU)
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{translationId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{translationId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{translationName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{taxonomyId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{levelId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{levelName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{originalScientificName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{translationScientificName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{isFinal}{
-\itemize{
-\item \strong{data type}Boolean* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:Boolean
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{translations}{
+\subsection{Description}{
 
-\strong{Description}List of all translations in the system.
+:List of all translations in the system.
+}
+
 \subsection{Input Parameters}{
 
 none
@@ -2040,52 +4005,97 @@ none
 }
 
 \subsection{translationId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{translationName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{description}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{isActive}{
-\itemize{
-\item \strong{data type}Boolean* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:Boolean
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{taxaCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{createdDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{updatedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{planktonSamples}{
+\subsection{Description}{
 
-\strong{Description}List of all plankton samples in the system.
+:List of all plankton samples in the system.
+}
+
 \subsection{Input Parameters}{
 
 none
@@ -2095,64 +4105,121 @@ none
 }
 
 \subsection{sampleId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{diameter}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{subSampleCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{towLength}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{volume}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{aliquot}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{sizeInterval}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{towType}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{updatedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{driftSamples}{
+\subsection{Description}{
 
-\strong{Description}List of all drift samples in the system.
+:List of all drift samples in the system.
+}
+
 \subsection{Input Parameters}{
 
 none
@@ -2162,52 +4229,97 @@ none
 }
 
 \subsection{sampleId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{netArea}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{netDuration}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{streamDepth}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{netDepth}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{netVelocity}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{updatedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{fishSamples}{
+\subsection{Description}{
 
-\strong{Description}List of all fish samples in the system.
+:List of all fish samples in the system.
+}
+
 \subsection{Input Parameters}{
 
 none
@@ -2217,58 +4329,109 @@ none
 }
 
 \subsection{sampleId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{taxonomyId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{scientificName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{levelId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{levelName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{fishLength}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{fishMass}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{updatedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{massSamples}{
+\subsection{Description}{
 
-\strong{Description}List of all mass samples in the system.
+:List of all mass samples in the system.
+}
+
 \subsection{Input Parameters}{
 
 none
@@ -2278,657 +4441,1359 @@ none
 }
 
 \subsection{sampleId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{typeId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{typeAbbreviation}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{typeName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{methodId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{methodAbbreviation}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{methodName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{mass}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{updatedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{fishGuts}{
+\subsection{Description}{
 
-\strong{Description}List all fish guts samples in the system
+:List all fish guts samples in the system
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{sampleIds}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{sampleId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{sampleDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{siteId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{siteName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{fishWeight}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{fishLength}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{fishTaxonomyId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{fishScientificName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{notes}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{metadata}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{organicWeight}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{inorganicWeight}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{otherWeight}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{createdDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{updatedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{taxonomyId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{scientificName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{lifeStageId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{lifeStage}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{count}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{weight}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{sampleTaxaRaw}{
+\subsection{Description}{
 
-\strong{Description}Sample organisms summed by taxonomy only. Includes both raw counts as well as counts corrected for lab and field split. Also includes both raw and corrected big rare counts.
+:Sample organisms summed by taxonomy only. Includes both raw counts as well as counts corrected for lab and field split. Also includes both raw and corrected big rare counts.
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{sampleIds}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{boxIds}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{projectIds}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{sampleId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}The sample to which the taxa belong
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:The sample to which the taxa belong
 }
 
 \subsection{taxonomyId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}The taxa identified within the laboratory.
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:The taxa identified within the laboratory.
 }
 
 \subsection{scientificName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The name of the taxa identified with the laboratory.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The name of the taxa identified with the laboratory.
 }
 
 \subsection{levelId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}The taxonomic level of the taxa identified within the laboratory.
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:The taxonomic level of the taxa identified within the laboratory.
 }
 
 \subsection{levelName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The taxonomic level of the taxa identified within the laboratory.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The taxonomic level of the taxa identified within the laboratory.
 }
 
 \subsection{rawCount}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}Sum of the split_counts recorded within the laboratory for this taxa. No other manipulation.
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:Sum of the split_counts recorded within the laboratory for this taxa. No other manipulation.
 }
 
 \subsection{correctedCount}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}Sum of the split counts multiplied by the sample lab_split and field_split.
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:Sum of the split counts multiplied by the sample lab_split and field_split.
 
 corrected_count = sum(split_count) * (100 / lab_split) * (100 / field_split)
 }
 
 \subsection{rawBigRareCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}Sum of the big rare count within the laboratory for this taxa. No other manipulation.
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:Sum of the big rare count within the laboratory for this taxa. No other manipulation.
 }
 
 }
 
 \subsection{sampleTaxaGeneralized}{
+\subsection{Description}{
 
-\strong{Description}Sample organisms summed by taxonomy, life stage and bug size. Includes both raw counts as well as counts corrected for lab and field split. Also includes both raw and corrected big rare counts.
+:Sample organisms summed by taxonomy, life stage and bug size. Includes both raw counts as well as counts corrected for lab and field split. Also includes both raw and corrected big rare counts.
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{sampleId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{sampleId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{taxonomyId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{scientificName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{levelId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{levelName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{lifeStageId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{lifeStage}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{lifeStageAbbreviation}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{bugSize}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{rawCount}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{correctedCount}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{rawBigRareCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{sampleTaxaTranslation}{
+\subsection{Description}{
 
-\strong{Description}Sample organisms converted to a translation (OTU). Rolls up counts to those taxa present in the translation and omits any organisms that don't roll up to a taxa in the translation.
+:Sample organisms converted to a translation (OTU). Rolls up counts to those taxa present in the translation and omits any organisms that don't roll up to a taxa in the translation.
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{sampleId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{translationId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{sampleId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{taxonomyId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{scientificName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{aliasName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{levelId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{levelName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{rawCount}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{correctedCount}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{rawBigRareCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{sampleTaxaTranslationRarefied}{
+\subsection{Description}{
 
-\strong{Description}Sample organisms converted to the translation (OTU) and then rarefied to the specified fixed count.
+:Sample organisms converted to the translation (OTU) and then rarefied to the specified fixed count.
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{sampleId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{translationId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{fixedCount}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{taxonomyId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{scientificName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{levelId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{levelName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{organismCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{pointTaxaRaw}{
+\subsection{Description}{
 
-\strong{Description}Sample organisms within distance (meters) of a point (decimal degrees)
+:Sample organisms within distance (meters) of a point (decimal degrees)
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{longitude}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{latitude}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{distance}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{sampleId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}The sample to which the taxa belong
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:The sample to which the taxa belong
 }
 
 \subsection{taxonomyId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}The taxa identified within the laboratory.
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:The taxa identified within the laboratory.
 }
 
 \subsection{scientificName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The name of the taxa identified with the laboratory.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The name of the taxa identified with the laboratory.
 }
 
 \subsection{levelId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}The taxonomic level of the taxa identified within the laboratory.
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:The taxonomic level of the taxa identified within the laboratory.
 }
 
 \subsection{levelName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The taxonomic level of the taxa identified within the laboratory.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The taxonomic level of the taxa identified within the laboratory.
 }
 
 \subsection{rawCount}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}Sum of the split_counts recorded within the laboratory for this taxa. No other manipulation.
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:Sum of the split_counts recorded within the laboratory for this taxa. No other manipulation.
 }
 
 \subsection{correctedCount}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}Sum of the split counts multiplied by the sample lab_split and field_split.
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:Sum of the split counts multiplied by the sample lab_split and field_split.
 
 corrected_count = sum(split_count) * (100 / lab_split) * (100 / field_split)
 }
 
 \subsection{rawBigRareCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}Sum of the big rare count within the laboratory for this taxa. No other manipulation.
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:Sum of the big rare count within the laboratory for this taxa. No other manipulation.
 }
 
 }
 
 \subsection{polygonTaxaRaw}{
+\subsection{Description}{
 
-\strong{Description}Sample organisms within a polygon
+:Sample organisms within a polygon
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{polygon}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{sampleId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}The sample to which the taxa belong
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:The sample to which the taxa belong
 }
 
 \subsection{taxonomyId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}The taxa identified within the laboratory.
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:The taxa identified within the laboratory.
 }
 
 \subsection{scientificName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The name of the taxa identified with the laboratory.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The name of the taxa identified with the laboratory.
 }
 
 \subsection{levelId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}The taxonomic level of the taxa identified within the laboratory.
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:The taxonomic level of the taxa identified within the laboratory.
 }
 
 \subsection{levelName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE* \strong{description}The taxonomic level of the taxa identified within the laboratory.
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The taxonomic level of the taxa identified within the laboratory.
 }
 
 \subsection{rawCount}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}Sum of the split_counts recorded within the laboratory for this taxa. No other manipulation.
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:Sum of the split_counts recorded within the laboratory for this taxa. No other manipulation.
 }
 
 \subsection{correctedCount}{
-\itemize{
-\item \strong{data type}Float* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}Sum of the split counts multiplied by the sample lab_split and field_split.
-}
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:Sum of the split counts multiplied by the sample lab_split and field_split.
 
 corrected_count = sum(split_count) * (100 / lab_split) * (100 / field_split)
 }
 
 \subsection{rawBigRareCount}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE* \strong{description}Sum of the big rare count within the laboratory for this taxa. No other manipulation.
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:Sum of the big rare count within the laboratory for this taxa. No other manipulation.
 }
 
 }
 
 \subsection{metrics}{
+\subsection{Description}{
 
-\strong{Description}
+:
+}
+
 \subsection{Input Parameters}{
 
 none
@@ -2938,190 +5803,388 @@ none
 }
 
 \subsection{metricId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{metricName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{metricTypeId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{typeName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{translationId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{translationName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{formulaId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{formulaName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{formulaCodeFunction}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{isStandardized}{
-\itemize{
-\item \strong{data type}Boolean* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:Boolean
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{perturbDirection}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{description}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{createdDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{updatedDate}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{sampleMetrics}{
+\subsection{Description}{
 
-\strong{Description}
+:
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{sampleIds}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{boxIds}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{projectIds}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{translationId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{fixedCount}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
 }
 
 \subsection{sampleId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{groupId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{groupName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{metricId}{
-\itemize{
-\item \strong{data type}Int* \strong{is numeric}TRUE* \strong{is expandable}FALSE
-}
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
 }
 
 \subsection{metricName}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 \subsection{metricValue}{
-\itemize{
-\item \strong{data type}String* \strong{is numeric}FALSE* \strong{is expandable}FALSE
-}
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
 }
 
 }
 
 \subsection{setSitePredictorValue}{
+\subsection{Description}{
 
-\strong{Description}Store a non-temporal predictor value for a specific site. See setSamplePredictorValue if you want to store a temporal predictor value associated with a particular sample.
+:Store a non-temporal predictor value for a specific site. See setSamplePredictorValue if you want to store a temporal predictor value associated with a particular sample.
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{siteId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{predictorId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{value}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
@@ -3132,27 +6195,57 @@ none
 }
 
 \subsection{setSamplePredictorValue}{
+\subsection{Description}{
 
-\strong{Description}Store a temporal predictor value for a specific sample. Set setSitePredictorValue if you want to store a temporal predictor value associated with a particular site.
+:Store a temporal predictor value for a specific sample. Set setSitePredictorValue if you want to store a temporal predictor value associated with a particular site.
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{sampleId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{predictorId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{value}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
@@ -3163,21 +6256,42 @@ none
 }
 
 \subsection{setSiteCatchment}{
+\subsection{Description}{
 
-\strong{Description}Store the upstream catchment polygon for a specific site. The catchment polygon must be a valid, non-empty GeoJSON polygon that partially or entirely intersects with the United States.
+:Store the upstream catchment polygon for a specific site. The catchment polygon must be a valid, non-empty GeoJSON polygon that partially or entirely intersects with the United States.
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{siteId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{catchment}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
@@ -3188,21 +6302,42 @@ none
 }
 
 \subsection{createTranslation}{
+\subsection{Description}{
 
-\strong{Description}Create a new translation. The name is mandatory and cannot be an empty string. The description is optional.
+:Create a new translation. The name is mandatory and cannot be an empty string. The description is optional.
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{translationName}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{description}{
-\itemize{
-\item \strong{is numeric}FALSE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:FALSE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
@@ -3213,33 +6348,72 @@ none
 }
 
 \subsection{setTranslationTaxa}{
+\subsection{Description}{
 
-\strong{Description}Add or update a taxa associated with a translation
+:Add or update a taxa associated with a translation
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{translationId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{taxonomyId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{alias}{
-\itemize{
-\item \strong{is numeric}FALSE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:FALSE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{isFinal}{
-\itemize{
-\item \strong{is numeric}FALSE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:FALSE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
@@ -3250,21 +6424,42 @@ none
 }
 
 \subsection{deleteTranslationTaxa}{
+\subsection{Description}{
 
-\strong{Description}Permanently remove a taxa from a translation
+:Permanently remove a taxa from a translation
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{translationId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{taxonomyId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
@@ -3275,57 +6470,132 @@ none
 }
 
 \subsection{setTaxonomy}{
+\subsection{Description}{
 
-\strong{Description}Update information related to a specific taxa. Change its scientific name, move its level or change its parent
+:Update information related to a specific taxa. Change its scientific name, move its level or change its parent
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{taxonomyId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{scientificName}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{levelId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{parentId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{author}{
-\itemize{
-\item \strong{is numeric}FALSE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:FALSE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{year}{
-\itemize{
-\item \strong{is numeric}FALSE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:FALSE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{notes}{
-\itemize{
-\item \strong{is numeric}FALSE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:FALSE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{metadata}{
-\itemize{
-\item \strong{is numeric}FALSE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:FALSE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
@@ -3336,39 +6606,87 @@ none
 }
 
 \subsection{createProject}{
+\subsection{Description}{
 
-\strong{Description}
+:
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{projectName}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{isPrivate}{
-\itemize{
-\item \strong{is numeric}FALSE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:FALSE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{description}{
-\itemize{
-\item \strong{is numeric}FALSE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:FALSE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{metadata}{
-\itemize{
-\item \strong{is numeric}FALSE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:FALSE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{contactId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
@@ -3379,21 +6697,42 @@ none
 }
 
 \subsection{addProjectSamples}{
+\subsection{Description}{
 
-\strong{Description}
+:
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{projectId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{sampleIds}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
@@ -3404,21 +6743,42 @@ none
 }
 
 \subsection{addProjectBoxes}{
+\subsection{Description}{
 
-\strong{Description}
+:
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{projectId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{boxIds}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
@@ -3429,21 +6789,42 @@ none
 }
 
 \subsection{removeProjectSamples}{
+\subsection{Description}{
 
-\strong{Description}
+:
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{projectId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{sampleIds}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}FALSE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
@@ -3454,15 +6835,27 @@ none
 }
 
 \subsection{deleteProject}{
+\subsection{Description}{
 
-\strong{Description}
+:
+}
+
 \subsection{Input Parameters}{
 }
 
 \subsection{projectId}{
-\itemize{
-\item \strong{is numeric}TRUE* \strong{is array}FALSE* \strong{is required}TRUE* \strong{is for paging}FALSE
-}
+
+is numeric
+:TRUE
+
+is array
+:FALSE
+
+is required
+:TRUE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{

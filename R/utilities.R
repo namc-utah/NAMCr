@@ -115,7 +115,13 @@ columnize = function(items, numberItems = FALSE){
         iLastColRow = ifelse(iCol==nCols,nItems,iLastRows[iCol])
         columnizedItems = paste0(
             columnizedItems,
-            numberedItems[seq(from=iLastRows[iCol-1]+1, to=iLastColRow)]
+            c(
+                numberedItems[seq(from=iLastRows[iCol-1]+1, to=iLastColRow)],
+                replicate(
+                    nItemsPerColumn - length(numberedItems[seq(from=iLastRows[iCol-1]+1, to=iLastColRow)]),
+                    ""
+                )
+            )
         )
     }
 
@@ -125,9 +131,12 @@ columnize = function(items, numberItems = FALSE){
 }
 
 
+
 tab = function(nTabs=1, tabWidth=8){
     return( paste0(replicate(nTabs,space(tabWidth)), collapse = "") )
 }
+
+
 
 space = function(nSpaces=1){
     return( paste0(replicate(nSpaces," "), collapse = "") )
