@@ -61,8 +61,8 @@ api_cli = R6::R6Class(
                 data = private[[ paste0("fn_",private$cli_positions[private$cli_position]) ]]()
             }
             if( private$cli_position == 0 ) return( data )
-            if( private$cli_position == -1 ) return()
-            return()
+            if( private$cli_position == -1 ) invisible()
+            invisible()
         }
     ),
 
@@ -256,11 +256,12 @@ api_cli = R6::R6Class(
                         res = private$validate( user_input, c(1:length(other_args)), "numeric", TRUE)
                         if( res$skip ) break
                         if( res$exit_required) return()
-
-                        arg = other_args[ res$data ]
-                        arg_info = private$api$schema$get_argument( private$api_endpoint, arg)
-                        res = private$get_arg(arg, arg_info)
-                        if( res$exit_required ) return()
+                        if( res$is_valid ){
+                            arg = other_args[ res$data ]
+                            arg_info = private$api$schema$get_argument( private$api_endpoint, arg)
+                            res = private$get_arg(arg, arg_info)
+                            if( res$exit_required ) return()
+                        }
                     }
                 }
             }

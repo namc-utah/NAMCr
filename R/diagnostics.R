@@ -11,11 +11,11 @@
 #' NAMCr::diagnose_connection()
 #'
 diagnose_connection = function(){
-    if(!r_is_online){
+    if(!r_is_online()){
         message("R has no internet connection.")
-    } else if(!api_is_online){
+    } else if(!api_is_online()){
         message("API connection is down.")
-    } else if(!oauth_is_online){
+    } else if(!oauth_is_online()){
         message("oAuth2 provider is not accessible.")
     } else {
         message("Internet, API and oAuth2 provider are all available and online.")

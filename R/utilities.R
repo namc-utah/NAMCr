@@ -149,9 +149,9 @@ json.expand = function(data, fields){
 #' @examples
 #'
 #' # Multiple columns
-#' data = json.expand(data, "newField", c("field1","field2"))
+#' data = json.collapse(data, "newField", c("field1","field2"))
 #' # OR single column
-#' data = json.expand(data, "newField", "field1")
+#' data = json.collapse(data, "newField", "field1")
 #'
 json.collapse = function(data, field, colNames){
     data[[field]] = apply(
