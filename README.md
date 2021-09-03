@@ -16,7 +16,7 @@ Update to latest package version
 
 ```r
 detach("NAMCr", unload=TRUE)
-remotes::install_github("namc-utah/NAMCr", force=TRUE)
+remotes::install_github("namc-utah/NAMCr", force=TRUE, upgrade="never", quiet=TRUE)
 ```
 
 ## Examples

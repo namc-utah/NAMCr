@@ -105,6 +105,242 @@ is expandable
 
 }
 
+\subsection{organizations}{
+\subsection{Description}{
+
+:API endpoint that calls entity.fn_organizations
+}
+
+\subsection{Input Parameters}{
+}
+
+\subsection{searchTerm}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
+}
+
+\subsection{Output Fields}{
+}
+
+\subsection{entityId}{
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+}
+
+\subsection{organizationName}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+}
+
+\subsection{organizationType}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+}
+
+\subsection{isLab}{
+
+data type
+:Boolean
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+}
+
+\subsection{address1}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+}
+
+\subsection{address2}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+}
+
+\subsection{city}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+}
+
+\subsection{usState}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+}
+
+\subsection{country}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+}
+
+\subsection{zipCode}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+}
+
+\subsection{phone}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+}
+
+\subsection{fax}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+}
+
+\subsection{website}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+}
+
+\subsection{notes}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+}
+
+\subsection{metadata}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+}
+
+\subsection{createdDate}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+}
+
+\subsection{updatedDate}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+}
+
+}
+
 \subsection{siteInfo}{
 \subsection{Description}{
 
@@ -304,7 +540,7 @@ description
 :The string name of the waterbody on which the site occurs. Typicall this is the stream name.
 }
 
-\subsection{geometryChanged}{
+\subsection{geographyChanged}{
 
 data type
 :String
@@ -689,10 +925,10 @@ is expandable
 
 }
 
-\subsection{modelThresholds}{
+\subsection{modelConditions}{
 \subsection{Description}{
 
-:List of all thresholds (e.g. good, fair, poor) for a particular model
+:List of all model conditions (e.g. good, fair, poor) for a particular model
 }
 
 \subsection{Input Parameters}{
@@ -731,7 +967,7 @@ is expandable
 :FALSE
 }
 
-\subsection{thresholdId}{
+\subsection{conditionId}{
 
 data type
 :Int
@@ -743,7 +979,7 @@ is expandable
 :FALSE
 }
 
-\subsection{threshold}{
+\subsection{condition}{
 
 data type
 :String
@@ -768,446 +1004,6 @@ is expandable
 }
 
 \subsection{description}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-}
-
-\subsection{sampleInfo}{
-\subsection{Description}{
-
-:Detailed information about a single sample, including information about the box and customer.
-}
-
-\subsection{Input Parameters}{
-}
-
-\subsection{sampleId}{
-
-data type
-:Int
-
-is numeric
-:TRUE
-
-is array
-:FALSE
-
-is required
-:TRUE
-
-is for paging
-:FALSE
-}
-
-\subsection{Output Fields}{
-}
-
-\subsection{sampleId}{
-
-data type
-:Int
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{boxId}{
-
-data type
-:Int
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{customerName}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{customerAbbreviation}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{submittedBy}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{boxState}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{siteId}{
-
-data type
-:Int
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{siteName}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{usState}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{siteLocation}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{siteLongitude}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{siteLatitude}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{visitId}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{sampleDate}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{sampleTime}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{sampleType}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{sampleMethod}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{habitat}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{sampleLocation}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{sampleLongitude}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{sampleLatitude}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{area}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{fieldSplit}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{fieldNotes}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{labSplit}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{jarCount}{
-
-data type
-:Int
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{qualitative}{
-
-data type
-:Boolean
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{labNotes}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{mesh}{
-
-data type
-:Int
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{createdDate}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{updatedDate}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{sampleDateChanged}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{qaSampleId}{
-
-data type
-:Int
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{metadata}{
 
 data type
 :String
@@ -1488,8 +1284,132 @@ is expandable
 }
 
 \subsection{Input Parameters}{
+}
 
-none
+\subsection{sampleIds}{
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is array
+:TRUE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
+}
+
+\subsection{boxIds}{
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is array
+:TRUE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
+}
+
+\subsection{projectIds}{
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is array
+:TRUE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
+}
+
+\subsection{entityIds}{
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is array
+:TRUE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
+}
+
+\subsection{siteIds}{
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is array
+:TRUE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
+}
+
+\subsection{polygon}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
+}
+
+\subsection{pointDistance}{
+
+data type
+:QueryDistance
+
+is numeric
+:FALSE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
@@ -1531,7 +1451,7 @@ is expandable
 :FALSE
 }
 
-\subsection{boxStateName}{
+\subsection{customerAbbreviation}{
 
 data type
 :String
@@ -1543,19 +1463,19 @@ is expandable
 :FALSE
 }
 
-\subsection{boxStateId}{
+\subsection{submittedBy}{
 
 data type
-:Int
+:String
 
 is numeric
-:TRUE
+:FALSE
 
 is expandable
 :FALSE
 }
 
-\subsection{submitterName}{
+\subsection{boxState}{
 
 data type
 :String
@@ -1591,13 +1511,25 @@ is expandable
 :FALSE
 }
 
-\subsection{siteLatitude}{
+\subsection{usState}{
 
 data type
-:Float
+:String
 
 is numeric
-:TRUE
+:FALSE
+
+is expandable
+:FALSE
+}
+
+\subsection{siteLocation}{
+
+data type
+:String
+
+is numeric
+:FALSE
 
 is expandable
 :FALSE
@@ -1615,7 +1547,31 @@ is expandable
 :FALSE
 }
 
-\subsection{siteState}{
+\subsection{siteLatitude}{
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+}
+
+\subsection{visitId}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+}
+
+\subsection{customerSiteCode}{
 
 data type
 :String
@@ -1639,37 +1595,13 @@ is expandable
 :FALSE
 }
 
-\subsection{sampleYear}{
+\subsection{sampleTime}{
 
 data type
-:Int
+:String
 
 is numeric
-:TRUE
-
-is expandable
 :FALSE
-}
-
-\subsection{sampleLatitude}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{sampleLongitude}{
-
-data type
-:Float
-
-is numeric
-:TRUE
 
 is expandable
 :FALSE
@@ -1699,13 +1631,49 @@ is expandable
 :FALSE
 }
 
-\subsection{habitatName}{
+\subsection{habitat}{
 
 data type
 :String
 
 is numeric
 :FALSE
+
+is expandable
+:FALSE
+}
+
+\subsection{sampleLocation}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+}
+
+\subsection{sampleLongitude}{
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+}
+
+\subsection{sampleLatitude}{
+
+data type
+:Float
+
+is numeric
+:TRUE
 
 is expandable
 :FALSE
@@ -1730,6 +1698,18 @@ data type
 
 is numeric
 :TRUE
+
+is expandable
+:FALSE
+}
+
+\subsection{fieldNotes}{
+
+data type
+:String
+
+is numeric
+:FALSE
 
 is expandable
 :FALSE
@@ -1771,10 +1751,22 @@ is expandable
 :FALSE
 }
 
+\subsection{labNotes}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+}
+
 \subsection{mesh}{
 
 data type
-:Float
+:Int
 
 is numeric
 :TRUE
@@ -1807,6 +1799,18 @@ is expandable
 :FALSE
 }
 
+\subsection{sampleDateChanged}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+}
+
 \subsection{qaSampleId}{
 
 data type
@@ -1819,145 +1823,13 @@ is expandable
 :FALSE
 }
 
-\subsection{diameter}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{subSampleCount}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{towLength}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{volume}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{aliquot}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{siteInterval}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{towType}{
+\subsection{metadata}{
 
 data type
 :String
 
 is numeric
 :FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{netArea}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{netDuration}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{streamDepth}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{netDepth}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{netVelocity}{
-
-data type
-:Float
-
-is numeric
-:TRUE
 
 is expandable
 :FALSE
@@ -1984,6 +1856,132 @@ is numeric
 
 is array
 :TRUE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
+}
+
+\subsection{sampleIds}{
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is array
+:TRUE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
+}
+
+\subsection{boxIds}{
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is array
+:TRUE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
+}
+
+\subsection{projectIds}{
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is array
+:TRUE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
+}
+
+\subsection{entityIds}{
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is array
+:TRUE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
+}
+
+\subsection{siteIds}{
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is array
+:TRUE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
+}
+
+\subsection{polygon}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
+}
+
+\subsection{pointDistance}{
+
+data type
+:QueryDistance
+
+is numeric
+:FALSE
+
+is array
+:FALSE
 
 is required
 :FALSE
@@ -2160,8 +2158,42 @@ is expandable
 }
 
 \subsection{Input Parameters}{
+}
 
-none
+\subsection{boxIds}{
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is array
+:TRUE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
+}
+
+\subsection{entityIds}{
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is array
+:TRUE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
@@ -2327,18 +2359,6 @@ is expandable
 :FALSE
 }
 
-\subsection{projectType}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
 \subsection{isPrivate}{
 
 data type
@@ -2367,18 +2387,6 @@ is expandable
 
 data type
 :String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-}
-
-\subsection{autoUpdateSamples}{
-
-data type
-:Boolean
 
 is numeric
 :FALSE
@@ -2489,6 +2497,9 @@ is numeric
 
 is expandable
 :FALSE
+
+description
+:The unique system generated identifier for the predictor.
 }
 
 \subsection{predictorName}{
@@ -2501,6 +2512,9 @@ is numeric
 
 is expandable
 :FALSE
+
+description
+:The unique textual name for the predictor.
 }
 
 \subsection{abbreviation}{
@@ -2513,18 +2527,9 @@ is numeric
 
 is expandable
 :FALSE
-}
 
-\subsection{description}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
+description
+:The unique shorthand abbreviation for the predictor.
 }
 
 \subsection{units}{
@@ -2537,9 +2542,12 @@ is numeric
 
 is expandable
 :FALSE
+
+description
+:The units in which the predictor values are stored.
 }
 
-\subsection{calculationScript}{
+\subsection{predictorType}{
 
 data type
 :String
@@ -2549,30 +2557,9 @@ is numeric
 
 is expandable
 :FALSE
-}
 
-\subsection{predictorTypeId}{
-
-data type
-:Int
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{predictorTypeName}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
+description
+:The predictor type (e.g. metrics, atmosphere, geology, anthro).
 }
 
 \subsection{isTemporal}{
@@ -2585,9 +2572,15 @@ is numeric
 
 is expandable
 :FALSE
+
+description
+:Boolean representing whether the predictor varies over time or whether
+there is just a single value for the site. True indicates that the predictor
+is temporal and values are stored for each sample. False indicates that there
+is only one predictor value for each site.
 }
 
-\subsection{updatedDate}{
+\subsection{description}{
 
 data type
 :String
@@ -2597,9 +2590,12 @@ is numeric
 
 is expandable
 :FALSE
+
+description
+:Long form information about the predictor.
 }
 
-\subsection{createdDate}{
+\subsection{metadata}{
 
 data type
 :String
@@ -2609,6 +2605,9 @@ is numeric
 
 is expandable
 :FALSE
+
+description
+:Miscellaneou structured metadata in GeoJSON format.
 }
 
 \subsection{modelCount}{
@@ -2621,6 +2620,69 @@ is numeric
 
 is expandable
 :FALSE
+
+description
+:The number of models that use the predictor
+}
+
+\subsection{createdDate}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The system generated date and time that the site record was created in the database.
+}
+
+\subsection{updatedDate}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:The system generated date and time that the site record was last changed in the database.
+}
+
+\subsection{calculationScript}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:Optional name of the R function that performs the calculation for this predictor.
+}
+
+\subsection{source}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is expandable
+:FALSE
+
+description
+:Source information about the predictors
 }
 
 }
@@ -3009,221 +3071,6 @@ is expandable
 
 }
 
-\subsection{modelPredictors}{
-\subsection{Description}{
-
-:List of predictors required by a single model.
-}
-
-\subsection{Input Parameters}{
-}
-
-\subsection{modelId}{
-
-data type
-:Int
-
-is numeric
-:TRUE
-
-is array
-:FALSE
-
-is required
-:TRUE
-
-is for paging
-:FALSE
-}
-
-\subsection{Output Fields}{
-}
-
-\subsection{predictorId}{
-
-data type
-:Int
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-
-description
-:The unique system generated identifier for the predictor.
-}
-
-\subsection{predictorName}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-
-description
-:The unique textual name for the predictor.
-}
-
-\subsection{abbreviation}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-
-description
-:The unique shorthand abbreviation for the predictor.
-}
-
-\subsection{units}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-
-description
-:The units in which the predictor values are stored.
-}
-
-\subsection{predictorType}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-
-description
-:The predictor type (e.g. metrics, atmosphere, geology, anthro).
-}
-
-\subsection{isTemporal}{
-
-data type
-:Boolean
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-
-description
-:Boolean representing whether the predictor varies over time or whether
-there is just a single value for the site. True indicates that the predictor
-is temporal and values are stored for each sample. False indicates that there
-is only one predictor value for each site.
-}
-
-\subsection{description}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-
-description
-:Long form information about the predictor.
-}
-
-\subsection{metadata}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-
-description
-:Miscellaneou structured metadata in GeoJSON format.
-}
-
-\subsection{modelCount}{
-
-data type
-:Int
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-
-description
-:The number of models that use the predictor
-}
-
-\subsection{createdDate}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-
-description
-:The system generated date and time that the site record was created in the database.
-}
-
-\subsection{updatedDate}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-
-description
-:The system generated date and time that the site record was last changed in the database.
-}
-
-\subsection{calculationScript}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
-
-description
-:Optional name of the R function that performs the calculation for this predictor.
-}
-
-}
-
 \subsection{modelResults}{
 \subsection{Description}{
 
@@ -3419,8 +3266,24 @@ is expandable
 }
 
 \subsection{Input Parameters}{
+}
 
-none
+\subsection{searchTerm}{
+
+data type
+:String
+
+is numeric
+:FALSE
+
+is array
+:FALSE
+
+is required
+:FALSE
+
+is for paging
+:FALSE
 }
 
 \subsection{Output Fields}{
@@ -4592,10 +4455,10 @@ is expandable
 
 }
 
-\subsection{fishGuts}{
+\subsection{fishDiet}{
 \subsection{Description}{
 
-:List all fish guts samples in the system
+:List all fish diet samples in the system
 }
 
 \subsection{Input Parameters}{
@@ -5017,7 +4880,7 @@ description
 :The taxonomic level of the taxa identified within the laboratory.
 }
 
-\subsection{rawCount}{
+\subsection{abundance}{
 
 data type
 :Float
@@ -5029,39 +4892,7 @@ is expandable
 :FALSE
 
 description
-:Sum of the split_counts recorded within the laboratory for this taxa. No other manipulation.
-}
-
-\subsection{correctedCount}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-
-description
-:Sum of the split counts multiplied by the sample lab_split and field_split.
-
-corrected_count = sum(split_count) * (100 / lab_split) * (100 / field_split)
-}
-
-\subsection{rawBigRareCount}{
-
-data type
-:Int
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-
-description
-:Sum of the big rare count within the laboratory for this taxa. No other manipulation.
+:Abundance for the specified taxa and lifestage
 }
 
 }
@@ -5216,6 +5047,30 @@ is expandable
 :FALSE
 }
 
+\subsection{labSplit}{
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+}
+
+\subsection{fieldSplit}{
+
+data type
+:Float
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+}
+
 \subsection{correctedCount}{
 
 data type
@@ -5300,6 +5155,9 @@ is numeric
 
 is expandable
 :FALSE
+
+description
+:The sample to which the taxa belong
 }
 
 \subsection{taxonomyId}{
@@ -5312,6 +5170,9 @@ is numeric
 
 is expandable
 :FALSE
+
+description
+:The taxa identified within the laboratory.
 }
 
 \subsection{scientificName}{
@@ -5324,18 +5185,9 @@ is numeric
 
 is expandable
 :FALSE
-}
 
-\subsection{aliasName}{
-
-data type
-:String
-
-is numeric
-:FALSE
-
-is expandable
-:FALSE
+description
+:The name of the taxa identified with the laboratory.
 }
 
 \subsection{levelId}{
@@ -5348,6 +5200,9 @@ is numeric
 
 is expandable
 :FALSE
+
+description
+:The taxonomic level of the taxa identified within the laboratory.
 }
 
 \subsection{levelName}{
@@ -5360,9 +5215,12 @@ is numeric
 
 is expandable
 :FALSE
+
+description
+:The taxonomic level of the taxa identified within the laboratory.
 }
 
-\subsection{rawCount}{
+\subsection{abundance}{
 
 data type
 :Float
@@ -5372,30 +5230,9 @@ is numeric
 
 is expandable
 :FALSE
-}
 
-\subsection{correctedCount}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{rawBigRareCount}{
-
-data type
-:Int
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
+description
+:Abundance for the specified taxa and lifestage
 }
 
 }
@@ -5466,6 +5303,21 @@ is for paging
 \subsection{Output Fields}{
 }
 
+\subsection{sampleId}{
+
+data type
+:Int
+
+is numeric
+:TRUE
+
+is expandable
+:FALSE
+
+description
+:The sample to which the taxa belong
+}
+
 \subsection{taxonomyId}{
 
 data type
@@ -5476,6 +5328,9 @@ is numeric
 
 is expandable
 :FALSE
+
+description
+:The taxa identified within the laboratory.
 }
 
 \subsection{scientificName}{
@@ -5488,6 +5343,9 @@ is numeric
 
 is expandable
 :FALSE
+
+description
+:The name of the taxa identified with the laboratory.
 }
 
 \subsection{levelId}{
@@ -5500,6 +5358,9 @@ is numeric
 
 is expandable
 :FALSE
+
+description
+:The taxonomic level of the taxa identified within the laboratory.
 }
 
 \subsection{levelName}{
@@ -5512,18 +5373,24 @@ is numeric
 
 is expandable
 :FALSE
+
+description
+:The taxonomic level of the taxa identified within the laboratory.
 }
 
-\subsection{organismCount}{
+\subsection{abundance}{
 
 data type
-:Int
+:Float
 
 is numeric
 :TRUE
 
 is expandable
 :FALSE
+
+description
+:Abundance for the specified taxa and lifestage
 }
 
 }
@@ -5669,7 +5536,7 @@ description
 :The taxonomic level of the taxa identified within the laboratory.
 }
 
-\subsection{rawCount}{
+\subsection{abundance}{
 
 data type
 :Float
@@ -5681,39 +5548,7 @@ is expandable
 :FALSE
 
 description
-:Sum of the split_counts recorded within the laboratory for this taxa. No other manipulation.
-}
-
-\subsection{correctedCount}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-
-description
-:Sum of the split counts multiplied by the sample lab_split and field_split.
-
-corrected_count = sum(split_count) * (100 / lab_split) * (100 / field_split)
-}
-
-\subsection{rawBigRareCount}{
-
-data type
-:Int
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-
-description
-:Sum of the big rare count within the laboratory for this taxa. No other manipulation.
+:Abundance for the specified taxa and lifestage
 }
 
 }
@@ -5823,7 +5658,7 @@ description
 :The taxonomic level of the taxa identified within the laboratory.
 }
 
-\subsection{rawCount}{
+\subsection{abundance}{
 
 data type
 :Float
@@ -5835,39 +5670,7 @@ is expandable
 :FALSE
 
 description
-:Sum of the split_counts recorded within the laboratory for this taxa. No other manipulation.
-}
-
-\subsection{correctedCount}{
-
-data type
-:Float
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-
-description
-:Sum of the split counts multiplied by the sample lab_split and field_split.
-
-corrected_count = sum(split_count) * (100 / lab_split) * (100 / field_split)
-}
-
-\subsection{rawBigRareCount}{
-
-data type
-:Int
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-
-description
-:Sum of the big rare count within the laboratory for this taxa. No other manipulation.
+:Abundance for the specified taxa and lifestage
 }
 
 }
@@ -5910,19 +5713,7 @@ is expandable
 :FALSE
 }
 
-\subsection{metricTypeId}{
-
-data type
-:Int
-
-is numeric
-:TRUE
-
-is expandable
-:FALSE
-}
-
-\subsection{typeName}{
+\subsection{displayText}{
 
 data type
 :String
@@ -5934,7 +5725,7 @@ is expandable
 :FALSE
 }
 
-\subsection{translationId}{
+\subsection{groupId}{
 
 data type
 :Int
@@ -5946,7 +5737,7 @@ is expandable
 :FALSE
 }
 
-\subsection{translationName}{
+\subsection{groupName}{
 
 data type
 :String
@@ -5982,7 +5773,7 @@ is expandable
 :FALSE
 }
 
-\subsection{formulaCodeFunction}{
+\subsection{codeFunction}{
 
 data type
 :String

@@ -23,6 +23,8 @@
 #' @param api namc_api An instance of the namc_api class having a default of a
 #'   pre-initialized package object
 #' @param ... named arguments to merge with args and pass to the API endpoint.
+#' @param expand_metadata logical if JSON metadata field is expanded into dataframe columns
+#' @param default_JSON_fieldName "metadata" is the preset default
 #'
 #' @return data.frame A dataframe containing the query results.
 #' @export
@@ -55,6 +57,8 @@ query = function(
     sort    = c(),
     limit   = NA,
     api     = .pkgenv$api,
+    expand_metadata = TRUE,
+    default_JSON_fieldName = .pkgenv$data$default_JSON_fieldName,
     ...
 ){
 
@@ -190,6 +194,9 @@ query = function(
         }
 
     }
+    if(expand_metadata && (default_JSON_fieldName %in% names(data[[api_endpoint]]))){
+        data[[api_endpoint]] = json.expand(data[[api_endpoint]], default_JSON_fieldName)
+    }
     cat(" Complete!\n")
 
     return( data[[api_endpoint]] )
@@ -240,6 +247,7 @@ save = function(
     api_endpoint,
     args = list(),
     api = .pkgenv$api,
+    append_metadata = FALSE,
     ...
 ){
 
@@ -317,7 +325,7 @@ format_arguments = function(api_endpoint, endpoint_args, api){
             if( api$schema$is_arg_numeric(api_endpoint, arg) ) {
                 arg_vals = paste0(endpoint_args[[arg]], collapse = ",")
             } else if( api$schema$is_arg_boolean(api_endpoint, arg) ) {
-                arg_vals = paste0(gsub(TRUE,"true",gsub(1,"true",endpoint_args[[arg]])), collapse = ",")
+                arg_vals = paste0(gsub(TRUE,"true", gsub(FALSE,"false", as.logical(endpoint_args[[arg]]))), collapse = ",")
             } else {
                 arg_vals = paste0('"', paste0(endpoint_args[[arg]], collapse = '","'), '"')
             }

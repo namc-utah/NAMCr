@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>NAMC-API-Overview</title>
+
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">NAMC-API-Overview</h1>
+
+
+
+<p>[1] &quot;NAMC API:## auth:### Input Parameters### Output Fields### loggedIntype:Booleannumeric:FALSEexpandable:FALSE### userPooltype:Stringnumeric:FALSEexpandable:FALSE### clientIdtype:Stringnumeric:FALSEexpandable:FALSE### regiontype:Stringnumeric:FALSEexpandable:FALSE### domaintype:Stringnumeric:FALSEexpandable:FALSE## siteInfo:Detailed information about a single site. Includes the point location and upstream catchment geometries as GeoJSON.### Input Parameters### siteIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields### siteIdtype:Intnumeric:TRUEexpandable:FALSE:Unique database generated integer that uniquely identifies each site### siteNametype:Stringnumeric:FALSEexpandable:FALSE:Unique text identifier for each site### systemtype:Stringnumeric:FALSEexpandable:FALSE:The ecological system (e.g. lake, pond, reservoir) in which the site is located.### ecosystemtype:Stringnumeric:FALSEexpandable:FALSE:The ecosystem in which the site is located.### locationtype:Stringnumeric:FALSEexpandable:FALSE:GeoJSON point location of the site in <a href="https://epsg.io/4326">EPSG:4326</a> spatial reference.### longitudetype:Floatnumeric:TRUEexpandable:FALSE:Longtidue of the site location in decimal degrees.### latitudetype:Floatnumeric:TRUEexpandable:FALSE:Latitude of the site location in decimal degrees.### usStatetype:Stringnumeric:FALSEexpandable:FALSE:US State in which the site is located.### waterbodyTypetype:Stringnumeric:FALSEexpandable:FALSE:If the site has a waterbody code, then the waterbody type identifies the system thatidentifier pertains to. The waterbody type might be NHDPlus 1:100,000 or 1:24,000 etc.### waterbodyCodetype:Stringnumeric:FALSEexpandable:FALSE:The identifier of the waterbody on which this site occurs. Can be null. If a code exists, then the waterbodyType can be used to determine whichthe code belongs to, such as NHDPlus or NHDPlusHR.### waterbodyNametype:Stringnumeric:FALSEexpandable:FALSE:The string name of the waterbody on which the site occurs. Typicall this is the stream name.### geometryChangedtype:Stringnumeric:FALSEexpandable:FALSE:The latest date and time that either the site location (point) or catchment (polygon) were changed.### createdDatetype:Stringnumeric:FALSEexpandable:FALSE:The system generated date and time that the site record was created in the database.### updatedDatetype:Stringnumeric:FALSEexpandable:FALSE:The system generated date and time that the site record was last changed in the database.### catchmenttype:Stringnumeric:FALSEexpandable:FALSE:GeoJSON polygon of the upstream area that drains into this site in <a href="https://epsg.io/4326">EPSG:4326</a> spatial reference.### sampleCounttype:Intnumeric:TRUEexpandable:FALSE:The number of samples that are available for this site.## modelInfo:Detailed information about a single model, including the number of predictors associated with the model.### Input Parameters### modelIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields### modelIdtype:Intnumeric:TRUEexpandable:FALSE### modelNametype:Stringnumeric:FALSEexpandable:FALSE### abbreviationtype:Stringnumeric:FALSEexpandable:FALSE### modelTypetype:Stringnumeric:FALSEexpandable:FALSE### translationIdtype:Intnumeric:TRUEexpandable:FALSE### translationtype:Stringnumeric:FALSEexpandable:FALSE### extentDescriptiontype:Stringnumeric:FALSEexpandable:FALSE### platformtype:Stringnumeric:FALSEexpandable:FALSE### referenceSitestype:Intnumeric:TRUEexpandable:FALSE### groupCounttype:Intnumeric:TRUEexpandable:FALSE### minimumCounttype:Intnumeric:TRUEexpandable:FALSE### oeMeantype:Floatnumeric:TRUEexpandable:FALSE### oeStdevtype:Floatnumeric:TRUEexpandable:FALSE### taxonomicEfforttype:Stringnumeric:FALSEexpandable:FALSE### isActivetype:Booleannumeric:FALSEexpandable:FALSE### fixedCounttype:Intnumeric:TRUEexpandable:FALSE### unitstype:Stringnumeric:FALSEexpandable:FALSE### descriptiontype:Stringnumeric:FALSEexpandable:FALSE### metadatatype:Stringnumeric:FALSEexpandable:FALSE### predictorCounttype:Intnumeric:TRUEexpandable:FALSE### createdDatetype:Stringnumeric:FALSEexpandable:FALSE### updatedDatetype:Stringnumeric:FALSEexpandable:FALSE### extenttype:Stringnumeric:FALSEexpandable:FALSE## modelThresholds:List of all thresholds (e.g. good, fair, poor) for a particular model### Input Parameters### modelIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields### modelIdtype:Intnumeric:TRUEexpandable:FALSE### thresholdIdtype:Intnumeric:TRUEexpandable:FALSE### thresholdtype:Stringnumeric:FALSEexpandable:FALSE### displayTexttype:Stringnumeric:FALSEexpandable:FALSE### descriptiontype:Stringnumeric:FALSEexpandable:FALSE## sampleInfo:Detailed information about a single sample, including information about the box and customer.### Input Parameters### sampleIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields### sampleIdtype:Intnumeric:TRUEexpandable:FALSE### boxIdtype:Intnumeric:TRUEexpandable:FALSE### customerNametype:Stringnumeric:FALSEexpandable:FALSE### customerAbbreviationtype:Stringnumeric:FALSEexpandable:FALSE### submittedBytype:Stringnumeric:FALSEexpandable:FALSE### boxStatetype:Stringnumeric:FALSEexpandable:FALSE### siteIdtype:Intnumeric:TRUEexpandable:FALSE### siteNametype:Stringnumeric:FALSEexpandable:FALSE### usStatetype:Stringnumeric:FALSEexpandable:FALSE### siteLocationtype:Stringnumeric:FALSEexpandable:FALSE### siteLongitudetype:Floatnumeric:TRUEexpandable:FALSE### siteLatitudetype:Floatnumeric:TRUEexpandable:FALSE### visitIdtype:Stringnumeric:FALSEexpandable:FALSE### sampleDatetype:Stringnumeric:FALSEexpandable:FALSE### sampleTimetype:Stringnumeric:FALSEexpandable:FALSE### sampleTypetype:Stringnumeric:FALSEexpandable:FALSE### sampleMethodtype:Stringnumeric:FALSEexpandable:FALSE### habitattype:Stringnumeric:FALSEexpandable:FALSE### sampleLocationtype:Stringnumeric:FALSEexpandable:FALSE### sampleLongitudetype:Floatnumeric:TRUEexpandable:FALSE### sampleLatitudetype:Floatnumeric:TRUEexpandable:FALSE### areatype:Floatnumeric:TRUEexpandable:FALSE### fieldSplittype:Floatnumeric:TRUEexpandable:FALSE### fieldNotestype:Stringnumeric:FALSEexpandable:FALSE### labSplittype:Floatnumeric:TRUEexpandable:FALSE### jarCounttype:Intnumeric:TRUEexpandable:FALSE### qualitativetype:Booleannumeric:FALSEexpandable:FALSE### labNotestype:Stringnumeric:FALSEexpandable:FALSE### meshtype:Intnumeric:TRUEexpandable:FALSE### createdDatetype:Stringnumeric:FALSEexpandable:FALSE### updatedDatetype:Stringnumeric:FALSEexpandable:FALSE### sampleDateChangedtype:Stringnumeric:FALSEexpandable:FALSE### qaSampleIdtype:Intnumeric:TRUEexpandable:FALSE### metadatatype:Stringnumeric:FALSEexpandable:FALSE## boxInfo:Detailed information about a single box, including information about the customer and number of samples associated with the box.### Input Parameters### boxIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields### boxIdtype:Intnumeric:TRUEexpandable:FALSE### customerIdtype:Intnumeric:TRUEexpandable:FALSE### customerNametype:Stringnumeric:FALSEexpandable:FALSE### customerAbbreviationtype:Stringnumeric:FALSEexpandable:FALSE### submitterIdtype:Intnumeric:TRUEexpandable:FALSE### submittedBytype:Stringnumeric:FALSEexpandable:FALSE### boxStateIdtype:Intnumeric:TRUEexpandable:FALSE### boxStatetype:Stringnumeric:FALSEexpandable:FALSE### boxReceivedDatetype:Stringnumeric:FALSEexpandable:FALSE### processingCompleteDatetype:Stringnumeric:FALSEexpandable:FALSE### projectedCompleteDatetype:Stringnumeric:FALSEexpandable:FALSE### sampleCounttype:Intnumeric:TRUEexpandable:FALSE### descriptiontype:Stringnumeric:FALSEexpandable:FALSE### metadatatype:Stringnumeric:FALSEexpandable:FALSE### measurementstype:Booleannumeric:FALSEexpandable:FALSE### sorterQatype:Booleannumeric:FALSEexpandable:FALSE### taxaQatype:Booleannumeric:FALSEexpandable:FALSE### createdDatetype:Stringnumeric:FALSEexpandable:FALSE### updatedDatetype:Stringnumeric:FALSEexpandable:FALSE## samples:List of all samples in the system, including high level information about the associated box and customer.### Input Parameters### Output Fields### sampleIdtype:Intnumeric:TRUEexpandable:FALSE### boxIdtype:Intnumeric:TRUEexpandable:FALSE### customerNametype:Stringnumeric:FALSEexpandable:FALSE### boxStateNametype:Stringnumeric:FALSEexpandable:FALSE### boxStateIdtype:Intnumeric:TRUEexpandable:FALSE### submitterNametype:Stringnumeric:FALSEexpandable:FALSE### siteIdtype:Intnumeric:TRUEexpandable:FALSE### siteNametype:Stringnumeric:FALSEexpandable:FALSE### siteLatitudetype:Floatnumeric:TRUEexpandable:FALSE### siteLongitudetype:Floatnumeric:TRUEexpandable:FALSE### siteStatetype:Stringnumeric:FALSEexpandable:FALSE### sampleDatetype:Stringnumeric:FALSEexpandable:FALSE### sampleYeartype:Intnumeric:TRUEexpandable:FALSE### sampleLatitudetype:Floatnumeric:TRUEexpandable:FALSE### sampleLongitudetype:Floatnumeric:TRUEexpandable:FALSE### sampleTypetype:Stringnumeric:FALSEexpandable:FALSE### sampleMethodtype:Stringnumeric:FALSEexpandable:FALSE### habitatNametype:Stringnumeric:FALSEexpandable:FALSE### areatype:Floatnumeric:TRUEexpandable:FALSE### fieldSplittype:Floatnumeric:TRUEexpandable:FALSE### labSplittype:Floatnumeric:TRUEexpandable:FALSE### jarCounttype:Intnumeric:TRUEexpandable:FALSE### qualitativetype:Booleannumeric:FALSEexpandable:FALSE### meshtype:Floatnumeric:TRUEexpandable:FALSE### createdDatetype:Stringnumeric:FALSEexpandable:FALSE### updatedDatetype:Stringnumeric:FALSEexpandable:FALSE### qaSampleIdtype:Intnumeric:TRUEexpandable:FALSE### diametertype:Floatnumeric:TRUEexpandable:FALSE### subSampleCounttype:Floatnumeric:TRUEexpandable:FALSE### towLengthtype:Floatnumeric:TRUEexpandable:FALSE### volumetype:Floatnumeric:TRUEexpandable:FALSE### aliquottype:Floatnumeric:TRUEexpandable:FALSE### siteIntervaltype:Floatnumeric:TRUEexpandable:FALSE### towTypetype:Stringnumeric:FALSEexpandable:FALSE### netAreatype:Floatnumeric:TRUEexpandable:FALSE### netDurationtype:Floatnumeric:TRUEexpandable:FALSE### streamDepthtype:Floatnumeric:TRUEexpandable:FALSE### netDepthtype:Floatnumeric:TRUEexpandable:FALSE### netVelocitytype:Floatnumeric:TRUEexpandable:FALSE## sites:Summary information for all sites, including location coordinates and number of samples. Use the siteInfo query to get more detailed information about a single site.### Input Parameters### usStatenumeric:FALSEarray:FALSErequired:FALSEfor paging:FALSE### Output Fields### siteIdtype:Intnumeric:TRUEexpandable:FALSE### siteNametype:Stringnumeric:FALSEexpandable:FALSE### systemtype:Stringnumeric:FALSEexpandable:FALSE### ecosystemtype:Stringnumeric:FALSEexpandable:FALSE### longitudetype:Floatnumeric:TRUEexpandable:FALSE### latitudetype:Floatnumeric:TRUEexpandable:FALSE### usStatetype:Stringnumeric:FALSEexpandable:FALSE### waterbodyTypetype:Stringnumeric:FALSEexpandable:FALSE### waterbodyCodetype:Stringnumeric:FALSEexpandable:FALSE### waterbodyNametype:Stringnumeric:FALSEexpandable:FALSE### createdDatetype:Stringnumeric:FALSEexpandable:FALSE### updatedDatetype:Stringnumeric:FALSEexpandable:FALSE### hasCatchmenttype:Booleannumeric:FALSEexpandable:FALSE## boxes:Summary information for all boxes, including the customer name and number of samples within the box. Use the boxInfo query to get more detailed information about a single box.### Input Parameters### Output Fields### boxIdtype:Intnumeric:TRUEexpandable:FALSE### customerIdtype:Intnumeric:TRUEexpandable:FALSE### customerNametype:Stringnumeric:FALSEexpandable:FALSE### submitterIdtype:Intnumeric:TRUEexpandable:FALSE### submittedBytype:Stringnumeric:FALSEexpandable:FALSE### boxStatetype:Stringnumeric:FALSEexpandable:FALSE### boxReceivedDatetype:Stringnumeric:FALSEexpandable:FALSE### sampleCounttype:Intnumeric:TRUEexpandable:FALSE### processingCompleteDatetype:Stringnumeric:FALSEexpandable:FALSE### projectedCompleteDatetype:Stringnumeric:FALSEexpandable:FALSE## projects:Summary information about all projects in the system. Use the projectInfo query to get more detailed about a single project.### Input Parameters### Output Fields### projectIdtype:Intnumeric:TRUEexpandable:FALSE### projectNametype:Stringnumeric:FALSEexpandable:FALSE### projectTypetype:Stringnumeric:FALSEexpandable:FALSE### isPrivatetype:Booleannumeric:FALSEexpandable:FALSE### contactIdtype:Intnumeric:TRUEexpandable:FALSE### contactNametype:Stringnumeric:FALSEexpandable:FALSE### autoUpdateSamplestype:Booleannumeric:FALSEexpandable:FALSE### descriptiontype:Stringnumeric:FALSEexpandable:FALSE### sampleCounttype:Intnumeric:TRUEexpandable:FALSE### modelCounttype:Intnumeric:TRUEexpandable:FALSE### createdDatetype:Stringnumeric:FALSEexpandable:FALSE### updatedDatetype:Stringnumeric:FALSEexpandable:FALSE## predictors:List of all predictors in the system. Includes summary information about how many models rely on each predictor.### Input Parameters### modelIdnumeric:TRUEarray:FALSErequired:FALSEfor paging:FALSE### Output Fields### predictorIdtype:Intnumeric:TRUEexpandable:FALSE### predictorNametype:Stringnumeric:FALSEexpandable:FALSE### abbreviationtype:Stringnumeric:FALSEexpandable:FALSE### descriptiontype:Stringnumeric:FALSEexpandable:FALSE### unitstype:Stringnumeric:FALSEexpandable:FALSE### calculationScripttype:Stringnumeric:FALSEexpandable:FALSE### predictorTypeIdtype:Intnumeric:TRUEexpandable:FALSE### predictorTypeNametype:Stringnumeric:FALSEexpandable:FALSE### isTemporaltype:Booleannumeric:FALSEexpandable:FALSE### updatedDatetype:Stringnumeric:FALSEexpandable:FALSE### createdDatetype:Stringnumeric:FALSEexpandable:FALSE### modelCounttype:Intnumeric:TRUEexpandable:FALSE## models:List of all models in the system. Includes summary information about how many predictors are used by the model as well as the translation that might be required.### Input Parameters### Output Fields### modelIdtype:Intnumeric:TRUEexpandable:FALSE### modelNametype:Stringnumeric:FALSEexpandable:FALSE### abbreviationtype:Stringnumeric:FALSEexpandable:FALSE### isActivetype:Booleannumeric:FALSEexpandable:FALSE### descriptiontype:Stringnumeric:FALSEexpandable:FALSE### predictorCounttype:Intnumeric:TRUEexpandable:FALSE## sitePredictorValues:List of predictor values at a single site. Site predictors are non-temporal. The value is common to all samples at the specific site.### Input Parameters### siteIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields### predictorIdtype:Intnumeric:TRUEexpandable:FALSE:The unique system generated identifier for the predictor.### predictorNametype:Stringnumeric:FALSEexpandable:FALSE:The unique textual name for the predictor.### abbreviationtype:Stringnumeric:FALSEexpandable:FALSE:The unique shorthand abbreviation for the predictor.### descriptiontype:Stringnumeric:FALSEexpandable:FALSE:Long form information about the predictor.### predictorTypetype:Stringnumeric:FALSEexpandable:FALSE:The predictor type (e.g. metrics, atmosphere, geology, anthro).### predictorValuetype:Stringnumeric:FALSEexpandable:FALSE:The predictor value for this site. The value is always a string, evenit represents an integer or floating point value.### createdDatetype:Stringnumeric:FALSEexpandable:FALSE:The system generated date and time that the site record was created in the database.### updatedDatetype:Stringnumeric:FALSEexpandable:FALSE:The system generated date and time that the site record was last changed in the database.### calculationScripttype:Stringnumeric:FALSEexpandable:FALSE:Optional name of the R function that performs the calculation for this predictor.## samplePredictorValues:List of all predictor values for a single sample. This includes both temporal and non-temporal predictors as well as their calculation status (current, missing, expired).### Input Parameters### sampleIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields### predictorIdtype:Intnumeric:TRUEexpandable:FALSE### abbreviationtype:Stringnumeric:FALSEexpandable:FALSE### calculationScripttype:Stringnumeric:FALSEexpandable:FALSE### isTemporaltype:Booleannumeric:FALSEexpandable:FALSE### predictorMetadatatype:Stringnumeric:FALSEexpandable:FALSE### predictorValuetype:Stringnumeric:FALSEexpandable:FALSE### predictorValueUpdatedDatetype:Stringnumeric:FALSEexpandable:FALSE### statustype:Stringnumeric:FALSEexpandable:FALSE## modelPredictors:List of predictors required by a single model.### Input Parameters### modelIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields### predictorIdtype:Intnumeric:TRUEexpandable:FALSE:The unique system generated identifier for the predictor.### predictorNametype:Stringnumeric:FALSEexpandable:FALSE:The unique textual name for the predictor.### abbreviationtype:Stringnumeric:FALSEexpandable:FALSE:The unique shorthand abbreviation for the predictor.### unitstype:Stringnumeric:FALSEexpandable:FALSE:The units in which the predictor values are stored.### predictorTypetype:Stringnumeric:FALSEexpandable:FALSE:The predictor type (e.g. metrics, atmosphere, geology, anthro).### isTemporaltype:Booleannumeric:FALSEexpandable:FALSE:Boolean representing whether the predictor varies over time or whetheris just a single value for the site. True indicates that the predictortemporal and values are stored for each sample. False indicates that thereonly one predictor value for each site.### descriptiontype:Stringnumeric:FALSEexpandable:FALSE:Long form information about the predictor.### metadatatype:Stringnumeric:FALSEexpandable:FALSE:Miscellaneou structured metadata in GeoJSON format.### modelCounttype:Intnumeric:TRUEexpandable:FALSE:The number of models that use the predictor### createdDatetype:Stringnumeric:FALSEexpandable:FALSE:The system generated date and time that the site record was created in the database.### updatedDatetype:Stringnumeric:FALSEexpandable:FALSE:The system generated date and time that the site record was last changed in the database.### calculationScripttype:Stringnumeric:FALSEexpandable:FALSE:Optional name of the R function that performs the calculation for this predictor.## modelResults:### Input Parameters### sampleIdsnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields### sampleIdtype:Intnumeric:TRUEexpandable:FALSE### siteIdtype:Intnumeric:TRUEexpandable:FALSE### siteNametype:Stringnumeric:FALSEexpandable:FALSE### modelIdtype:Intnumeric:TRUEexpandable:FALSE### modelNametype:Stringnumeric:FALSEexpandable:FALSE### modelVersiontype:Stringnumeric:FALSEexpandable:FALSE### modelResulttype:Floatnumeric:TRUEexpandable:FALSE### conditiontype:Stringnumeric:FALSEexpandable:FALSE### fixCounttype:Intnumeric:TRUEexpandable:FALSE### notestype:Stringnumeric:FALSEexpandable:FALSE### metadatatype:Stringnumeric:FALSEexpandable:FALSE### createdDatetype:Stringnumeric:FALSEexpandable:FALSE### updatedDatetype:Stringnumeric:FALSEexpandable:FALSE## taxonomy:List of all taxa in the system. Includes information about each level of the taxonomic hierarchy above each taxa.### Input Parameters### Output Fields### taxonomyIdtype:Intnumeric:TRUEexpandable:FALSE### scientificNametype:Stringnumeric:FALSEexpandable:FALSE### levelIdtype:Intnumeric:TRUEexpandable:FALSE### levelNametype:Stringnumeric:FALSEexpandable:FALSE### parentTaxonomyIdtype:Intnumeric:TRUEexpandable:FALSE### parentScientificNametype:Stringnumeric:FALSEexpandable:FALSE### parentLevelIdtype:Intnumeric:TRUEexpandable:FALSE### parentLevelNametype:Stringnumeric:FALSEexpandable:FALSE### notestype:Stringnumeric:FALSEexpandable:FALSE### metadatatype:Stringnumeric:FALSEexpandable:FALSE### createdDatetype:Stringnumeric:FALSEexpandable:FALSE### updatedDatetype:Stringnumeric:FALSEexpandable:FALSE## taxonomyTree:list all parents for a particular taxa### Input Parameters### taxonomyIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields### taxonomyIdtype:Intnumeric:TRUEexpandable:FALSE### scientificNametype:Stringnumeric:FALSEexpandable:FALSE### levelIdtype:Intnumeric:TRUEexpandable:FALSE### levelNametype:Stringnumeric:FALSEexpandable:FALSE### parentIdtype:Intnumeric:TRUEexpandable:FALSE## attributes:List of all attributes in the system.### Input Parameters### Output Fields### attributeIdtype:Intnumeric:TRUEexpandable:FALSE### attributeNametype:Stringnumeric:FALSEexpandable:FALSE### attributeTypetype:Stringnumeric:FALSEexpandable:FALSE### labeltype:Stringnumeric:FALSEexpandable:FALSE### descriptiontype:Stringnumeric:FALSEexpandable:FALSE### metadatatype:Stringnumeric:FALSEexpandable:FALSE### createdDatetype:Stringnumeric:FALSEexpandable:FALSE### updatedDatetype:Stringnumeric:FALSEexpandable:FALSE## taxaAttributes:List of all attributes that exist for a single taxa### Input Parameters### taxonomyIdnumeric:TRUEarray:FALSErequired:FALSEfor paging:FALSE### Output Fields### taxonomyIdtype:Intnumeric:TRUEexpandable:FALSE### scientificNametype:Stringnumeric:FALSEexpandable:FALSE### levelIdtype:Intnumeric:TRUEexpandable:FALSE### levelNametype:Stringnumeric:FALSEexpandable:FALSE### attributeNametype:Stringnumeric:FALSEexpandable:FALSE### attributeTypetype:Stringnumeric:FALSEexpandable:FALSE### labeltype:Stringnumeric:FALSEexpandable:FALSE### attributeValuetype:Stringnumeric:FALSEexpandable:FALSE## translationTaxa:List all the taxa within a specific translation (OTU)### Input Parameters### translationIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields### translationIdtype:Intnumeric:TRUEexpandable:FALSE### translationNametype:Stringnumeric:FALSEexpandable:FALSE### taxonomyIdtype:Intnumeric:TRUEexpandable:FALSE### levelIdtype:Intnumeric:TRUEexpandable:FALSE### levelNametype:Stringnumeric:FALSEexpandable:FALSE### originalScientificNametype:Stringnumeric:FALSEexpandable:FALSE### translationScientificNametype:Stringnumeric:FALSEexpandable:FALSE### isFinaltype:Booleannumeric:FALSEexpandable:FALSE## translations:List of all translations in the system.### Input Parameters### Output Fields### translationIdtype:Intnumeric:TRUEexpandable:FALSE### translationNametype:Stringnumeric:FALSEexpandable:FALSE### descriptiontype:Stringnumeric:FALSEexpandable:FALSE### isActivetype:Booleannumeric:FALSEexpandable:FALSE### taxaCounttype:Intnumeric:TRUEexpandable:FALSE### createdDatetype:Stringnumeric:FALSEexpandable:FALSE### updatedDatetype:Stringnumeric:FALSEexpandable:FALSE## planktonSamples:List of all plankton samples in the system.### Input Parameters### Output Fields### sampleIdtype:Intnumeric:TRUEexpandable:FALSE### diametertype:Floatnumeric:TRUEexpandable:FALSE### subSampleCounttype:Intnumeric:TRUEexpandable:FALSE### towLengthtype:Floatnumeric:TRUEexpandable:FALSE### volumetype:Floatnumeric:TRUEexpandable:FALSE### aliquottype:Floatnumeric:TRUEexpandable:FALSE### sizeIntervaltype:Floatnumeric:TRUEexpandable:FALSE### towTypetype:Stringnumeric:FALSEexpandable:FALSE### updatedDatetype:Stringnumeric:FALSEexpandable:FALSE## driftSamples:List of all drift samples in the system.### Input Parameters### Output Fields### sampleIdtype:Intnumeric:TRUEexpandable:FALSE### netAreatype:Floatnumeric:TRUEexpandable:FALSE### netDurationtype:Floatnumeric:TRUEexpandable:FALSE### streamDepthtype:Floatnumeric:TRUEexpandable:FALSE### netDepthtype:Floatnumeric:TRUEexpandable:FALSE### netVelocitytype:Floatnumeric:TRUEexpandable:FALSE### updatedDatetype:Stringnumeric:FALSEexpandable:FALSE## fishSamples:List of all fish samples in the system.### Input Parameters### Output Fields### sampleIdtype:Intnumeric:TRUEexpandable:FALSE### taxonomyIdtype:Intnumeric:TRUEexpandable:FALSE### scientificNametype:Stringnumeric:FALSEexpandable:FALSE### levelIdtype:Intnumeric:TRUEexpandable:FALSE### levelNametype:Stringnumeric:FALSEexpandable:FALSE### fishLengthtype:Floatnumeric:TRUEexpandable:FALSE### fishMasstype:Floatnumeric:TRUEexpandable:FALSE### updatedDatetype:Stringnumeric:FALSEexpandable:FALSE## massSamples:List of all mass samples in the system.### Input Parameters### Output Fields### sampleIdtype:Intnumeric:TRUEexpandable:FALSE### typeIdtype:Intnumeric:TRUEexpandable:FALSE### typeAbbreviationtype:Stringnumeric:FALSEexpandable:FALSE### typeNametype:Stringnumeric:FALSEexpandable:FALSE### methodIdtype:Intnumeric:TRUEexpandable:FALSE### methodAbbreviationtype:Stringnumeric:FALSEexpandable:FALSE### methodNametype:Stringnumeric:FALSEexpandable:FALSE### masstype:Floatnumeric:TRUEexpandable:FALSE### updatedDatetype:Stringnumeric:FALSEexpandable:FALSE## fishGuts:List all fish guts samples in the system### Input Parameters### sampleIdsnumeric:TRUEarray:FALSErequired:FALSEfor paging:FALSE### Output Fields### sampleIdtype:Intnumeric:TRUEexpandable:FALSE### sampleDatetype:Stringnumeric:FALSEexpandable:FALSE### siteIdtype:Intnumeric:TRUEexpandable:FALSE### siteNametype:Stringnumeric:FALSEexpandable:FALSE### fishWeighttype:Floatnumeric:TRUEexpandable:FALSE### fishLengthtype:Floatnumeric:TRUEexpandable:FALSE### fishTaxonomyIdtype:Intnumeric:TRUEexpandable:FALSE### fishScientificNametype:Stringnumeric:FALSEexpandable:FALSE### notestype:Stringnumeric:FALSEexpandable:FALSE### metadatatype:Stringnumeric:FALSEexpandable:FALSE### organicWeighttype:Floatnumeric:TRUEexpandable:FALSE### inorganicWeighttype:Floatnumeric:TRUEexpandable:FALSE### otherWeighttype:Floatnumeric:TRUEexpandable:FALSE### createdDatetype:Stringnumeric:FALSEexpandable:FALSE### updatedDatetype:Stringnumeric:FALSEexpandable:FALSE### taxonomyIdtype:Intnumeric:TRUEexpandable:FALSE### scientificNametype:Stringnumeric:FALSEexpandable:FALSE### lifeStageIdtype:Intnumeric:TRUEexpandable:FALSE### lifeStagetype:Stringnumeric:FALSEexpandable:FALSE### counttype:Floatnumeric:TRUEexpandable:FALSE### weighttype:Floatnumeric:TRUEexpandable:FALSE## sampleTaxaRaw:Sample organisms summed by taxonomy only. Includes both raw counts as well as counts corrected for lab and field split. Also includes both raw and corrected big rare counts.### Input Parameters### sampleIdsnumeric:TRUEarray:FALSErequired:FALSEfor paging:FALSE### boxIdsnumeric:TRUEarray:FALSErequired:FALSEfor paging:FALSE### projectIdsnumeric:TRUEarray:FALSErequired:FALSEfor paging:FALSE### Output Fields### sampleIdtype:Intnumeric:TRUEexpandable:FALSE:The sample to which the taxa belong### taxonomyIdtype:Intnumeric:TRUEexpandable:FALSE:The taxa identified within the laboratory.### scientificNametype:Stringnumeric:FALSEexpandable:FALSE:The name of the taxa identified with the laboratory.### levelIdtype:Intnumeric:TRUEexpandable:FALSE:The taxonomic level of the taxa identified within the laboratory.### levelNametype:Stringnumeric:FALSEexpandable:FALSE:The taxonomic level of the taxa identified within the laboratory.### rawCounttype:Floatnumeric:TRUEexpandable:FALSE:Sum of the split_counts recorded within the laboratory for this taxa. No other manipulation.### correctedCounttype:Floatnumeric:TRUEexpandable:FALSE:Sum of the split counts multiplied by the sample lab_split and field_split._count = sum(split_count) * (100 / lab_split) * (100 / field_split)### rawBigRareCounttype:Intnumeric:TRUEexpandable:FALSE:Sum of the big rare count within the laboratory for this taxa. No other manipulation.## sampleTaxaGeneralized:Sample organisms summed by taxonomy, life stage and bug size. Includes both raw counts as well as counts corrected for lab and field split. Also includes both raw and corrected big rare counts.### Input Parameters### sampleIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields### sampleIdtype:Intnumeric:TRUEexpandable:FALSE### taxonomyIdtype:Intnumeric:TRUEexpandable:FALSE### scientificNametype:Stringnumeric:FALSEexpandable:FALSE### levelIdtype:Intnumeric:TRUEexpandable:FALSE### levelNametype:Stringnumeric:FALSEexpandable:FALSE### lifeStageIdtype:Intnumeric:TRUEexpandable:FALSE### lifeStagetype:Stringnumeric:FALSEexpandable:FALSE### lifeStageAbbreviationtype:Stringnumeric:FALSEexpandable:FALSE### bugSizetype:Floatnumeric:TRUEexpandable:FALSE### rawCounttype:Floatnumeric:TRUEexpandable:FALSE### correctedCounttype:Floatnumeric:TRUEexpandable:FALSE### rawBigRareCounttype:Intnumeric:TRUEexpandable:FALSE## sampleTaxaTranslation:Sample organisms converted to a translation (OTU). Rolls up counts to those taxa present in the translation and omits any organisms that don’t roll up to a taxa in the translation.### Input Parameters### sampleIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### translationIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields### sampleIdtype:Intnumeric:TRUEexpandable:FALSE### taxonomyIdtype:Intnumeric:TRUEexpandable:FALSE### scientificNametype:Stringnumeric:FALSEexpandable:FALSE### aliasNametype:Stringnumeric:FALSEexpandable:FALSE### levelIdtype:Intnumeric:TRUEexpandable:FALSE### levelNametype:Stringnumeric:FALSEexpandable:FALSE### rawCounttype:Floatnumeric:TRUEexpandable:FALSE### correctedCounttype:Floatnumeric:TRUEexpandable:FALSE### rawBigRareCounttype:Intnumeric:TRUEexpandable:FALSE## sampleTaxaTranslationRarefied:Sample organisms converted to the translation (OTU) and then rarefied to the specified fixed count.### Input Parameters### sampleIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### translationIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### fixedCountnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields### taxonomyIdtype:Intnumeric:TRUEexpandable:FALSE### scientificNametype:Stringnumeric:FALSEexpandable:FALSE### levelIdtype:Intnumeric:TRUEexpandable:FALSE### levelNametype:Stringnumeric:FALSEexpandable:FALSE### organismCounttype:Intnumeric:TRUEexpandable:FALSE## pointTaxaRaw:Sample organisms within distance (meters) of a point (decimal degrees)### Input Parameters### longitudenumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### latitudenumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### distancenumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields### sampleIdtype:Intnumeric:TRUEexpandable:FALSE:The sample to which the taxa belong### taxonomyIdtype:Intnumeric:TRUEexpandable:FALSE:The taxa identified within the laboratory.### scientificNametype:Stringnumeric:FALSEexpandable:FALSE:The name of the taxa identified with the laboratory.### levelIdtype:Intnumeric:TRUEexpandable:FALSE:The taxonomic level of the taxa identified within the laboratory.### levelNametype:Stringnumeric:FALSEexpandable:FALSE:The taxonomic level of the taxa identified within the laboratory.### rawCounttype:Floatnumeric:TRUEexpandable:FALSE:Sum of the split_counts recorded within the laboratory for this taxa. No other manipulation.### correctedCounttype:Floatnumeric:TRUEexpandable:FALSE:Sum of the split counts multiplied by the sample lab_split and field_split._count = sum(split_count) * (100 / lab_split) * (100 / field_split)### rawBigRareCounttype:Intnumeric:TRUEexpandable:FALSE:Sum of the big rare count within the laboratory for this taxa. No other manipulation.## polygonTaxaRaw:Sample organisms within a polygon### Input Parameters### polygonnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields### sampleIdtype:Intnumeric:TRUEexpandable:FALSE:The sample to which the taxa belong### taxonomyIdtype:Intnumeric:TRUEexpandable:FALSE:The taxa identified within the laboratory.### scientificNametype:Stringnumeric:FALSEexpandable:FALSE:The name of the taxa identified with the laboratory.### levelIdtype:Intnumeric:TRUEexpandable:FALSE:The taxonomic level of the taxa identified within the laboratory.### levelNametype:Stringnumeric:FALSEexpandable:FALSE:The taxonomic level of the taxa identified within the laboratory.### rawCounttype:Floatnumeric:TRUEexpandable:FALSE:Sum of the split_counts recorded within the laboratory for this taxa. No other manipulation.### correctedCounttype:Floatnumeric:TRUEexpandable:FALSE:Sum of the split counts multiplied by the sample lab_split and field_split._count = sum(split_count) * (100 / lab_split) * (100 / field_split)### rawBigRareCounttype:Intnumeric:TRUEexpandable:FALSE:Sum of the big rare count within the laboratory for this taxa. No other manipulation.## metrics:### Input Parameters### Output Fields### metricIdtype:Intnumeric:TRUEexpandable:FALSE### metricNametype:Stringnumeric:FALSEexpandable:FALSE### metricTypeIdtype:Intnumeric:TRUEexpandable:FALSE### typeNametype:Stringnumeric:FALSEexpandable:FALSE### translationIdtype:Intnumeric:TRUEexpandable:FALSE### translationNametype:Stringnumeric:FALSEexpandable:FALSE### formulaIdtype:Intnumeric:TRUEexpandable:FALSE### formulaNametype:Stringnumeric:FALSEexpandable:FALSE### formulaCodeFunctiontype:Stringnumeric:FALSEexpandable:FALSE### isStandardizedtype:Booleannumeric:FALSEexpandable:FALSE### perturbDirectiontype:Stringnumeric:FALSEexpandable:FALSE### descriptiontype:Stringnumeric:FALSEexpandable:FALSE### createdDatetype:Stringnumeric:FALSEexpandable:FALSE### updatedDatetype:Stringnumeric:FALSEexpandable:FALSE## sampleMetrics:### Input Parameters### sampleIdsnumeric:TRUEarray:FALSErequired:FALSEfor paging:FALSE### boxIdsnumeric:TRUEarray:FALSErequired:FALSEfor paging:FALSE### projectIdsnumeric:TRUEarray:FALSErequired:FALSEfor paging:FALSE### translationIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### fixedCountnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields### sampleIdtype:Intnumeric:TRUEexpandable:FALSE### groupIdtype:Intnumeric:TRUEexpandable:FALSE### groupNametype:Stringnumeric:FALSEexpandable:FALSE### metricIdtype:Intnumeric:TRUEexpandable:FALSE### metricNametype:Stringnumeric:FALSEexpandable:FALSE### metricValuetype:Stringnumeric:FALSEexpandable:FALSE## setSitePredictorValue:Store a non-temporal predictor value for a specific site. See setSamplePredictorValue if you want to store a temporal predictor value associated with a particular sample.### Input Parameters### siteIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### predictorIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### valuenumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields## setSamplePredictorValue:Store a temporal predictor value for a specific sample. Set setSitePredictorValue if you want to store a temporal predictor value associated with a particular site.### Input Parameters### sampleIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### predictorIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### valuenumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields## setSiteCatchment:Store the upstream catchment polygon for a specific site. The catchment polygon must be a valid, non-empty GeoJSON polygon that partially or entirely intersects with the United States.### Input Parameters### siteIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### catchmentnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields## createTranslation:Create a new translation. The name is mandatory and cannot be an empty string. The description is optional.### Input Parameters### translationNamenumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### descriptionnumeric:FALSEarray:FALSErequired:FALSEfor paging:FALSE### Output Fields## setTranslationTaxa:Add or update a taxa associated with a translation### Input Parameters### translationIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### taxonomyIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### aliasnumeric:FALSEarray:FALSErequired:FALSEfor paging:FALSE### isFinalnumeric:FALSEarray:FALSErequired:FALSEfor paging:FALSE### Output Fields## deleteTranslationTaxa:Permanently remove a taxa from a translation### Input Parameters### translationIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### taxonomyIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields## setTaxonomy:Update information related to a specific taxa. Change its scientific name, move its level or change its parent### Input Parameters### taxonomyIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### scientificNamenumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### levelIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### parentIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### authornumeric:FALSEarray:FALSErequired:FALSEfor paging:FALSE### yearnumeric:FALSEarray:FALSErequired:FALSEfor paging:FALSE### notesnumeric:FALSEarray:FALSErequired:FALSEfor paging:FALSE### metadatanumeric:FALSEarray:FALSErequired:FALSEfor paging:FALSE### Output Fields## createProject:### Input Parameters### projectNamenumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### isPrivatenumeric:FALSEarray:FALSErequired:FALSEfor paging:FALSE### descriptionnumeric:FALSEarray:FALSErequired:FALSEfor paging:FALSE### metadatanumeric:FALSEarray:FALSErequired:FALSEfor paging:FALSE### contactIdnumeric:TRUEarray:FALSErequired:FALSEfor paging:FALSE### Output Fields## addProjectSamples:### Input Parameters### projectIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### sampleIdsnumeric:TRUEarray:FALSErequired:FALSEfor paging:FALSE### Output Fields## addProjectBoxes:### Input Parameters### projectIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### boxIdsnumeric:TRUEarray:FALSErequired:FALSEfor paging:FALSE### Output Fields## removeProjectSamples:### Input Parameters### projectIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### sampleIdsnumeric:TRUEarray:FALSErequired:FALSEfor paging:FALSE### Output Fields## deleteProject:### Input Parameters### projectIdnumeric:TRUEarray:FALSErequired:TRUEfor paging:FALSE### Output Fields&quot;</p>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

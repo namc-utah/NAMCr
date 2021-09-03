@@ -14,6 +14,7 @@ initialize = function(){
     c$api$schema = api_schema$new( argList = c$schema )
 
     .pkgenv$api <<- namc_api$new( argList = c$api )
+    .pkgenv$data <<- c$data
     return()
 }
 
@@ -33,7 +34,7 @@ reinitialize = function(clear_credentials = FALSE){
 
     if(clear_credentials) .pkgenv$api$get_auth_provider()$reset_token()
     .pkgenv$api$configure( force = TRUE )
-    return()
+    invisible(NULL)
 }
 
 
@@ -83,6 +84,82 @@ is.empty = function(val){
     } else {
         return( is.na(val) | val == '' | lengths(val) == 0 )
     }
+}
+
+
+
+#' expands JSON keys into dataframe columns
+#'
+#' @param data dataframe containing one or more columns of JSON
+#' @param fields a single or an array of column names containing JSON text
+#'
+#' @return dataframe with additional columns representing the JSON keys
+#' @export
+#'
+#' @examples
+#'
+#' # Multiple columns
+#' data = json.expand(data, c("field1","field2"))
+#' # OR single column
+#' data = json.expand(data, "field1")
+#'
+json.expand = function(data, fields){
+    # ----- dplyr method -----
+    # data = data %>%
+    #   lapply(jsonlite::fromJSON) %>%
+    #   lapply(as.data.frame, stringsAsFactors = FALSE) %>%
+    #   dplyr::bind_rows()
+
+    for( field in fields){
+        jData = lapply(data[[field]], jsonlite::fromJSON)
+        jData = lapply(jData, as.data.frame, stringsAsFactors = FALSE)
+        uniqueKeys = unique( unlist( lapply(jData, names) ) )
+
+        # expand all json data to have the same keys filling in NA
+        jData = lapply(jData,
+            function(df){
+                newColNames = setdiff(uniqueKeys, names(df))
+                if( length(newColNames) > 0 ){
+                    df[, newColNames] = NA
+                }
+                return( df )
+            }
+        )
+
+        jData = do.call(what=rbind, jData)
+
+        data[, field] = NULL
+        data = cbind(data, jData)
+    }
+
+    return( data )
+}
+
+
+
+#' collapse columns in a dataframe to a single JSON column
+#'
+#' @param data dataframe containing one or more columns
+#' @param field name to give JSON column
+#' @param colNames a single or an array of column names to convert to JSON records
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#'
+#' # Multiple columns
+#' data = json.expand(data, "newField", c("field1","field2"))
+#' # OR single column
+#' data = json.expand(data, "newField", "field1")
+#'
+json.collapse = function(data, field, colNames){
+    data[[field]] = apply(
+        data[, colNames],
+        MARGIN = 1,
+        FUN = jsonlite::toJSON
+    )
+    data[colNames] = NULL
 }
 
 

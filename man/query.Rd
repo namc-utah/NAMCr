@@ -13,6 +13,8 @@ query(
   sort = c(),
   limit = NA,
   api = .pkgenv$api,
+  expand_metadata = TRUE,
+  default_JSON_fieldName = .pkgenv$data$default_JSON_fieldName,
   ...
 )
 }
@@ -35,6 +37,10 @@ be passed individually in  ...}
 
 \item{api}{namc_api An instance of the namc_api class having a default of a
 pre-initialized package object}
+
+\item{expand_metadata}{logical if JSON metadata field is expanded into dataframe columns}
+
+\item{default_JSON_fieldName}{"metadata" is the preset default}
 
 \item{...}{named arguments to merge with args and pass to the API endpoint.}
 }
