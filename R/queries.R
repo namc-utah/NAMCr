@@ -57,7 +57,7 @@ query = function(
     sort    = c(),
     limit   = NA,
     api     = .pkgenv$api,
-    expand_metadata = TRUE,
+    expand_metadata = FALSE,
     default_JSON_fieldName = .pkgenv$data$default_JSON_fieldName,
     ...
 ){
