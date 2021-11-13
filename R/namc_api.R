@@ -266,8 +266,20 @@ namc_api = R6::R6Class(
                 private$retry_conn = TRUE
             })
 
-            if( self$top_level_key_error %in% names(res) ) {
-                stop( paste0("Query Execution Error:\n\t", res[[ self$top_level_key_error ]]$message), call. = FALSE )
+            data.hasError = self$top_level_key_error %in% names(res)
+            data.exists = self$top_level_key %in% names(res)
+
+            if( data.hasError && data.exists ) {
+                warning(
+                    paste0(
+                        "\nQuery Execution Warning:\n\t",
+                        res[[ self$top_level_key_error ]]$message,
+                        "\n\t - Please send this message to the API maintainer to help address the issue."
+                    ),
+                    call. = FALSE
+                )
+            } else if( data.hasError ) {
+                stop( paste0("\nQuery Execution Error:\n\t", res[[ self$top_level_key_error ]]$message), call. = FALSE )
             }
 
             return( res[[ self$top_level_key ]] )

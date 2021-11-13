@@ -88,6 +88,43 @@ is.empty = function(val){
 
 
 
+#' checks if a list or dataframe contains JSON based elements or columns
+#'
+#' @param data list or dataframe to check from JSON data
+#'
+#' @return vector of element or column names
+#' @export
+#'
+#' @examples
+is.json = function(string){
+    return(
+        grepl("^\\{.*\\}$|^\\[.*\\]$",string)
+    )
+}
+
+
+
+#' checks if a list or dataframe contains JSON based elements or columns
+#'
+#' @param data list or dataframe to check from JSON data
+#'
+#' @return vector of element or column names
+#' @export
+#'
+#' @examples
+has.json = function(data){
+    keys = c()
+    for(col in names(data)){
+        # does it begin and end with a {} or []
+        if( any( is.json( data[[col]]) ) ) {
+            keys = c(keys, col)
+        }
+    }
+    return( keys )
+}
+
+
+
 #' expands JSON keys into dataframe columns
 #'
 #' @param data dataframe containing one or more columns of JSON
@@ -104,32 +141,48 @@ is.empty = function(val){
 #' data = json.expand(data, "field1")
 #'
 json.expand = function(data, fields){
-    # ----- dplyr method -----
-    # data = data %>%
-    #   lapply(jsonlite::fromJSON) %>%
-    #   lapply(as.data.frame, stringsAsFactors = FALSE) %>%
-    #   dplyr::bind_rows()
+
+
+    nRows = nrow(data)
 
     for( field in fields){
-        jData = lapply(data[[field]], jsonlite::fromJSON)
-        jData = lapply(jData, as.data.frame, stringsAsFactors = FALSE)
-        uniqueKeys = unique( unlist( lapply(jData, names) ) )
+        jData = data[[field]]
+        data.isJSON = is.json( jData )
+        data.isChar = unlist( lapply(jData, is.character) )
+        data.isNumeric = unlist( lapply(jData, is.numeric) )
+        jData[data.isJSON] = lapply(jData[data.isJSON], jsonlite::fromJSON)
 
-        # expand all json data to have the same keys filling in NA
-        jData = lapply(jData,
-            function(df){
-                newColNames = setdiff(uniqueKeys, names(df))
-                if( length(newColNames) > 0 ){
-                    df[, newColNames] = NA
-                }
-                return( df )
+        data.allJSON = !any( xor( data.isJSON, (data.isChar | data.isNumeric | is.na(jData)) ) )
+        if( data.allJSON ) {
+            jData = lapply(jData, as.data.frame, stringsAsFactors = FALSE)
+            uniqueKeys = unique( unlist( lapply(jData, names) ) )
+
+            if( length(uniqueKeys) > 0 ){
+                # expand all json data to have the same keys filling in NA
+                jData = lapply(
+                    jData,
+                    function(df, uniqueKeys){
+                        dOut = as.data.frame(
+                            matrix( ncol = length(uniqueKeys), nrow = 1, dimnames = list(NULL, uniqueKeys) ),
+                            stringsAsFactors = FALSE
+                        )
+                        if( length( names(df) ) > 0 ){
+                            dOut[, names(df)] = df[, names(df)]
+                        }
+                        return( dOut )
+                    },
+                    uniqueKeys
+                )
+
+                jData = do.call(what=rbind, jData)
+                names(jData) = paste0(paste0(field,"."), names(jData)) # prefix names with "fieldName."
+                data[, field] = NULL
+                data = cbind(data, jData)
             }
-        )
-
-        jData = do.call(what=rbind, jData)
-
-        data[, field] = NULL
-        data = cbind(data, jData)
+        } else if( any(data.isJSON) ) {
+            jData[data.isJSON] = lapply(jData[data.isJSON], as.data.frame, stringsAsFactors = FALSE)
+            data[, field] = jData
+        }
     }
 
     return( data )
