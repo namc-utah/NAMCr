@@ -145,15 +145,23 @@ json.expand = function(data, fields){
 
     nRows = nrow(data)
 
+    fields = fields[ fields %in% names(data) ]
+
     for( field in fields){
         jData = data[[field]]
         data.isJSON = is.json( jData )
         data.isChar = unlist( lapply(jData, is.character) )
         data.isNumeric = unlist( lapply(jData, is.numeric) )
         jData[data.isJSON] = lapply(jData[data.isJSON], jsonlite::fromJSON)
+        data.isComplex = unlist( lapply(jData, is.data.frame) )
 
-        data.allJSON = !any( xor( data.isJSON, (data.isChar | data.isNumeric | is.na(jData)) ) )
-        if( data.allJSON ) {
+        data.allSimpleJSON = !any(
+            xor(
+                data.isJSON & !data.isComplex,
+                data.isChar | data.isNumeric | is.na(jData)
+            )
+        )
+        if( data.allSimpleJSON ) {
             jData = lapply(jData, as.data.frame, stringsAsFactors = FALSE)
             uniqueKeys = unique( unlist( lapply(jData, names) ) )
 
@@ -179,9 +187,9 @@ json.expand = function(data, fields){
                 data[, field] = NULL
                 data = cbind(data, jData)
             }
+
         } else if( any(data.isJSON) ) {
-            jData[data.isJSON] = lapply(jData[data.isJSON], as.data.frame, stringsAsFactors = FALSE)
-            data[, field] = jData
+            data[[field]][data.isJSON] = lapply(jData[data.isJSON], as.data.frame, stringsAsFactors = FALSE)
         }
     }
 
@@ -194,7 +202,7 @@ json.expand = function(data, fields){
 #'
 #' @param data dataframe containing one or more columns
 #' @param field name to give JSON column
-#' @param colNames a single or an array of column names to convert to JSON records
+#' @param colNames a single name or an array of names to convert to JSON data
 #'
 #' @return
 #' @export
@@ -207,12 +215,22 @@ json.expand = function(data, fields){
 #' data = json.collapse(data, "newField", "field1")
 #'
 json.collapse = function(data, field, colNames){
-    data[[field]] = apply(
-        data[, colNames],
-        MARGIN = 1,
-        FUN = jsonlite::toJSON
-    )
-    data[colNames] = NULL
+    if(is.data.frame(data)){
+        data[[field]] = by(
+            data = data[colNames],
+            INDICES = seq_len( nrow(data) ),
+            FUN = function(rec){
+                gsub("^\\[|\\]$","",jsonlite::toJSON(rec))
+            }
+        )
+        data[colNames] = NULL
+        return(data)
+
+    } else {
+        data[[field]] = gsub("^\\[|\\]$","",jsonlite::toJSON( data[colNames] ))
+        data[colNames] = NULL
+        return(data)
+    }
 }
 
 

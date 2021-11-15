@@ -20,7 +20,7 @@ pkg.config = function(){
                 path.credential_store_key = '~/.secrets/R/NAMCr/'
             ),
             data = list(
-                default_JSON_fieldName    = "metadata"
+                default_json_fieldName    = "metadata"
             ),
             api = list(
                 URL                   = 'https://54w15tgigd.execute-api.us-west-2.amazonaws.com/production/api',

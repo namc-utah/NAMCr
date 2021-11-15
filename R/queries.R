@@ -24,7 +24,7 @@
 #'   pre-initialized package object
 #' @param ... named arguments to merge with args and pass to the API endpoint.
 #' @param expand_metadata logical if JSON metadata field is expanded into dataframe columns
-#' @param default_JSON_fieldName "metadata" is the preset default
+#' @param default_json_fieldName "metadata" is the preset default
 #'
 #' @return data.frame A dataframe containing the query results.
 #' @export
@@ -58,7 +58,8 @@ query = function(
     limit   = NA,
     api     = .pkgenv$api,
     expand_metadata = TRUE,
-    default_JSON_fieldName = .pkgenv$data$default_JSON_fieldName,
+    json_fields = c(),
+    default_json_fieldName = .pkgenv$data$default_json_fieldName,
     ...
 ){
 
@@ -194,8 +195,8 @@ query = function(
         }
 
     }
-    if(expand_metadata && (default_JSON_fieldName %in% names(data[[api_endpoint]]))){
-        data[[api_endpoint]] = json.expand(data[[api_endpoint]], default_JSON_fieldName)
+    if(expand_metadata && any(c(default_json_fieldName, json_fields) %in% names(data[[api_endpoint]])) ){
+        data[[api_endpoint]] = json.expand(data[[api_endpoint]], c(default_json_fieldName, json_fields))
     }
     cat(" Complete!\n")
 
@@ -247,7 +248,8 @@ save = function(
     api_endpoint,
     args = list(),
     api = .pkgenv$api,
-    append_metadata = FALSE,
+    json_autodetect = TRUE,
+    json_fields = c(),
     ...
 ){
 
@@ -259,6 +261,11 @@ save = function(
 
     # Collect all arguments and remove any pagination keys
     endpoint_args = modifyList(args, list(...))
+
+    if( json_find ){
+        ifields_to_collapse = grepl("\\.", names(endpoint_args))
+    }
+    endpoint_args =
 
     tpl_args = format_arguments(api_endpoint, endpoint_args, api)
 
