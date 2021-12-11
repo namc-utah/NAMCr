@@ -224,13 +224,12 @@ json.collapse = function(data, field, colNames){
             }
         )
         data[colNames] = NULL
-        return(data)
 
     } else {
         data[[field]] = gsub("^\\[|\\]$","",jsonlite::toJSON( data[colNames] ))
         data[colNames] = NULL
-        return(data)
     }
+    return(data)
 }
 
 

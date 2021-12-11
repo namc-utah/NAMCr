@@ -57,9 +57,8 @@ query = function(
     sort    = c(),
     limit   = NA,
     api     = .pkgenv$api,
-    expand_metadata = TRUE,
+    json_autodetect = TRUE,
     json_fields = c(),
-    default_json_fieldName = .pkgenv$data$default_json_fieldName,
     ...
 ){
 
@@ -68,16 +67,19 @@ query = function(
 
     # Collect all arguments and remove any pagination keys
     endpoint_args = modifyList(args, list(...))
+    json_args = c()
 
     # Build Argument Template
     if(length(endpoint_args) != 0){
         arg_names = names( endpoint_args )
-
         # LET GRAPHQL ERRORS FALL THROUGH | NO ARGUMENT VALIDATION IS PERFORMED
 
         # Place Arguments
         tpl_args = '('
         for(arg in arg_names){
+            if( json_autodetect && api$schema$is_arg_json(api_endpoint, arg) ){
+                json_args = c(json_args, arg)
+            }
             if( api$schema$is_arg_numeric(api_endpoint, arg) ) {
                 arg_vals = paste0(endpoint_args[[arg]], collapse = ",")
             } else if( api$schema$is_arg_boolean(api_endpoint, arg) ) {
@@ -195,8 +197,15 @@ query = function(
         }
 
     }
-    if(expand_metadata && any(c(default_json_fieldName, json_fields) %in% names(data[[api_endpoint]])) ){
-        data[[api_endpoint]] = json.expand(data[[api_endpoint]], c(default_json_fieldName, json_fields))
+    # Handle JSON in returned data
+    if( json_autodetect ){
+        json_args = c(json_args, json_fields)
+    } else {
+        json_args = json_fields
+    }
+
+    if( any(json_args %in% names(data[[api_endpoint]])) ){
+        data[[api_endpoint]] = json.expand(data[[api_endpoint]], json_args)
     }
     cat(" Complete!\n")
 
@@ -249,7 +258,7 @@ save = function(
     args = list(),
     api = .pkgenv$api,
     json_autodetect = TRUE,
-    json_fields = c(),
+    json_fields = list(),
     ...
 ){
 
@@ -262,10 +271,17 @@ save = function(
     # Collect all arguments and remove any pagination keys
     endpoint_args = modifyList(args, list(...))
 
-    if( json_find ){
-        ifields_to_collapse = grepl("\\.", names(endpoint_args))
+    if( json_autodetect ){
+        arg_names = names(endpoint_args)
+        collapsed_field_names = unique( gsub("\\..*$", "", arg_names[ grepl("\\.", arg_names) ]) )
+        for(cField_name in collapsed_field_names){
+            json_fields[[cField_name]] = arg_names[ grepl(c(cField_name, "\\."), arg_names) ]
+        }
     }
-    endpoint_args =
+
+    for( field_name in json_fields ){
+        endpoint_args = json.collapse(endpoint_args, field_name, json_fields[[field_name]])
+    }
 
     tpl_args = format_arguments(api_endpoint, endpoint_args, api)
 

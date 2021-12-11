@@ -48,7 +48,8 @@ api_schema = R6::R6Class(
                     list(
                         data_type     = NA,
                         is_numeric    = FALSE,
-                        is_expandable = FALSE,
+                        is_json       = FALSE,
+                        is_record     = FALSE,
                         description   = NA
                     ),
                     list(...)
@@ -62,6 +63,7 @@ api_schema = R6::R6Class(
                     list(
                         data_type     = NA,
                         is_numeric    = FALSE,
+                        is_json       = FALSE,
                         is_array      = FALSE,
                         is_required   = FALSE,
                         is_for_paging = FALSE,
@@ -181,7 +183,7 @@ api_schema = R6::R6Class(
 
             iSpecialType   = private$types$name == special_type
             iEndpoint      = private$types$fields[ iSpecialType ][[1]]$name == endpoint
-            no_type        = is.na(private$types$fields[ iSpecialType ][[1]]$type$ofType[ iEndpoint ])
+            no_type        = ifelse(private$types$fields[ iSpecialType ][[1]]$type$kind[ iEndpoint ] == "LIST", FALSE, TRUE)
             no_description = is.na(private$types$fields[ iSpecialType ][[1]]$description[ iEndpoint ])
             data_type      = ifelse(no_type, NA, private$types$fields[ iSpecialType ][[1]]$type$ofType$name[ iEndpoint ] )
             edge_name      = NA
@@ -221,7 +223,8 @@ api_schema = R6::R6Class(
                 private[[ special_type ]][[ endpoint ]]$fields[[ fieldname ]] = private$new_field(
                     data_type     = ifelse(no_type,NA,private$types$fields[ iDataType ][[1]]$type$name[ iField ]),
                     is_numeric    = any( private$types$fields[ iDataType ][[1]]$type$name[ iField ] == private$numeric_types ),
-                    is_expandable = FALSE,
+                    is_json       = ifelse(no_description, FALSE, grepl("\\[JSON\\]", private$types$fields[ iDataType ][[1]]$description[iField])),
+                    is_record     = FALSE,
                     description   = ifelse(no_description, NA, private$types$fields[ iDataType ][[1]]$description[iField])
                 )
             }
@@ -255,6 +258,7 @@ api_schema = R6::R6Class(
                 private[[ special_type ]][[ endpoint ]]$args[[ argname ]] = private$new_argument(
                     data_type     = data_type,
                     is_numeric    = is_numeric,
+                    is_json       = ifelse(no_description, FALSE, grepl("\\[JSON\\]", private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$description[ iArg ])),
                     is_array      = is_array,
                     is_required   = private$types$fields[ iSpecialType ][[1]]$args[ iEndpoint ][[1]]$type$kind[ iArg ] == self$required_kind,
                     is_for_paging = private$is_paging_arg( argname ),
@@ -301,6 +305,27 @@ api_schema = R6::R6Class(
             special_type = self$get_special_type_from_endpoint( endpoint )
             if( any(argname == names(private[[ special_type ]][[ endpoint ]]$args)) ){
                 return( private[[ special_type ]][[ endpoint ]]$args[[ argname ]]$data_type == "Boolean" )
+
+            } else {
+                # Assume argument is not boolean if no data available
+                return( FALSE )
+            }
+        },
+
+
+
+        #' Check if argument is numeric
+        #'
+        #' @param endpoint String name of api endpoint
+        #' @param argname String name of api endpoint argument
+        #'
+        #' @return logical TRUE/FALSE if argument is numeric
+        #'
+        # @examples
+        is_arg_json = function(endpoint,argname){
+            special_type = self$get_special_type_from_endpoint( endpoint )
+            if( any(argname == names(private[[ special_type ]][[ endpoint ]]$args)) ){
+                return( private[[ special_type ]][[ endpoint ]]$args[[ argname ]]$is_json )
 
             } else {
                 # Assume argument is not boolean if no data available
