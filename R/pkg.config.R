@@ -23,7 +23,7 @@ pkg.config = function(){
                 default_json_fieldName    = "metadata"
             ),
             api = list(
-                URL                   = 'https://54w15tgigd.execute-api.us-west-2.amazonaws.com/production/api',
+                URL                   = 'https://6dsntufqt9.execute-api.us-west-2.amazonaws.com/production/api',
                 pagination_limit      = 100,
                 top_level_key         = 'data',
                 top_level_key_error   = 'errors',

@@ -1,7 +1,7 @@
 Package: NAMCr
 Type: Package
 Title: NAMC Database Access API
-Version: 0.7.3
+Version: 0.7.4
 Author: National Aquatic Monitoring Center
 Maintainer: National Aquatic Monitoring Center <usubuglab+NAMCr@gmail.com>
 Description: Based on the permissions granted to the authenticated user, data can both be retrieved 
