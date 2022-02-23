@@ -285,6 +285,10 @@ save = function(
 
     tpl_args = format_arguments(api_endpoint, endpoint_args, api)
 
+    #tmp_endpoint_args = gsub("\\\"", "\\\\\\\"", endpoint_args[[arg]])
+    #arg_vals = paste0('"', paste0(tmp_endpoint_args, collapse = '","'), '"')
+
+
     tpl_query = sprintf(
         'mutation rMutation{
             %s%s
@@ -343,6 +347,7 @@ format_arguments = function(api_endpoint, endpoint_args, api){
         # LET GRAPHQL ERRORS FALL THROUGH | NO ARGUMENT VALIDATION IS PERFORMED
 
         # Place Arguments
+        arg_count = 0
         tpl_args = '('
         for(arg in arg_names){
             if( api$schema$is_arg_numeric(api_endpoint, arg) ) {
@@ -350,9 +355,16 @@ format_arguments = function(api_endpoint, endpoint_args, api){
             } else if( api$schema$is_arg_boolean(api_endpoint, arg) ) {
                 arg_vals = paste0(gsub(TRUE,"true", gsub(FALSE,"false", as.logical(endpoint_args[[arg]]))), collapse = ",")
             } else {
-                arg_vals = paste0('"', paste0(endpoint_args[[arg]], collapse = '","'), '"')
+                tmp_endpoint_args = gsub("\\\"", "\\\\\\\"", endpoint_args[[arg]])
+                arg_vals = paste0('"', paste0(tmp_endpoint_args, collapse = '","'), '"')
             }
-            is_vector = grepl(",",arg_vals)
+            is_vector = grepl(",",arg_vals) & !grepl("\\{",arg_vals)
+            if(arg_count > 0) {
+                tpl_args = paste0(
+                    tpl_args,
+                    ","
+                )
+            }
             tpl_args = paste0(
                 tpl_args,
                 sprintf(
@@ -363,6 +375,7 @@ format_arguments = function(api_endpoint, endpoint_args, api){
                     ifelse(is_vector,']','')
                 )
             )
+            arg_count = arg_count + 1
         }
         tpl_args = paste0(tpl_args,')')
 
