@@ -25,9 +25,9 @@ base_class = R6::R6Class(
 
 
 
-    #' Initialize object
+    #' #Initialize object
     #'
-    #' Allow list based function initialization (easier to integrate with config files)
+    #' #Allow list based function initialization (easier to integrate with config files)
     #'
     #' @param argList A 'List' of name/value pairs to be passed in as arguments.
     #' @param ... Name/Value pairs as arguments.
@@ -41,9 +41,9 @@ base_class = R6::R6Class(
 
 
 
-    #' Dump object values
+    #' #Dump object values
     #'
-    #' Convenient for debugging private class values (puts var named tmpVar in global environment)
+    #' #Convenient for debugging private class values (puts var named tmpVar in global environment)
     #'
     #' @return private The private environment of the object
     #'
@@ -61,9 +61,9 @@ base_class = R6::R6Class(
 
 
 
-    #' Get variable
+    #' #Get variable
     #'
-    #' Gets a private variables value.
+    #' #Gets a private variables value.
     #'
     #' @param var_name The name of the private variable to return.
     #'
@@ -80,10 +80,10 @@ base_class = R6::R6Class(
 
 
 
-    #' Set variable
+    #' #Set variable
     #'
-    #' Sets a private variables value.
-    #' This method is chainable.
+    #' #Sets a private variables value.
+    #' #This method is chainable.
     #'
     #' @param var_name The name of the private variable to set.
     #' @param var_value The value to assign to the desired private variable.

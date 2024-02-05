@@ -21,7 +21,7 @@ messages = R6::R6Class(
         #' @field iLevel is the index of the level contained in levels.
         iLevel = 2,
 
-        #' Initialize object
+        #' #Initialize object
         #'
         #' @param level The text message type to initialize messaging to
         #'
@@ -33,7 +33,7 @@ messages = R6::R6Class(
 
 
 
-        #' Title
+        #' #Title
         #'
         #' @param msg string A message to display
         #' @param type string The type of the message

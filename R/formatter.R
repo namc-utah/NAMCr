@@ -51,7 +51,7 @@ formatter = R6::R6Class(
 
     public = list(
 
-        #' Initialize object
+        #' #Initialize object
         #'
         #' @param level The text message type to initialize messaging to
         #'
@@ -64,7 +64,7 @@ formatter = R6::R6Class(
 
 
 
-        #' format a string for console or markup output
+        #' #format a string for console or markup output
         #'
         #' @param txt string to wrap in a style
         #' @param style string name of a styles key
