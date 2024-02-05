@@ -186,16 +186,17 @@ query = function(
             )
         }
         ##
-        ifelse(is.na(page_offset) || nrow( data[[api_endpoint]] ) !=  page_limit || (!is.na(limit) && nrow( data[[api_endpoint]] ) >= limit),
-            is_last_page <- TRUE,
-            is_last_page<-FALSE)
-
-        ifelse(is_paginated && !is.na(paged_data),
-                {data[[api_endpoint]] <- paged_data; data[[api_endpoint]] <- rbind(paged_data, as.data.frame(data[[api_endpoint]]) )},
-
-        ifelse(!is.data.frame(paged_data),
-            paged_data <- data[[api_endpoint]],
-            paged_data <- rbind(paged_data, data[[api_endpoint]])))
+        if(is.na(page_offset) | nrow( data[[api_endpoint]] ) !=  page_limit | (!is.na(limit) & nrow( data[[api_endpoint]] ) >= limit) ){
+            is_last_page = TRUE
+            if(is_paginated && !is.na(paged_data)){
+                data[[api_endpoint]] = paged_data
+                data[[api_endpoint]] = rbind(paged_data, as.data.frame(data[[api_endpoint]]) )
+            }
+        } else if(!is.data.frame(paged_data)) {
+            paged_data = data[[api_endpoint]]
+        } else {
+            paged_data = rbind(paged_data, data[[api_endpoint]])
+        }
 
     # Handle JSON in returned data
     if( json_autodetect ){
