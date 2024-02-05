@@ -1,4 +1,4 @@
 library(testthat)
-library(namc_r)
+library(NAMCr)
 
-test_check("namc_r")
+test_check("NAMCr")
