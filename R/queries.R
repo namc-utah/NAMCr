@@ -185,9 +185,9 @@ query = function(
                 nrow(paged_data) + nrow( data[[api_endpoint]] )
             )
         }
-        ifelse(is.na(page_offset) || nrow( data[[api_endpoint]] ) !=  page_limit || (!is.na(limit) && nrow( data[[api_endpoint]] ) >= limit),
+        ifelse(is.na(page_offset) | nrow( data[[api_endpoint]] ) !=  page_limit | (!is.na(limit) & nrow( data[[api_endpoint]] ) >= limit),
         is_last_page <- TRUE,
-            ifelse(is_paginated && !is.na(paged_data),
+            ifelse(is_paginated & !is.na(paged_data),
             data[[api_endpoint]] <- rbind(paged_data, as.data.frame(data[[api_endpoint]]) ),
             ifelse(!is.data.frame(paged_data),
             paged_data <- data[[api_endpoint]],
