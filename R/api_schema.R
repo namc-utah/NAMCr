@@ -166,7 +166,7 @@ api_schema = R6::R6Class(
 
 
 
-        #' Discover info on API endpoint
+        #' #Discover info on API endpoint
         #'
         #' @param endpoint Name of API endpoint to discover
         #' @param special_type Name of the type of the API endpoint
@@ -272,7 +272,7 @@ api_schema = R6::R6Class(
 
 
 
-        #' Check if argument is numeric
+        #' #Check if argument is numeric
         #'
         #' @param endpoint String name of api endpoint
         #' @param argname String name of api endpoint argument
@@ -293,7 +293,7 @@ api_schema = R6::R6Class(
 
 
 
-        #' Check if argument is numeric
+        #' #Check if argument is numeric
         #'
         #' @param endpoint String name of api endpoint
         #' @param argname String name of api endpoint argument
@@ -314,7 +314,7 @@ api_schema = R6::R6Class(
 
 
 
-        #' Check if argument is numeric
+        #' #Check if argument is numeric
         #'
         #' @param endpoint String name of api endpoint
         #' @param argname String name of api endpoint argument
@@ -335,7 +335,7 @@ api_schema = R6::R6Class(
 
 
 
-        #' Get the sub-type contained within an api endpoint
+        #' #Get the sub-type contained within an api endpoint
         #'
         #' @param endpoint String name of api endpoint
         #'
@@ -353,7 +353,7 @@ api_schema = R6::R6Class(
 
 
 
-        #' Determine if an endpoint has an edge
+        #' #Determine if an endpoint has an edge
         #'
         #' @param endpoint String name of api endpoint
         #'
@@ -367,7 +367,7 @@ api_schema = R6::R6Class(
 
 
 
-        #' Get the name of the graphql edge contained in an endpoint
+        #' #Get the name of the graphql edge contained in an endpoint
         #'
         #' @param endpoint String name of api endpoint
         #'
@@ -381,7 +381,7 @@ api_schema = R6::R6Class(
 
 
 
-        #' Get all available endpoint names
+        #' #Get all available endpoint names
         #'
         #' @return Array of endpoint names
         #'
@@ -396,7 +396,7 @@ api_schema = R6::R6Class(
 
 
 
-        #' Get info about an endpoint
+        #' #Get info about an endpoint
         #'
         #' @param endpoint String name of api endpoint
         #'
@@ -410,7 +410,7 @@ api_schema = R6::R6Class(
 
 
 
-        #' Get all available field names for an endpoint
+        #' #Get all available field names for an endpoint
         #'
         #' @param endpoint String name of api endpoint
         #'
@@ -424,7 +424,7 @@ api_schema = R6::R6Class(
 
 
 
-        #' Get info about an endpoint field
+        #' #Get info about an endpoint field
         #'
         #' @param endpoint String name of api endpoint
         #' @param field String name for a field of the endpoint
@@ -439,7 +439,7 @@ api_schema = R6::R6Class(
 
 
 
-        #' Get all arguments for and endpoint
+        #' #Get all arguments for and endpoint
         #'
         #' @param endpoint String name of api endpoint
         #' @param no_paging
@@ -463,7 +463,7 @@ api_schema = R6::R6Class(
 
 
 
-        #' Get info about an argument
+        #' #Get info about an argument
         #'
         #' @param endpoint String name of api endpoint
         #' @param argname
@@ -478,7 +478,7 @@ api_schema = R6::R6Class(
 
 
 
-        #' Checks if an argument is required
+        #' #Checks if an argument is required
         #'
         #' @param endpoint String name of api endpoint
         #' @param argname
@@ -493,7 +493,7 @@ api_schema = R6::R6Class(
 
 
 
-        #' Checks if argument name is valid for an endpoint
+        #' #Checks if argument name is valid for an endpoint
         #'
         #' @param endpoint String name of api endpoint
         #' @param argname
@@ -508,7 +508,7 @@ api_schema = R6::R6Class(
 
 
 
-        #' Check if endpoint exists
+        #' #Check if endpoint exists
         #'
         #' @param endpoint String name of api endpoint
         #'
@@ -521,7 +521,7 @@ api_schema = R6::R6Class(
 
 
 
-        #' Describe an Endpoint.
+        #' #Describe an Endpoint.
         #'
         #' @description `info` prints text to the console describing an endpoint
         #'
