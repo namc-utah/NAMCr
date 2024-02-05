@@ -388,4 +388,4 @@ format_arguments = function(api_endpoint, endpoint_args, api){
         tpl_args = ''
     }
     return(tpl_args)
-
+}
