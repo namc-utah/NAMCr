@@ -210,6 +210,7 @@ query = function(
     cat(" Complete!\n")
 
     return( data[[api_endpoint]] )
+    }
 }
 
 
