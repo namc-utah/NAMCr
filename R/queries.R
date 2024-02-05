@@ -187,7 +187,7 @@ query = function(
         }
         if(is.na(page_offset) || nrow( data[[api_endpoint]] ) !=  page_limit || (!is.na(limit) && nrow( data[[api_endpoint]] ) >= limit) ){
             is_last_page = TRUE
-            if(is_paginated && !is.na(paged_data)){
+            if(is_paginated && any(!is.na(paged_data))){
                 data[[api_endpoint]] = rbind(paged_data, as.data.frame(data[[api_endpoint]]) )
             }
         } else if(!is.data.frame(paged_data)) {
