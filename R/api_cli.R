@@ -22,7 +22,7 @@ cli = function(api = .pkgenv$api, ...){
 #' @examples
 #'
 #' auth_config = list() # api_cli public or private variables
-#' auth = api_cli$new(api,args)
+#' #auth = api_cli$new(api,args)
 #'
 api_cli = R6::R6Class(
     "api_cli",
