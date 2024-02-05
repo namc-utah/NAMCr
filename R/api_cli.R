@@ -30,7 +30,7 @@ api_cli = R6::R6Class(
 
     public = list(
 
-        #' 'Starts an api cli instance'
+        #' #Starts an api cli instance
         #'
         #' @param api_endpoint String name of endpoint
         #' @param args List of named arguments to pass to the endpoint
