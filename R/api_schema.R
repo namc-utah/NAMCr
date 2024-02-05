@@ -29,7 +29,7 @@ api_schema = R6::R6Class(
 
         new_endpoint = function(...){
             return(
-                modifyList(
+                utils::modifyList(
                     list(
                         edge_name   = NA,
                         has_edge    = FALSE,
@@ -44,7 +44,7 @@ api_schema = R6::R6Class(
 
         new_field = function(...){
             return(
-                modifyList(
+                utils::modifyList(
                     list(
                         data_type     = NA,
                         is_numeric    = FALSE,
@@ -59,7 +59,7 @@ api_schema = R6::R6Class(
 
         new_argument = function(...){
             return(
-                modifyList(
+                utils::modifyList(
                     list(
                         data_type     = NA,
                         is_numeric    = FALSE,

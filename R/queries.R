@@ -66,7 +66,7 @@ query = function(
     api$is_endpoint(api_endpoint, stop_if_not = TRUE)
 
     # Collect all arguments and remove any pagination keys
-    endpoint_args = modifyList(args, list(...))
+    endpoint_args = utils::modifyList(args, list(...))
     json_args = c()
 
     # Build Argument Template
@@ -269,7 +269,7 @@ save = function(
     api$is_endpoint(api_endpoint, stop_if_not = TRUE)
 
     # Collect all arguments and remove any pagination keys
-    endpoint_args = modifyList(args, list(...))
+    endpoint_args = utils::modifyList(args, list(...))
 
     if( json_autodetect ){
         arg_names = names(endpoint_args)

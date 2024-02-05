@@ -50,7 +50,7 @@ api_cli = R6::R6Class(
 
             private$api           = api
             private$api_endpoint  = api_endpoint
-            private$args          = modifyList(args, list(...))
+            private$args          = utils::modifyList(args, list(...))
             private$include       = include
             private$exclude       = exclude
             private$filter        = filter

@@ -36,7 +36,7 @@ base_class = R6::R6Class(
     #'
     initialize = function(argList=NULL,...){
       if(is.null(argList)) argList = list()
-      private$.set_from_list( modifyList(argList, list(...)) )
+      private$.set_from_list( utils::modifyList(argList, list(...)) )
     },
 
 
