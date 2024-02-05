@@ -40,7 +40,7 @@
 #'       data = c(42,46),
 #'       type = 'between'
 #'     )
-#'   )
+#'   ),
 #'   sort = c('station','lat'),
 #'   limit = 50
 #' )
