@@ -142,7 +142,7 @@ api_schema = R6::R6Class(
 
 
 
-        #' Parse introspected schema
+        #' #Parse introspected schema
         #'
         #' @return api_schema For method chaining
         #'

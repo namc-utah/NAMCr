@@ -52,7 +52,7 @@ info = function(endpoint = NA, no_paging = TRUE, format = "text", to_console = T
 
 
 
-#' View API vignett
+#' #View API vignett
 #'
 #' @export
 #'
@@ -65,7 +65,7 @@ docs = function(){
 }
 
 
-#' List all api endpoints
+#' #List all api endpoints
 #'
 #' @return A character vector of endpoint names
 #' @export
@@ -80,7 +80,7 @@ endpoints = function(){
 
 
 
-#' List all endpoint fields
+#' #List all endpoint fields
 #'
 #' @description
 #' `endpoint_fields` retrieves the fields associated with an API endpoint from the schema#'
@@ -99,7 +99,7 @@ endpoint_fields = function(api_endpoint){
 
 
 
-#' List all endpoint parameters
+#' #List all endpoint parameters
 #'
 #' @description
 #' `endpoint_parameters` returns a vector of parameters associated with an API endpoint from the schema
