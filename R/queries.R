@@ -213,7 +213,6 @@ query = function(
 
     return( data[[api_endpoint]] )
     }
-}
 
 
 
