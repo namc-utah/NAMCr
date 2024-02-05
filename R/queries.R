@@ -185,16 +185,16 @@ query = function(
                 nrow(paged_data) + nrow( data[[api_endpoint]] )
             )
         }
-        if(is.na(page_offset) || nrow( data[[api_endpoint]] ) !=  page_limit || (!is.na(limit) && nrow( data[[api_endpoint]] ) >= limit) ){
-            is_last_page = TRUE
-            if(is_paginated && !is.na(paged_data)){
-                data[[api_endpoint]] = rbind(paged_data, as.data.frame(data[[api_endpoint]]) )
-            }
-        } else if(!is.data.frame(paged_data)) {
-            paged_data = data[[api_endpoint]]
-        } else {
-            paged_data = rbind(paged_data, data[[api_endpoint]])
-        }
+        #Andrew is making changes to the structure of the if statements here
+        #after R 4.2, double Boolean operators throw errors. So, change an if
+        #statement to an ifelse, and the function should work
+        ifelse(is.na(page_offset) || nrow( data[[api_endpoint]] ) !=  page_limit || (!is.na(limit) && nrow( data[[api_endpoint]] ) >= limit),
+        is_last_page = TRUE,
+            ifelse(is_paginated && !is.na(paged_data),
+            data[[api_endpoint]] = rbind(paged_data, as.data.frame(data[[api_endpoint]]) ),
+            ifelse(!is.data.frame(paged_data),
+            paged_data = data[[api_endpoint]],
+            paged_data = rbind(paged_data, data[[api_endpoint]]))))
 
     }
     # Handle JSON in returned data
