@@ -1,4 +1,4 @@
-#' Diagnose connection issues
+#' #Diagnose connection issues
 #'
 #' @description
 #' `diagnose_connection` checks for connectivity of the internet, API, and authentication service
@@ -25,7 +25,7 @@ diagnose_connection = function(){
 
 
 
-#' oAuth2 provider check
+#' #oAuth2 provider check
 #'
 #' @return boolean
 #'
@@ -39,7 +39,7 @@ oauth_is_online = function(){
 
 
 
-#' API connectivity check
+#' #API connectivity check
 #'
 #' @return logical
 #'
@@ -50,7 +50,7 @@ api_is_online = function(){
 
 
 
-#' API connectivity check
+#' #API connectivity check
 #'
 #' @param site_url is a url to check if it is accessible
 #'
@@ -67,7 +67,7 @@ site_is_online = function(site_url){
 
 
 
-#' R internet check
+#' #R internet check
 #'
 #' @return locical
 #'

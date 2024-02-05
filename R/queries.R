@@ -33,7 +33,7 @@
 #'
 #' sites = NAMCr::query(
 #'   api_endpoint = 'sites',
-#'   include = c('station','lat','long')),
+#'   include = c('station','lat','long'),
 #'   filter = list(
 #'     station = c('station1','station2'),
 #'     lat = list(
@@ -185,9 +185,6 @@ query = function(
                 nrow(paged_data) + nrow( data[[api_endpoint]] )
             )
         }
-        #Andrew is making changes to the structure of the if statements here
-        #after R 4.2, double Boolean operators throw errors. So, change an if
-        #statement to an ifelse, and the function should work
         ifelse(is.na(page_offset) || nrow( data[[api_endpoint]] ) !=  page_limit || (!is.na(limit) && nrow( data[[api_endpoint]] ) >= limit),
         is_last_page <- TRUE,
             ifelse(is_paginated && !is.na(paged_data),
