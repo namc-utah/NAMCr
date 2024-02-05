@@ -21,7 +21,7 @@ cli = function(api = .pkgenv$api, ...){
 #' @return a `api_cli` class (R6 class)
 #' @examples
 #'
-#' auth_config = list(...) # api_cli public or private variables
+#' auth_config = list() # api_cli public or private variables
 #' auth = api_cli$new(api,args)
 #'
 api_cli = R6::R6Class(
