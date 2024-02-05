@@ -37,9 +37,9 @@ namc_oauth2 = R6::R6Class(
         is_configured = FALSE,
 
 
-        #' Set connection details
+        #' #Set connection details
         #'
-        #' Sets the clientID and URL for the authentication provider
+        #' #Sets the clientID and URL for the authentication provider
         #'
         #' @param clientId string The auth clientID.
         #' @param domain string The auth domain name.
@@ -73,9 +73,9 @@ namc_oauth2 = R6::R6Class(
 
 
 
-        #' Get user info
+        #' #Get user info
         #'
-        #' Gets the user information from the auth provider once authenticated.
+        #' #Gets the user information from the auth provider once authenticated.
         #'
         #' @return list A list containing the available user data.
         #'
@@ -105,11 +105,11 @@ namc_oauth2 = R6::R6Class(
 
 
 
-        #' Get oAuth2 token
+        #' #Get oAuth2 token
         #'
-        #' Gets and oAuth2 token object which can be used for subsequent connections.
-        #' A stop error occurs if this authentication object has not been configured via
-        #' set_connection_details().
+        #' #Gets and oAuth2 token object which can be used for subsequent connections.
+        #' #A stop error occurs if this authentication object has not been configured via
+        #' #set_connection_details().
         #'
         #' @param auto_refresh Logical TRUE/FALSE to override the objects default behavior
         #'
@@ -152,10 +152,10 @@ namc_oauth2 = R6::R6Class(
 
 
 
-        #' Get access token
+        #' #Get access token
         #'
-        #' Extracts the access token from the cached oAuth2 credential. This is
-        #' used for the Bearer Authentication header.
+        #' #Extracts the access token from the cached oAuth2 credential. This is
+        #' #used for the Bearer Authentication header.
         #'
         #' @return string The oAuth2 access token
         #'
@@ -171,9 +171,9 @@ namc_oauth2 = R6::R6Class(
 
 
 
-        #' Check refresh token
+        #' #Check refresh token
         #'
-        #' Check if the oAuth2 token needs refreshing
+        #' #Check if the oAuth2 token needs refreshing
         #'
         #' @return namc_oauth2 An R6 class.
         #'
@@ -190,9 +190,9 @@ namc_oauth2 = R6::R6Class(
 
 
 
-        #' Refresh token
+        #' #Refresh token
         #'
-        #' Refreshes the oAuth2 token
+        #' #Refreshes the oAuth2 token
         #'
         #' @return namc_oauth2 An R6 class.
         #'
@@ -213,9 +213,9 @@ namc_oauth2 = R6::R6Class(
 
 
 
-        #' Reset token
+        #' #Reset token
         #'
-        #' Deletes cached token file .httr-oauth
+        #' #Deletes cached token file .httr-oauth
         #'
         #' @return namc_oauth2 An R6 class.
         #'

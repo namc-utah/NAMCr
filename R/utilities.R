@@ -1,4 +1,4 @@
-#' initialize cached API state.
+#' #initialize cached API state.
 #'
 #' @description
 #' `initialize` analyzes the API schema and authentication information.
@@ -20,7 +20,7 @@ initialize = function(){
 
 
 
-#' Reinitialize cached API state.
+#' #Reinitialize cached API state.
 #'
 #' @description
 #' `reinitialize` reanalyzes the API schema and authentication information.
@@ -39,7 +39,7 @@ reinitialize = function(clear_credentials = FALSE){
 
 
 
-#' Execute public API class method
+#' #Execute public API class method
 #'
 #' @param fn_name Name of namc_api public method
 #'
@@ -51,7 +51,7 @@ execute_api_fn = function(fn_name){
 
 
 
-#' Get API class variable
+#' #Get API class variable
 #'
 #' @param var_name Name of namc_api variable name
 #'
@@ -63,7 +63,7 @@ get_api_var = function(var_name){
 
 
 
-#' Checks for empty values
+#' #Checks for empty values
 #'
 #' @description
 #' `is.empty` Null, NA and empty string values are all considered empty
@@ -88,7 +88,7 @@ is.empty = function(val){
 
 
 
-#' checks if a list or dataframe contains JSON based elements or columns
+#' #checks if a list or dataframe contains JSON based elements or columns
 #'
 #' @param data list or dataframe to check from JSON data
 #'
@@ -104,7 +104,7 @@ is.json = function(string){
 
 
 
-#' checks if a list or dataframe contains JSON based elements or columns
+#' #checks if a list or dataframe contains JSON based elements or columns
 #'
 #' @param data list or dataframe to check from JSON data
 #'
@@ -125,7 +125,7 @@ has.json = function(data){
 
 
 
-#' expands JSON keys into dataframe columns
+#' #expands JSON keys into dataframe columns
 #'
 #' @param data dataframe containing one or more columns of JSON
 #' @param fields a single or an array of column names containing JSON text
@@ -198,7 +198,7 @@ json.expand = function(data, fields){
 
 
 
-#' collapse columns in a dataframe to a single JSON column
+#' #collapse columns in a dataframe to a single JSON column
 #'
 #' @param data dataframe containing one or more columns
 #' @param field name to give JSON column

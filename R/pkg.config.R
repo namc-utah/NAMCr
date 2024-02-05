@@ -1,6 +1,6 @@
-#' Get API parameters
+#' #Get API parameters
 #'
-#' Returns a nested list of high-level parameters required for making the API and authentication calls.
+#' #Returns a nested list of high-level parameters required for making the API and authentication calls.
 #'
 #' @return list A list of API and authentication parameters
 #'

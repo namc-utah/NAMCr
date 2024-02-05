@@ -55,9 +55,9 @@ namc_api = R6::R6Class(
 
 
 
-        #' Configure parameters
+        #' #Configure parameters
         #'
-        #' Retrieves authentication and schema information via unauthenticated API queries
+        #' #Retrieves authentication and schema information via unauthenticated API queries
         #'
         #' @param force is a boolean TRUE/FALSE to force a reconfiguration
         #'
@@ -84,9 +84,9 @@ namc_api = R6::R6Class(
 
 
 
-        #' Graphql client retrieval
+        #' #Graphql client retrieval
         #'
-        #' Configures a graphql client with proper authentication and connection settings
+        #' #Configures a graphql client with proper authentication and connection settings
         #'
         #' @param authenticate boolean A logical TRUE/FALSE representing the required authentication state.
         #'
@@ -118,9 +118,9 @@ namc_api = R6::R6Class(
 
 
 
-        #' Introspect the API schema type
+        #' #Introspect the API schema type
         #'
-        #' Retrieves the raw schema return from introspecting the API schema type
+        #' #Retrieves the raw schema return from introspecting the API schema type
         #'
         #' @return namc_api An R6 class.
         #'
@@ -186,12 +186,12 @@ namc_api = R6::R6Class(
 
 
 
-        #' Builds a graphql schema
+        #' #Builds a graphql schema
         #'
-        #' Builds a graphql schema structure via introspection of the API.
-        #' For all Query and Mutation graphql types the built structure stores
-        #' all associated fields and dependent sub-types. This is used for the
-        #' automated query builder as a convenience function.
+        #' #Builds a graphql schema structure via introspection of the API.
+        #' #For all Query and Mutation graphql types the built structure stores
+        #' #all associated fields and dependent sub-types. This is used for the
+        #' #automated query builder as a convenience function.
         #'
         #' @return namc_api An R6 class.
         #'
@@ -213,9 +213,9 @@ namc_api = R6::R6Class(
 
 
 
-        #' Query the API
+        #' #Query the API
         #'
-        #' Executes a given graphql query against the API. If errors are returned execution is stopped.
+        #' #Executes a given graphql query against the API. If errors are returned execution is stopped.
         #'
         #'
         #' @param query string Text containing a graphql query
@@ -287,10 +287,10 @@ namc_api = R6::R6Class(
 
 
 
-        #' Authentication information retrieval
+        #' #Authentication information retrieval
         #'
-        #' Retrieves the clientId and domain required for authentication from the auth
-        #' graphql endpoint.
+        #' #Retrieves the clientId and domain required for authentication from the auth
+        #' #graphql endpoint.
         #'
         #' @return list A list containing the clientId and domain required for authentication.
         #'
@@ -320,9 +320,9 @@ namc_api = R6::R6Class(
 
 
 
-        #' Get the authentication object
+        #' #Get the authentication object
         #'
-        #' Access method for the oAuth2 authentication object stored within this namc_api object.
+        #' #Access method for the oAuth2 authentication object stored within this namc_api object.
         #'
         #' @return namc_api An R6 authentication class.
         #'
@@ -338,9 +338,9 @@ namc_api = R6::R6Class(
 
 
 
-        #' Authentication check
+        #' #Authentication check
         #'
-        #' Provides a logical depicting the state of the current authentication
+        #' #Provides a logical depicting the state of the current authentication
         #'
         #' @return logical A logical TRUE/FALSE.
         #'
@@ -366,9 +366,9 @@ namc_api = R6::R6Class(
 
 
 
-        #' Retrieve API endpoints
+        #' #Retrieve API endpoints
         #'
-        #' Retrieves the API endpoint names from the schema
+        #' #Retrieves the API endpoint names from the schema
         #'
         #' @return vector A character vector.
         #'
@@ -387,9 +387,9 @@ namc_api = R6::R6Class(
 
 
 
-        #' Retrieve fields
+        #' #Retrieve fields
         #'
-        #' Retrieves the fields associated with an API endpoint from the schema
+        #' #Retrieves the fields associated with an API endpoint from the schema
         #'
         #' @param api_endpoint The name of an API endpoint.
         #'
@@ -410,9 +410,9 @@ namc_api = R6::R6Class(
 
 
 
-        #' Retrieve arguments
+        #' #Retrieve arguments
         #'
-        #' Retrieves the arguments associated with an API endpoint from the schema
+        #' #Retrieves the arguments associated with an API endpoint from the schema
         #'
         #' @param api_endpoint The name of an API endpoint.
         #' @param no_paging Logical that omits the paging arguments by default
@@ -434,9 +434,9 @@ namc_api = R6::R6Class(
 
 
 
-        #' Retrieve fields
+        #' #Retrieve fields
         #'
-        #' Retrieves the fields associated with an API endpoint from the schema
+        #' #Retrieves the fields associated with an API endpoint from the schema
         #'
         #' @param api_endpoint The name of an API endpoint.
         #' @param stop_if_not Logical TRUE/FALSE switch giving stop control to caller functions
